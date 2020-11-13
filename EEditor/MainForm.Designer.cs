@@ -228,7 +228,7 @@
             this.viewToolStrip.Location = new System.Drawing.Point(618, 0);
             this.viewToolStrip.Name = "viewToolStrip";
             this.viewToolStrip.Padding = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.viewToolStrip.Size = new System.Drawing.Size(180, 27);
+            this.viewToolStrip.Size = new System.Drawing.Size(156, 27);
             this.viewToolStrip.TabIndex = 0;
             this.viewToolStrip.Text = "toolStrip5";
             // 
@@ -318,10 +318,10 @@
             this.settingsToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.settingsButton,
             this.aboutButton});
-            this.settingsToolStrip.Location = new System.Drawing.Point(612, 0);
+            this.settingsToolStrip.Location = new System.Drawing.Point(402, 0);
             this.settingsToolStrip.Name = "settingsToolStrip";
             this.settingsToolStrip.Padding = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.settingsToolStrip.Size = new System.Drawing.Size(156, 27);
+            this.settingsToolStrip.Size = new System.Drawing.Size(54, 27);
             this.settingsToolStrip.TabIndex = 9;
             // 
             // settingsButton
@@ -782,6 +782,12 @@
             this.addButton.Text = "Insert frame";
             this.addButton.Click += new System.EventHandler(this.addButton_Click);
             // 
+            // codeTextbox
+            // 
+            this.codeTextbox.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.codeTextbox.Name = "codeTextbox";
+            this.codeTextbox.Size = new System.Drawing.Size(100, 23);
+            // 
             // topFlowLayoutPanel
             // 
             this.topFlowLayoutPanel.AutoSize = true;
@@ -1189,7 +1195,7 @@
             this.lastUsedBlockButton2,
             this.lastUsedBlockButton3,
             this.lastUsedBlockButton4});
-            this.lastUsedToolStrip.Location = new System.Drawing.Point(798, 0);
+            this.lastUsedToolStrip.Location = new System.Drawing.Point(774, 0);
             this.lastUsedToolStrip.Name = "lastUsedToolStrip";
             this.lastUsedToolStrip.Size = new System.Drawing.Size(118, 25);
             this.lastUsedToolStrip.TabIndex = 3;
@@ -1262,7 +1268,7 @@
             this.MinimumSize = new System.Drawing.Size(1021, 589);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "EEditor";
+            this.Text = "EEOditor";
             this.Activated += new System.EventHandler(this.MainForm_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);

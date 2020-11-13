@@ -57,7 +57,7 @@
     <StartupObject />
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>eeditor_.ico</ApplicationIcon>
+    <ApplicationIcon>eeditor_1.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -81,9 +81,6 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ColorMine, Version=1.1.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ColorMine.1.1.3.0\lib\ColorMine.dll</HintPath>
-    </Reference>
     <Reference Include="EELVL">
       <HintPath>..\files\EELVL.dll</HintPath>
     </Reference>
@@ -413,7 +410,7 @@
     <None Include="Resources\picker.png" />
     <None Include="Resources\debug.png" />
     <Content Include="eeditor.ico" />
-    <Content Include="eeditor_.ico" />
+    <Content Include="eeditor_1.ico" />
     <Content Include="output.ico" />
     <None Include="Resources\ag_icon.png" />
     <None Include="Resources\add.png" />
