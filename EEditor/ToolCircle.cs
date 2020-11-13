@@ -35,8 +35,7 @@ namespace EEditor
             if (e.Button == MouseButtons.Left)
             {
                 Point cur1 = GetLocation(e);
-                if (IsPaintable(cur1.X, cur1.Y))
-                {
+
                     if (selected)
                     {
                         Point cur = GetLocation(e);
@@ -59,7 +58,7 @@ namespace EEditor
                         select = true;
                     }
                 }
-            }
+            
         }
 
         public override void MouseMove(MouseEventArgs e)
@@ -68,8 +67,7 @@ namespace EEditor
             {
                 //Rect(yStart, xStart, p.Y, p.X);
                 Point cur1 = GetLocation(e);
-                if (IsPaintable(cur1.X, cur1.Y))
-                {
+
                     if (select)
                     {
                         Point p = GetLocation(e);
@@ -87,7 +85,7 @@ namespace EEditor
                             PlaceBorderRect();
                         }
                     }
-                }
+                
             }
         }
 
@@ -96,8 +94,6 @@ namespace EEditor
             if (e.Button == MouseButtons.Left)
             {
                 Point cur1 = GetLocation(e);
-                if (IsPaintable(cur1.X, cur1.Y))
-                {
                     if (select)
                     {
                         Q = GetLocation(e);
@@ -110,17 +106,6 @@ namespace EEditor
                         selected = false;
                         RemoveBorder();
                     }
-                }
-
-                else
-                {
-                    if (select)
-                    {
-                        RemoveBorder();
-                        select = false;
-                        selected = false;
-                    }
-                }
             }
         }
         #endregion
@@ -365,7 +350,7 @@ namespace EEditor
                     else if (PenID < 500 || PenID >= 1001)
                     {
                         if (PenID != editArea.CurFrame.Foreground[y, x]) incfg += PenID + ":" + editArea.CurFrame.Foreground[y, x] + ":" + x + ":" + y + ":";
-                        if (IsPaintable(x, y, PenID, true) && IsPaintable(x, y, PenID, false)) editArea.CurFrame.Foreground[y, x] = PenID;
+                        editArea.CurFrame.Foreground[y, x] = PenID;
                     }
                     editArea.Draw(x, y, g, MainForm.userdata.thisColor);
                 }

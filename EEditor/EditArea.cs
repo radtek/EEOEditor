@@ -274,27 +274,6 @@ IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
             Invalidate();
         }
 
-        public bool ownedBid(int bid, int mode)
-        {
-            bool exists = false;
-            if (MainForm.ownedb.Count > 0)
-            {
-                for (int i = 0; i < MainForm.ownedb.Count; i++)
-                {
-                    for (int o = 0; o < MainForm.ownedb[i].blocks.Length; o++)
-                    {
-                        if (MainForm.ownedb[i].blocks[o] == bid && MainForm.ownedb[i].mode == mode)
-                        {
-
-                            exists = true;
-                            break;
-                        }
-                    }
-                }
-            }
-
-            return exists;
-        }
 
         public void hideCursor(bool hide)
         {
@@ -403,27 +382,6 @@ IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
                         bmp2 = unknowBricks.Clone(new Rectangle(6 * 16 + 1, 0, 16, 16), unknowBricks.PixelFormat);
                     }
                     g.DrawImage(bmp2, x * 16, y * 16);
-                    if (MainForm.unknown.Count > 0)
-                    {
-                        unknownBlock bl = new unknownBlock(bid, 1, (int)coins, id, target, null);
-                        if (!MainForm.unknown.Contains(bl))
-                        {
-                            MainForm.unknown.Add(bl);
-                            if (!MainForm.userdata.newestBlocks.Contains(bid.ToString()))
-                            {
-                                MainForm.userdata.newestBlocks.Add(bid.ToString());
-                            }
-                        }
-                    }
-                    else
-                    {
-                        unknownBlock bl = new unknownBlock(bid, 1, (int)coins, id, target, null);
-                        MainForm.unknown.Add(bl);
-                        if (!MainForm.userdata.newestBlocks.Contains(bid.ToString()))
-                        {
-                            MainForm.userdata.newestBlocks.Add(bid.ToString());
-                        }
-                    }
                 }
             }
             else if (bid >= 500 && bid <= 999 || bid == 0)
@@ -521,53 +479,6 @@ IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
                     {
                         Bitmap bmp2 = unknowBricks.Clone(new Rectangle(2 * 16, 0, 16, 16), unknowBricks.PixelFormat);
                         g.DrawImage(bmp2, x * 16, y * 16);
-                        if (MainForm.unknown.Count > 0)
-                        {
-                            unknownBlock bl = new unknownBlock(fid, 0, (int)coins, id, target, null);
-                            if (!MainForm.unknown.Contains(bl))
-                            {
-                                MainForm.unknown.Add(bl);
-                                if (!MainForm.userdata.newestBlocks.Contains(fid.ToString()))
-                                {
-                                    MainForm.userdata.newestBlocks.Add(fid.ToString());
-                                }
-                            }
-                        }
-                        else
-                        {
-                            unknownBlock bl = new unknownBlock(fid, 0, (int)coins, id, target, null);
-                            MainForm.unknown.Add(bl);
-                            if (!MainForm.userdata.newestBlocks.Contains(fid.ToString()))
-                            {
-                                MainForm.userdata.newestBlocks.Add(fid.ToString());
-                            }
-                        }
-                    }
-                    else if (fid >= 2500)
-                    {
-                        Bitmap bmp2 = unknowBricks.Clone(new Rectangle(2 * 16, 0, 16, 16), unknowBricks.PixelFormat);
-                        g.DrawImage(bmp2, x * 16, y * 16);
-                        if (MainForm.unknown.Count > 0)
-                        {
-                            unknownBlock bl = new unknownBlock(fid, 0, (int)coins, id, target, null);
-                            if (!MainForm.unknown.Contains(bl))
-                            {
-                                MainForm.unknown.Add(bl);
-                                if (!MainForm.userdata.newestBlocks.Contains(fid.ToString()))
-                                {
-                                    MainForm.userdata.newestBlocks.Add(fid.ToString());
-                                }
-                            }
-                        }
-                        else
-                        {
-                            unknownBlock bl = new unknownBlock(fid, 0, (int)coins, id, target, null);
-                            MainForm.unknown.Add(bl);
-                            if (!MainForm.userdata.newestBlocks.Contains(fid.ToString()))
-                            {
-                                MainForm.userdata.newestBlocks.Add(fid.ToString());
-                            }
-                        }
                     }
                 }
             }

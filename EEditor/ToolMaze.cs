@@ -231,8 +231,7 @@ namespace EEditor
             if (e.Button == MouseButtons.Left)
             {
                System.Drawing.Point cur1 = GetLocation(e);
-                if (IsPaintable(cur1.X, cur1.Y))
-                {
+
                     if (selected)
                     {
                         System.Drawing.Point cur = GetLocation(e);
@@ -254,7 +253,7 @@ namespace EEditor
                         PlaceBorder(P);
                         select = true;
                     }
-                }
+                
             }
         }
 
@@ -263,8 +262,7 @@ namespace EEditor
             if (e.Button == MouseButtons.Left)
             {
                 System.Drawing.Point cur1 = GetLocation(e);
-                if (IsPaintable(cur1.X, cur1.Y))
-                {
+
                     if (select)
                     {
                         Q = GetLocation(e);
@@ -277,16 +275,6 @@ namespace EEditor
                         select = false;
                         selected = false;
                     }
-                }
-                else
-                {
-                    if (select)
-                    {
-                        RemoveBorder();
-                        select = false;
-                        selected = false;
-                    }
-                }
             }
         }
 
@@ -296,8 +284,7 @@ namespace EEditor
             {
                 //Rect(yStart, xStart, p.Y, p.X);
                 System.Drawing.Point cur1 = GetLocation(e);
-                if (IsPaintable(cur1.X, cur1.Y))
-                {
+
                     if (select)
                     {
                         System.Drawing.Point p = GetLocation(e);
@@ -314,7 +301,7 @@ namespace EEditor
                             PlaceBorderRect();
                         }
                     }
-                }
+                
             }
         }
         #endregion

@@ -111,14 +111,13 @@ namespace EEditor
             {
                 for (int x = xStart; x <= xEnd; x++)
                 {
-                    if (IsPaintable(x, y, PenID, true) && IsPaintable(x, y, PenID, false))
-                    {
+
                         if (start.Y == end.Y && start.X == end.X) { }
                         else
                         {
                             g.DrawImage(img2, x * 16, y * 16);
                         }
-                    }
+                    
                 }
             }
         }
@@ -188,8 +187,7 @@ namespace EEditor
             {
                 for (int x = xStart; x <= xEnd; x++)
                 {
-                    if (IsPaintable(x, y, PenID, true) && IsPaintable(x, y, PenID, false))
-                    {
+
                         if (ToolPen.rotation.ContainsKey(PenID))
                         {
                             if (PenID == 242 || PenID == 381)
@@ -224,7 +222,7 @@ namespace EEditor
                         }
                         editArea.Draw(x, y, g, MainForm.userdata.thisColor);
                     }
-                }
+                
             }
             ToolPen.undolist.Push(incfg);
             editArea.Invalidate();
@@ -236,8 +234,7 @@ namespace EEditor
             if (e.Button == MouseButtons.Left)
             {
                 Point cur1 = GetLocation(e);
-                if (IsPaintable(cur1.X, cur1.Y))
-                {
+
                     if (selected)
                     {
                         Point cur = GetLocation(e);
@@ -259,7 +256,7 @@ namespace EEditor
                         PlaceBorder(P);
                         select = true;
                     }
-                }
+                
             }
         }
 
@@ -268,8 +265,6 @@ namespace EEditor
             if (e.Button == MouseButtons.Left)
             {
                 Point cur1 = GetLocation(e);
-                if (IsPaintable(cur1.X, cur1.Y))
-                {
                     if (select)
                     {
                         Q = GetLocation(e);
@@ -282,13 +277,6 @@ namespace EEditor
                         select = false;
                         selected = false;
                     }
-                }
-                else
-                {
-                    RemoveBorder();
-                    select = false;
-                    selected = false;
-                }
             }
         }
 

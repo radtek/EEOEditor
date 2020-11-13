@@ -39,12 +39,10 @@
             this.showActionsButton = new System.Windows.Forms.ToolStripButton();
             this.showBackgroundsButton = new System.Windows.Forms.ToolStripButton();
             this.showDecorationsButton = new System.Windows.Forms.ToolStripButton();
-            this.unknownButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.hideBlocksButton = new System.Windows.Forms.ToolStripButton();
             this.minimapButton = new System.Windows.Forms.ToolStripButton();
             this.settingsToolStrip = new System.Windows.Forms.ToolStrip();
-            this.accountsComboBox = new System.Windows.Forms.ToolStripComboBox();
             this.settingsButton = new System.Windows.Forms.ToolStripButton();
             this.aboutButton = new System.Windows.Forms.ToolStripButton();
             this.fileToolStrip = new System.Windows.Forms.ToolStrip();
@@ -63,7 +61,6 @@
             this.eEBuilderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.roomDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
-            this.myOwnWorldsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveDropButton = new System.Windows.Forms.ToolStripDropDownButton();
             this.saveWorldToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eelvlToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -94,11 +91,7 @@
             this.frameSelector = new System.Windows.Forms.ToolStripComboBox();
             this.delayTextBox = new System.Windows.Forms.ToolStripTextBox();
             this.addButton = new System.Windows.Forms.ToolStripButton();
-            this.uploadToolStrip = new System.Windows.Forms.ToolStrip();
-            this.levelTextbox = new System.Windows.Forms.ToolStripTextBox();
-            this.refreshButton = new System.Windows.Forms.ToolStripButton();
             this.codeTextbox = new System.Windows.Forms.ToolStripTextBox();
-            this.uploadButton = new System.Windows.Forms.ToolStripButton();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.topFlowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.historyToolStrip = new System.Windows.Forms.ToolStrip();
@@ -151,7 +144,6 @@
             this.fileToolStrip.SuspendLayout();
             this.toolToolStrip.SuspendLayout();
             this.unknownToolStrip.SuspendLayout();
-            this.uploadToolStrip.SuspendLayout();
             this.topFlowLayoutPanel.SuspendLayout();
             this.historyToolStrip.SuspendLayout();
             this.bottomFlowLayoutPanel.SuspendLayout();
@@ -230,7 +222,6 @@
             this.showActionsButton,
             this.showBackgroundsButton,
             this.showDecorationsButton,
-            this.unknownButton,
             this.toolStripSeparator1,
             this.hideBlocksButton,
             this.minimapButton});
@@ -287,17 +278,6 @@
             this.showDecorationsButton.ToolTipText = "Switch to decoration blocks";
             this.showDecorationsButton.Click += new System.EventHandler(this.showDecorationsButton_Click);
             // 
-            // unknownButton
-            // 
-            this.unknownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.unknownButton.Image = global::EEditor.Properties.Resources.eeditor_unknown;
-            this.unknownButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.unknownButton.Name = "unknownButton";
-            this.unknownButton.Size = new System.Drawing.Size(24, 24);
-            this.unknownButton.Text = "Unknown";
-            this.unknownButton.ToolTipText = "Switch to unknown blocks";
-            this.unknownButton.Click += new System.EventHandler(this.unknownButton_Click);
-            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
@@ -336,7 +316,6 @@
             this.settingsToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.settingsToolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.settingsToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.accountsComboBox,
             this.settingsButton,
             this.aboutButton});
             this.settingsToolStrip.Location = new System.Drawing.Point(612, 0);
@@ -344,16 +323,6 @@
             this.settingsToolStrip.Padding = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.settingsToolStrip.Size = new System.Drawing.Size(156, 27);
             this.settingsToolStrip.TabIndex = 9;
-            // 
-            // accountsComboBox
-            // 
-            this.accountsComboBox.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.accountsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.accountsComboBox.Name = "accountsComboBox";
-            this.accountsComboBox.Size = new System.Drawing.Size(100, 27);
-            this.accountsComboBox.ToolTipText = "Switch to account or edit accounts";
-            this.accountsComboBox.SelectedIndexChanged += new System.EventHandler(this.accountsComboBox_SelectedIndexChanged);
-            this.accountsComboBox.Click += new System.EventHandler(this.accountsComboBox_Click);
             // 
             // settingsButton
             // 
@@ -418,8 +387,7 @@
             this.savToolStripMenuItem,
             this.eEBuilderToolStripMenuItem,
             this.roomDatabaseToolStripMenuItem,
-            this.toolStripSeparator11,
-            this.myOwnWorldsToolStripMenuItem});
+            this.toolStripSeparator11});
             this.openWorldDropButton.Image = global::EEditor.Properties.Resources.open;
             this.openWorldDropButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.openWorldDropButton.Name = "openWorldDropButton";
@@ -511,13 +479,6 @@
             // 
             this.toolStripSeparator11.Name = "toolStripSeparator11";
             this.toolStripSeparator11.Size = new System.Drawing.Size(185, 6);
-            // 
-            // myOwnWorldsToolStripMenuItem
-            // 
-            this.myOwnWorldsToolStripMenuItem.Name = "myOwnWorldsToolStripMenuItem";
-            this.myOwnWorldsToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
-            this.myOwnWorldsToolStripMenuItem.Text = "My Own Worlds";
-            this.myOwnWorldsToolStripMenuItem.Click += new System.EventHandler(this.myOwnWorldsToolStripMenuItem_Click);
             // 
             // saveDropButton
             // 
@@ -821,63 +782,6 @@
             this.addButton.Text = "Insert frame";
             this.addButton.Click += new System.EventHandler(this.addButton_Click);
             // 
-            // uploadToolStrip
-            // 
-            this.uploadToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.uploadToolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.uploadToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.levelTextbox,
-            this.refreshButton,
-            this.codeTextbox,
-            this.uploadButton});
-            this.uploadToolStrip.Location = new System.Drawing.Point(402, 0);
-            this.uploadToolStrip.Name = "uploadToolStrip";
-            this.uploadToolStrip.Padding = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.uploadToolStrip.Size = new System.Drawing.Size(210, 27);
-            this.uploadToolStrip.TabIndex = 6;
-            // 
-            // levelTextbox
-            // 
-            this.levelTextbox.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.levelTextbox.Name = "levelTextbox";
-            this.levelTextbox.Size = new System.Drawing.Size(76, 27);
-            this.levelTextbox.Text = "Level ID";
-            this.levelTextbox.ToolTipText = "Insert world ID to load (F6)";
-            this.levelTextbox.Leave += new System.EventHandler(this.levelTextbox_Leave);
-            this.levelTextbox.TextChanged += new System.EventHandler(this.levelTextbox_TextChanged);
-            // 
-            // refreshButton
-            // 
-            this.refreshButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.refreshButton.Image = global::EEditor.Properties.Resources.download;
-            this.refreshButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.refreshButton.Name = "refreshButton";
-            this.refreshButton.Size = new System.Drawing.Size(24, 24);
-            this.refreshButton.Text = "Refresh";
-            this.refreshButton.ToolTipText = "Left click: load current level (F5)\r\nRight click: load saved level ";
-            this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
-            this.refreshButton.MouseUp += new System.Windows.Forms.MouseEventHandler(this.refreshButton_MouseUp);
-            // 
-            // codeTextbox
-            // 
-            this.codeTextbox.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.codeTextbox.Name = "codeTextbox";
-            this.codeTextbox.Size = new System.Drawing.Size(76, 27);
-            this.codeTextbox.Text = "Code";
-            this.codeTextbox.ToolTipText = "Insert world code to upload (F7)";
-            this.codeTextbox.Leave += new System.EventHandler(this.codeTextbox_Leave);
-            // 
-            // uploadButton
-            // 
-            this.uploadButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.uploadButton.Image = global::EEditor.Properties.Resources.upload;
-            this.uploadButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.uploadButton.Name = "uploadButton";
-            this.uploadButton.Size = new System.Drawing.Size(24, 24);
-            this.uploadButton.Text = "Upload";
-            this.uploadButton.ToolTipText = "Start uploading your changes (Ctrl+U)";
-            this.uploadButton.Click += new System.EventHandler(this.uploadButton_Click);
-            // 
             // topFlowLayoutPanel
             // 
             this.topFlowLayoutPanel.AutoSize = true;
@@ -886,7 +790,6 @@
             this.topFlowLayoutPanel.Controls.Add(this.toolToolStrip);
             this.topFlowLayoutPanel.Controls.Add(this.morphToolStrip);
             this.topFlowLayoutPanel.Controls.Add(this.historyToolStrip);
-            this.topFlowLayoutPanel.Controls.Add(this.uploadToolStrip);
             this.topFlowLayoutPanel.Controls.Add(this.settingsToolStrip);
             this.topFlowLayoutPanel.Controls.Add(this.unknownToolStrip);
             this.topFlowLayoutPanel.Dock = System.Windows.Forms.DockStyle.Top;
@@ -1375,8 +1278,6 @@
             this.toolToolStrip.PerformLayout();
             this.unknownToolStrip.ResumeLayout(false);
             this.unknownToolStrip.PerformLayout();
-            this.uploadToolStrip.ResumeLayout(false);
-            this.uploadToolStrip.PerformLayout();
             this.topFlowLayoutPanel.ResumeLayout(false);
             this.topFlowLayoutPanel.PerformLayout();
             this.historyToolStrip.ResumeLayout(false);
@@ -1410,10 +1311,6 @@
         private System.Windows.Forms.ToolStripButton flipButton;
         private System.Windows.Forms.ToolStripButton rotateLeftButton;
         private System.Windows.Forms.ToolStripButton rotateRightButton;
-        private System.Windows.Forms.ToolStrip uploadToolStrip;
-        private System.Windows.Forms.ToolStripTextBox levelTextbox;
-        private System.Windows.Forms.ToolStripButton refreshButton;
-        private System.Windows.Forms.ToolStripButton uploadButton;
         private System.Windows.Forms.FontDialog fontDialog1;
         private System.Windows.Forms.ToolStrip viewToolStrip;
         private System.Windows.Forms.ToolStripButton showBlocksButton;
@@ -1442,7 +1339,6 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel5;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripButton unknownButton;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel6;
         private System.Windows.Forms.ToolStrip historyToolStrip;
         private System.Windows.Forms.ToolStripButton undoButton;
@@ -1458,7 +1354,6 @@
         private System.Windows.Forms.ToolStripButton sprayButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem eEBuilderToolStripMenuItem;
-        private System.Windows.Forms.ToolStripComboBox accountsComboBox;
         private System.Windows.Forms.ToolStripDropDownButton shapesDropButton;
         private System.Windows.Forms.ToolStripMenuItem rectangleButton;
         private System.Windows.Forms.ToolStripMenuItem filledRectangleButton;
@@ -1491,7 +1386,6 @@
         private System.Windows.Forms.ToolStripButton lastUsedBlockButton4;
         private System.Windows.Forms.ToolStripMenuItem roomDatabaseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem eEditor37ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem myOwnWorldsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem eEditor38ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem eELVLToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem eelvlToolStripMenuItem1;

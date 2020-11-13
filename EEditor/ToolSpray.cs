@@ -23,13 +23,12 @@ namespace EEditor
             if (e.Button == MouseButtons.Left)
             {
                 Point p = GetLocation(e);
-                if (IsPaintable(p.X, p.Y))
-                {
+
                     xStart = GetLocation(e).X;
                     yStart = GetLocation(e).Y;
                     Point p1 = GetLocation(e);
                     Recte(p1);
-                }
+                
 
             }
             if (e.Button == MouseButtons.Right)
@@ -61,8 +60,7 @@ namespace EEditor
                 var yy = Math.Abs(y);
                 if (yy <= editArea.CurFrame.Height && xx <= editArea.CurFrame.Width)
                 {
-                    if (IsPaintable((int)xx, (int)yy, PenID, true) && IsPaintable((int)xx, (int)yy, PenID, false))
-                    {
+
                         if (ToolPen.rotation.ContainsKey(PenID) && PenID != 374 && PenID != 385)
                         {
                             if (bdata.portals.Contains(PenID))
@@ -131,7 +129,7 @@ namespace EEditor
                         }
                         editArea.Draw((int)xx, (int)yy, g, MainForm.userdata.thisColor);
                     }
-                }
+                
                 else
                 {
 

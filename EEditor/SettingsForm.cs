@@ -141,11 +141,6 @@ namespace EEditor
                     System.Threading.Thread.Sleep(1000);
                     this.Close();
                     break;
-                case 3: //Blocks in unknown tab
-                    MainForm.userdata.newestBlocks.Clear();
-                    StatusToolStripStatusLabel.Text = "Unknown blocks have been cleared.";
-                    StatusToolStripStatusLabel.ForeColor = Color.DarkGreen;
-                    break;
                 case 5: //Old settings
                     var path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData).Replace("Roaming", "Local");
                     if (Directory.Exists(path + "\\EEditor"))
@@ -180,28 +175,18 @@ namespace EEditor
                 case 6: //current settings
                     MainForm.userdata = new userData()
                     {
-                        username = "guest",
-                        newestBlocks = new List<JToken>(),
-                        uploadDelay = 5,
                         brickHotkeys = "",
                         sprayr = 5,
                         sprayp = 10,
                         confirmClose = true,
-                        uploadOption = 0,
                         themeBorder = false,
                         themeClean = false,
                         imageBackgrounds = true,
                         imageBlocks = true,
                         imageSpecialblocksMorph = false,
                         imageSpecialblocksAction = false,
-                        random = false,
-                        reverse = false,
                         ColorFG = true,
                         ColorBG = true,
-                        ignoreplacing = false,
-                        randomLines = false,
-                        BPSblocks = 100,
-                        BPSplacing = false,
                         IgnoreBlocks = new List<JToken>(),
                         fastshape = true,
                         replaceit = false,
@@ -211,7 +196,6 @@ namespace EEditor
                         HotkeyBar = false,
 
                     };
-                    MainForm.OpenWorld = false;
                     MainForm.userdata.useColor = false;
                     MainForm.userdata.thisColor = Color.Transparent;
                     MainForm.editArea.MainForm.updateTheme();

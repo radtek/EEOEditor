@@ -31,9 +31,6 @@ namespace EEditor
             y = Math.Min(y, height - 1);
             x = Math.Max(0, x);
             y = Math.Max(0, y);
-            if (!IsPaintable(x, y, PenID, true) && !IsPaintable(x, y, PenID, false)) { editArea.mouseDown = false; }
-            else
-            {
                 if (!button)
                 {
                     //if (editArea.IsBackground)
@@ -131,10 +128,8 @@ namespace EEditor
                                 }
                                 if (PenID != 77 && PenID != 83 && PenID != 1520)
                                 {
-                                    if (IsPaintable(x, y, PenID, true) && IsPaintable(x, y, PenID, false))
-                                    {
-                                        editArea.CurFrame.Foreground[y, x] = PenID;
-                                    }
+
+                                    editArea.CurFrame.Foreground[y, x] = PenID;
                                     if (rotation.ContainsKey(PenID))
                                     {
                                         editArea.CurFrame.BlockData[y, x] = rotation[PenID];
@@ -149,10 +144,9 @@ namespace EEditor
                             {
                                 if (PenID != 77 && PenID != 83 && PenID != 1520)
                                 {
-                                    if (IsPaintable(x, y, PenID, true) && IsPaintable(x, y, PenID, false))
-                                    {
+
                                         editArea.CurFrame.Foreground[y, x] = PenID;
-                                    }
+                                    
                                     if (rotation.ContainsKey(PenID))
                                     {
                                         editArea.CurFrame.BlockData[y, x] = rotation[PenID];
@@ -579,7 +573,7 @@ namespace EEditor
                                 else { editArea.CurFrame.BlockData2[y, x] = 0; }
                             }
                         }
-                    }
+                    
                 }
                 if (!editArea.ShowLines)
                 {
@@ -600,8 +594,7 @@ namespace EEditor
                 if (!ToolFill.filling)
                 {
                     Point p = GetLocation(e);
-                    if (IsPaintable(p.X, p.Y, PenID, true) && IsPaintable(p.X, p.Y, PenID, false))
-                    {
+
                         mouseMove = false;
                         if (PenSize == 1)
                         {
@@ -637,7 +630,7 @@ namespace EEditor
                                 }
                             }
                         }
-                    }
+                    
                 }
             }
             else if (e.Button == MouseButtons.Right)
@@ -645,11 +638,10 @@ namespace EEditor
                 if (!ToolFill.filling)
                 {
                     Point p = GetLocation(e);
-                    if (IsPaintable(p.X, p.Y, PenID, true))
-                    {
+
                         mouseMove = false;
                         PlaceBrick(p.X, p.Y, true, false, true);
-                    }
+                    
                 }
             }
         }
@@ -677,8 +669,7 @@ namespace EEditor
                 if (!ToolFill.filling)
                 {
                     Point p = GetLocation(e);
-                    if (IsPaintable(p.X, p.Y, PenID, true) && IsPaintable(p.X, p.Y, PenID, false))
-                    {
+
                         mouseMove = true;
                         if (PenSize == 1)
                         {
@@ -694,17 +685,14 @@ namespace EEditor
                                 }
                             }
                         }
-                    }
+                    
                 }
             }
             else if (e.Button == MouseButtons.Right)
             {
                 Point p = GetLocation(e);
-                if (IsPaintable(p.X, p.Y, PenID, true))
-                {
                     mouseMove = true;
                     PlaceBrick(p.X, p.Y, true, false, false);
-                }
             }
         }
 

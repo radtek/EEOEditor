@@ -123,19 +123,6 @@
     <Compile Include="About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
-    <Compile Include="Accounts.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Accounts.Designer.cs">
-      <DependentUpon>Accounts.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AnimateForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AnimateForm.Designer.cs">
-      <DependentUpon>AnimateForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Animator.cs" />
     <Compile Include="BackgroundIgnore.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -205,12 +192,6 @@
       <DependentUpon>Minimap.cs</DependentUpon>
     </Compile>
     <Compile Include="ModifyProgressBarColor.cs" />
-    <Compile Include="MyWorlds.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MyWorlds.Designer.cs">
-      <DependentUpon>MyWorlds.cs</DependentUpon>
-    </Compile>
     <Compile Include="NPC.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -326,12 +307,6 @@
     <EmbeddedResource Include="About.resx">
       <DependentUpon>About.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Accounts.resx">
-      <DependentUpon>Accounts.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AnimateForm.resx">
-      <DependentUpon>AnimateForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="BackgroundIgnore.resx">
       <DependentUpon>BackgroundIgnore.cs</DependentUpon>
     </EmbeddedResource>
@@ -361,9 +336,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Minimap.resx">
       <DependentUpon>Minimap.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MyWorlds.resx">
-      <DependentUpon>MyWorlds.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NPC.resx">
       <DependentUpon>NPC.cs</DependentUpon>

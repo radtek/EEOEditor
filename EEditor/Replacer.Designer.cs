@@ -196,17 +196,6 @@
             this.ClearBgsBlacklistButton.UseVisualStyleBackColor = true;
             this.ClearBgsBlacklistButton.Click += new System.EventHandler(this.ClearBgsBlacklistButton_Click);
             // 
-            // button9
-            // 
-            this.button9.Enabled = false;
-            this.button9.Location = new System.Drawing.Point(139, 303);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(121, 33);
-            this.button9.TabIndex = 17;
-            this.button9.Text = "Replace unowned";
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
-            // 
             // button5
             // 
             this.button5.Image = ((System.Drawing.Image)(resources.GetObject("button5.Image")));

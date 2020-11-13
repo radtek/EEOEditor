@@ -40,51 +40,6 @@ namespace EEditor
             return new Point(x, y);
         }
 
-        public bool IsPaintable(int x, int y) { return IsPaintable(x, y, PenID, border); }
-
-        public bool IsPaintable(int x, int y, int id, bool border)
-        {
-            if (border)
-            {
-                if (x == 0 || x == editArea.CurFrame.Width - 1 || y == 0 || y == editArea.CurFrame.Height - 1)
-                {
-                    return true;
-                }
-                else
-                {
-                    return true;
-                }
-            }
-            else
-            {
-                if (x == 0 || x == editArea.CurFrame.Width - 1 || y == 0 || y == editArea.CurFrame.Height - 1)
-                {
-                    if (MainForm.OpenWorld)
-                    {
-                            if (MainForm.OpenWorldCode && MainForm.OpenWorld) return true;
-                            else if (!MainForm.OpenWorldCode && MainForm.OpenWorld && y > 4) return true;
-                            else return false;
-                    }
-                    else
-                    {
-                            return true;
-                    }
-                }
-                else
-                {
-                    if (MainForm.OpenWorld)
-                    {
-                            if (MainForm.OpenWorldCode && MainForm.OpenWorld) return true;
-                            else if (!MainForm.OpenWorldCode && MainForm.OpenWorld && y > 4) return true;
-                            else return false;
-                    }
-                    else
-                    {
-                        return true;
-                    }
-                }
-            }
-        }
         
         public virtual void MouseDown(MouseEventArgs e) { }
         public virtual void MouseMove(MouseEventArgs e) { }

@@ -192,8 +192,7 @@ namespace EEditor
                 {
                     if (x == start.X || y == start.Y || y == end.Y || x == end.X)
                     {
-                        if (IsPaintable(x, y, PenID, true) && IsPaintable(x, y, PenID, false))
-                        {
+
                             if (ToolPen.rotation.ContainsKey(PenID))
                             {
                                 if (PenID == 242 || PenID == 381)
@@ -228,7 +227,7 @@ namespace EEditor
                             }
                             editArea.Draw(x, y, g, MainForm.userdata.thisColor);
                         }
-                    }
+                    
                 }
             }
             ToolPen.undolist.Push(incfg);
@@ -242,8 +241,7 @@ namespace EEditor
             if (e.Button == MouseButtons.Left)
             {
                 Point cur1 = GetLocation(e);
-                if (IsPaintable(cur1.X, cur1.Y))
-                {
+
                     if (selected)
                     {
                         Point cur = GetLocation(e);
@@ -265,7 +263,7 @@ namespace EEditor
                         PlaceBorder(P);
                         select = true;
                     }
-                }
+                
             }
         }
 
@@ -274,8 +272,6 @@ namespace EEditor
             if (e.Button == MouseButtons.Left)
             {
                 Point cur1 = GetLocation(e);
-                if (IsPaintable(cur1.X, cur1.Y))
-                {
                     if (select)
                     {
                         Q = GetLocation(e);
@@ -288,16 +284,7 @@ namespace EEditor
                         select = false;
                         selected = false;
                     }
-                }
-                else
-                {
-                    if (select)
-                    {
-                        RemoveBorder();
-                        select = false;
-                        selected = false;
-                    }
-                }
+ 
             }
         }
 
@@ -307,8 +294,6 @@ namespace EEditor
             {
                 //Rect(yStart, xStart, p.Y, p.X);
                 Point cur1 = GetLocation(e);
-                if (IsPaintable(cur1.X, cur1.Y))
-                {
                     if (select)
                     {
                         Point p = GetLocation(e);
@@ -325,7 +310,7 @@ namespace EEditor
                             PlaceBorderRect();
                         }
                     }
-                }
+                
             }
         }
         #endregion

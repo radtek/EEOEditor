@@ -242,7 +242,7 @@ namespace EEditor
             {
                 if (MainForm.decosBMI[(int)numericUpDown2.Value] != 0)
                 {
-                    if (MainForm.editArea.ownedBid((int)numericUpDown2.Value, 2) || MainForm.userdata.replaceit)
+                    if (MainForm.userdata.replaceit)
                     {
                         Bitmap img1 = MainForm.decosBMD.Clone(new Rectangle(MainForm.decosBMI[Convert.ToInt32(numericUpDown2.Value)] * 16, 0, 16, 16), MainForm.decosBMD.PixelFormat);
                         ReplacePictureBox.Image = img1;
@@ -253,19 +253,11 @@ namespace EEditor
                         replaceRotate.Value = 1;
                         replaceRotating();
                     }
-                    else
-                    {
-                        ReplacePictureBox.Image = Properties.Resources.cross;
-                        numericUpDown2.ForeColor = Color.Red;
-                        button5.Enabled = false;
-                        button1.Enabled = false;
-                        label4.Text = "Can't replace block ID " + numericUpDown1.Value + " with ID " + numericUpDown2.Value + ", you don't own it.";
-                    }
                 }
 
                 else if (MainForm.miscBMI[(int)numericUpDown2.Value] != 0 || (int)numericUpDown2.Value == 119)
                 {
-                    if (MainForm.editArea.ownedBid((int)numericUpDown2.Value, 1) || MainForm.userdata.replaceit)
+                    if (MainForm.userdata.replaceit)
                     {
                         Bitmap img1 = MainForm.miscBMD.Clone(new Rectangle(MainForm.miscBMI[Convert.ToInt32(numericUpDown2.Value)] * 16, 0, 16, 16), MainForm.miscBMD.PixelFormat);
                         ReplacePictureBox.Image = img1;
@@ -276,18 +268,10 @@ namespace EEditor
                         replaceRotate.Value = 1;
                         replaceRotating();
                     }
-                    else
-                    {
-                        ReplacePictureBox.Image = Properties.Resources.cross;
-                        numericUpDown2.ForeColor = Color.Red;
-                        button5.Enabled = false;
-                        button1.Enabled = false;
-                        label4.Text = "Can't replace block ID " + numericUpDown1.Value + " with ID " + numericUpDown2.Value + ", you don't own it.";
-                    }
                 }
                 else
                 {
-                    if (MainForm.editArea.ownedBid((int)numericUpDown2.Value, 0) || MainForm.userdata.replaceit)
+                    if (MainForm.userdata.replaceit)
                     {
                         Bitmap img1 = MainForm.foregroundBMD.Clone(new Rectangle(MainForm.foregroundBMI[Convert.ToInt32(numericUpDown2.Value)] * 16, 0, 16, 16), MainForm.foregroundBMD.PixelFormat);
                         ReplacePictureBox.Image = img1;
@@ -297,21 +281,13 @@ namespace EEditor
                         button1.Enabled = true;
                         replaceRotate.Value = 1;
                     }
-                    else
-                    {
-                        ReplacePictureBox.Image = Properties.Resources.cross;
-                        numericUpDown2.ForeColor = Color.Red;
-                        button5.Enabled = false;
-                        button1.Enabled = false;
-                        label4.Text = "Can't replace block ID " + numericUpDown1.Value + " with ID " + numericUpDown2.Value + ", you don't own it.";
-                    }
 
                 }
             }
 
             else if (numericUpDown2.Value >= 500 && numericUpDown2.Value <= 999)
             {
-                if (MainForm.editArea.ownedBid((int)numericUpDown2.Value, 3) || MainForm.userdata.replaceit)
+                if (MainForm.userdata.replaceit)
                 {
                     Bitmap img6 = MainForm.backgroundBMD.Clone(new Rectangle(MainForm.backgroundBMI[Convert.ToInt32(numericUpDown2.Value)] * 16, 0, 16, 16), MainForm.backgroundBMD.PixelFormat);
                     ReplacePictureBox.Image = img6;
@@ -319,14 +295,6 @@ namespace EEditor
                     label4.Text = null;
                     button5.Enabled = true;
                     button1.Enabled = true;
-                }
-                else
-                {
-                    ReplacePictureBox.Image = Properties.Resources.cross;
-                    numericUpDown2.ForeColor = Color.Red;
-                    button5.Enabled = false;
-                    button1.Enabled = false;
-                    label4.Text = "Can't replace block ID " + numericUpDown1.Value + " with ID " + numericUpDown2.Value + ", you don't own it.";
                 }
             }
         }
@@ -342,7 +310,7 @@ namespace EEditor
             {
                 if (MainForm.decosBMI[(int)numericUpDown2.Value] != 0)
                 {
-                    if (MainForm.editArea.ownedBid((int)numericUpDown2.Value, 2) || MainForm.userdata.replaceit)
+                    if (MainForm.userdata.replaceit)
                     {
                         Bitmap img1 = MainForm.decosBMD.Clone(new Rectangle(MainForm.decosBMI[Convert.ToInt32(numericUpDown2.Value)] * 16, 0, 16, 16), MainForm.decosBMD.PixelFormat);
                         ReplacePictureBox.Image = img1;
@@ -351,18 +319,10 @@ namespace EEditor
                         label4.Text = null;
                         numericUpDown2.ForeColor = MainForm.themecolors.foreground;
                     }
-                    else
-                    {
-                        ReplacePictureBox.Image = Properties.Resources.cross;
-                        numericUpDown2.ForeColor = Color.Red;
-                        button5.Enabled = false;
-                        button1.Enabled = false;
-                        label4.Text = "Can't replace block ID " + numericUpDown1.Value + " with ID " + numericUpDown2.Value + ", you don't own it.";
-                    }
                 }
                 else if (MainForm.miscBMI[(int)numericUpDown2.Value] != 0 || numericUpDown2.Value == 119)
                 {
-                    if (MainForm.editArea.ownedBid((int)numericUpDown2.Value, 1) || MainForm.userdata.replaceit)
+                    if (MainForm.userdata.replaceit)
                     {
                         Bitmap img1 = MainForm.miscBMD.Clone(new Rectangle(MainForm.miscBMI[Convert.ToInt32(numericUpDown2.Value)] * 16, 0, 16, 16), MainForm.miscBMD.PixelFormat);
                         ReplacePictureBox.Image = img1;
@@ -371,18 +331,10 @@ namespace EEditor
                         label4.Text = null;
                         numericUpDown2.ForeColor = MainForm.themecolors.foreground;
                     }
-                    else
-                    {
-                        ReplacePictureBox.Image = Properties.Resources.cross;
-                        numericUpDown2.ForeColor = Color.Red;
-                        button5.Enabled = false;
-                        button1.Enabled = false;
-                        label4.Text = "Can't replace block ID " + numericUpDown1.Value + " with ID " + numericUpDown2.Value + ", you don't own it.";
-                    }
                 }
                 else
                 {
-                    if (MainForm.editArea.ownedBid((int)numericUpDown2.Value, 0) || MainForm.userdata.replaceit)
+                    if (MainForm.userdata.replaceit)
                     {
                         Bitmap img1 = MainForm.foregroundBMD.Clone(new Rectangle(MainForm.foregroundBMI[Convert.ToInt32(numericUpDown2.Value)] * 16, 0, 16, 16), MainForm.foregroundBMD.PixelFormat);
                         ReplacePictureBox.Image = img1;
@@ -391,19 +343,11 @@ namespace EEditor
                         label4.Text = null;
                         numericUpDown2.ForeColor = MainForm.themecolors.foreground;
                     }
-                    else
-                    {
-                        ReplacePictureBox.Image = Properties.Resources.cross;
-                        numericUpDown2.ForeColor = Color.Red;
-                        button5.Enabled = false;
-                        button1.Enabled = false;
-                        label4.Text = "Can't replace block ID " + numericUpDown1.Value + " with ID " + numericUpDown2.Value + ", you don't own it.";
-                    }
                 }
             }
             else if (numericUpDown2.Value >= 500 && numericUpDown2.Value <= 999)
             {
-                if (MainForm.editArea.ownedBid((int)numericUpDown2.Value, 3) || MainForm.userdata.replaceit)
+                if (MainForm.userdata.replaceit)
                 {
                     Bitmap img2 = MainForm.backgroundBMD.Clone(new Rectangle(MainForm.backgroundBMI[Convert.ToInt32(numericUpDown2.Value)] * 16, 0, 16, 16), MainForm.backgroundBMD.PixelFormat);
                     ReplacePictureBox.Image = img2;
@@ -411,15 +355,6 @@ namespace EEditor
                     button1.Enabled = true;
                     label4.Text = null;
                     numericUpDown2.ForeColor = MainForm.themecolors.foreground;
-                }
-                else
-                {
-                    ReplacePictureBox.Image = Properties.Resources.cross;
-                    numericUpDown2.ForeColor = Color.Red;
-                    button5.Enabled = false;
-                    button1.Enabled = false;
-                    label4.Text = null;
-                    label4.Text = "Can't replace block ID " + numericUpDown1.Value + " with ID " + numericUpDown2.Value + ", you don't own it.";
                 }
             }
         }
@@ -520,13 +455,13 @@ namespace EEditor
             if (!string.IsNullOrWhiteSpace(textBox1.Text))
             {
 
-                for (int i = 0; i < MainForm.ownedb.Count; i++)
+                for (int i = 0; i < MainForm.blocksdb.Count; i++)
                 {
-                    if (MainForm.ownedb[i].name.ToLower().Contains(textBox1.Text))
+                    if (MainForm.blocksdb[i].name.ToLower().Contains(textBox1.Text))
                     {
-                        int[] blocks = MainForm.ownedb[i].blocks;
+                        int[] blocks = MainForm.blocksdb[i].blocks;
                         ToolStrip strip = new ToolStrip();
-                        strip.Name = MainForm.ownedb[i].name + i;
+                        strip.Name = MainForm.blocksdb[i].name + i;
                         strip.GripStyle = ToolStripGripStyle.Hidden;
                         toolStripContainer1.ContentPanel.Controls.Add(strip);
                         for (int a = 0; a < blocks.Length; a++)
@@ -891,163 +826,6 @@ namespace EEditor
                 }
             }
             MainForm.editArea.Invalidate();
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-            Thread thr = new Thread(replaceNotOwnedBlocks);
-            thr.Start();
-        }
-        private void replaceNotOwnedBlocks()
-        {
-            if (!MainForm.debug)
-            {
-                int total1 = MainForm.editArea.Frames[0].Height - 1;
-                int incr = 0;
-                int totalReplaced = 0;
-                if (label4.InvokeRequired)
-                {
-                    label4.Invoke((MethodInvoker)delegate
-                    {
-                        label4.Text = "Replacing blocks you don't own.";
-                    });
-                }
-                for (int yy = 0; yy < MainForm.editArea.Frames[0].Height; yy++)
-                {
-
-                    for (int xx = 0; xx < MainForm.editArea.Frames[0].Width; xx++)
-                    {
-
-                        if (MainForm.decosBMI[MainForm.editArea.Frames[0].Foreground[yy, xx]] != 0)
-                        {
-
-
-                            if (!MainForm.editArea.ownedBid(MainForm.editArea.Frames[0].Foreground[yy, xx], 2))
-                            {
-                                MainForm.editArea.Frames[0].Foreground[yy, xx] = (int)numericUpDown2.Value;
-                                if (bdata.getRotation(MainForm.editArea.Frames[0].Foreground[yy, xx], MainForm.editArea.Frames[0].BlockData[yy, xx]) != null)
-                                {
-
-                                    MainForm.editArea.Frames[0].BlockData[yy, xx] = Convert.ToInt32(numericUpDown2.Value);
-                                }
-                                //incfg += (int)rp.NU2.Value + ":" + editArea.CurFrame.Background[yy, xx] + ":" + xx + ":" + yy + ":";
-                                totalReplaced += 1;
-
-                            }
-                        }
-                        if (MainForm.miscBMI[MainForm.editArea.Frames[0].Foreground[yy, xx]] != 0)
-                        {
-                            if (MainForm.editArea.Frames[0].Foreground[yy, xx] == 385)
-                            {
-                                if (!MainForm.accs[MainForm.userdata.username].payvault.ContainsKey("goldmember"))
-                                {
-                                    MainForm.editArea.Frames[0].BlockData[yy, xx] = 0;
-                                    totalReplaced += 1;
-                                }
-                            }
-                            if (!MainForm.editArea.ownedBid(MainForm.editArea.Frames[0].Foreground[yy, xx], 1))
-                            {
-
-                                MainForm.editArea.Frames[0].Foreground[yy, xx] = (int)numericUpDown2.Value;
-                                MainForm.editArea.Frames[0].BlockData[yy, xx] = 0;
-                                totalReplaced += 1;
-                                //incfg += (int)rp.NU2.Value + ":" + editArea.CurFrame.Background[yy, xx] + ":" + xx + ":" + yy + ":";
-                            }
-                        }
-
-                        if (MainForm.foregroundBMI[MainForm.editArea.Frames[0].Foreground[yy, xx]] != 0)
-                        {
-
-                            if (!MainForm.editArea.ownedBid(MainForm.editArea.Frames[0].Foreground[yy, xx], 0))
-                            {
-
-                                MainForm.editArea.Frames[0].Foreground[yy, xx] = (int)numericUpDown2.Value;
-                                MainForm.editArea.Frames[0].BlockData[yy, xx] = 0;
-                                totalReplaced += 1;
-                                //incfg += (int)rp.NU2.Value + ":" + editArea.CurFrame.Background[yy, xx] + ":" + xx + ":" + yy + ":";
-
-
-                            }
-                        }
-                        if (MainForm.backgroundBMI[MainForm.editArea.Frames[0].Background[yy, xx]] != 0)
-                        {
-
-                            if (!MainForm.editArea.ownedBid(MainForm.editArea.Frames[0].Background[yy, xx], 3))
-                            {
-
-                                MainForm.editArea.Frames[0].Background[yy, xx] = (int)numericUpDown2.Value;
-                                totalReplaced += 1;
-                                //incfg += (int)rp.NU2.Value + ":" + editArea.CurFrame.Background[yy, xx] + ":" + xx + ":" + yy + ":";
-
-
-                            }
-                        }
-                        if (MainForm.foregroundBMI[MainForm.editArea.Frames[0].Foreground[yy, xx]] == 0)
-                        {
-
-                            if (MainForm.editArea.Frames[0].Foreground[yy, xx] != 0)
-                            {
-
-                                MainForm.editArea.Frames[0].Foreground[yy, xx] = (int)numericUpDown2.Value;
-                                totalReplaced += 1;
-                                //incfg += (int)rp.NU2.Value + ":" + editArea.CurFrame.Background[yy, xx] + ":" + xx + ":" + yy + ":";
-
-
-                            }
-                        }
-                        if (MainForm.backgroundBMI[MainForm.editArea.Frames[0].Background[yy, xx]] == 0)
-                        {
-                            if (MainForm.editArea.Frames[0].Background[yy, xx] != 0)
-                            {
-                                MainForm.editArea.Frames[0].Background[yy, xx] = (int)numericUpDown2.Value;
-                                totalReplaced += 1;
-                            }
-                        }
-                        Point p = new Point(xx * 16 - Math.Abs(MainForm.editArea.AutoScrollPosition.X), yy * 16 - Math.Abs(MainForm.editArea.AutoScrollPosition.Y));
-
-
-                        if (MainForm.editArea.InvokeRequired)
-                        {
-                            MainForm.editArea.Invoke((MethodInvoker)delegate
-                            {
-                                MainForm.editArea.Draw(xx, yy, Graphics.FromImage(MainForm.editArea.Back), MainForm.userdata.thisColor);
-                                MainForm.editArea.Invalidate(new Rectangle(p, new Size(16, 16)));
-
-                            });
-                        }
-                        else
-                        {
-                            MainForm.editArea.Draw(xx, yy, Graphics.FromImage(MainForm.editArea.Back), MainForm.userdata.thisColor);
-                            MainForm.editArea.Invalidate(new Rectangle(p, new Size(16, 16)));
-                        }
-
-                    }
-                    if (progressBar1.InvokeRequired)
-                    {
-                        progressBar1.Invoke((MethodInvoker)delegate
-                        {
-                            double db = ((double)incr / total1) * 100;
-                            progressBar1.Value = Convert.ToInt32(db);
-                        });
-                    }
-                    if (!progressBar1.InvokeRequired)
-                    {
-                        double db = ((double)incr / total1) * 100;
-                        progressBar1.Value = Convert.ToInt32(db);
-                    }
-                    incr += 1;
-                }
-                if (label4.InvokeRequired)
-                {
-                    label4.Invoke((MethodInvoker)delegate
-                    {
-                        label4.Text = "Replaced " + totalReplaced + " blocks you don't own.";
-                    });
-                }
-
-            }
-
-            //MessageBox.Show("Unowned blocks have been replaced.","Unowned blocks replaced",MessageBoxButtons.OK,MessageBoxIcon.Information);
         }
 
         private void textBox1_KeyUp(object sender, KeyEventArgs e)

@@ -409,22 +409,9 @@ namespace EEditor
                         int yy = y + Rect.Y;
                         if (0 <= xx && xx < editArea.BlockWidth && 0 <= yy && yy < editArea.BlockHeight)
                         {
-                            if (IsPaintable(xx, yy, 0, true) && IsPaintable(xx, yy, 0, false))
-                            {
-                                frame.Foreground[yy, xx] = 0;
-                                frame.BlockData[yy, xx] = 0;
-                                frame.BlockData1[yy, xx] = 0;
-                                frame.BlockData2[yy, xx] = 0;
-                                frame.BlockData3[yy, xx] = "Unknown";
-                                frame.BlockData4[yy, xx] = "Unknown";
-                                frame.BlockData5[yy, xx] = "Unknown";
-                                frame.BlockData6[yy, xx] = "Unknown";
-                                frame.Foreground[yy, xx] = IsPaintable(xx, yy, 0, true) ? 0 : 9;
-                            }
-                            else if (!IsPaintable(xx, yy, 0, true) && IsPaintable(xx, yy, 0, false))
-                            {
-                                frame.Foreground[yy, xx] = 9;
-                            }
+
+                            frame.Foreground[yy, xx] = 9;
+
 
                             //frame.Background[yy, xx] = 0;
                             editArea.Draw(xx, yy, g, MainForm.userdata.thisColor);
@@ -448,30 +435,17 @@ namespace EEditor
                         int yy = y + Rect.Y;
                         if (0 <= xx && xx < editArea.BlockWidth && 0 <= yy && yy < editArea.BlockHeight)
                         {
-                            if (IsPaintable(xx, yy, 0, true) && IsPaintable(xx, yy, 0, false))
-                            {
-                                frame.Foreground[yy, xx] = 0;
-                                frame.Background[yy, xx] = 0;
-                                frame.BlockData[yy, xx] = 0;
-                                frame.BlockData1[yy, xx] = 0;
-                                frame.BlockData2[yy, xx] = 0;
-                                frame.BlockData3[yy, xx] = "Unknown";
-                                frame.BlockData4[yy, xx] = "Unknown";
-                                frame.BlockData5[yy, xx] = "Unknown";
-                                frame.BlockData6[yy, xx] = "Unknown";
-                            }
-                            else if (!IsPaintable(xx, yy, 0, true) && IsPaintable(xx, yy, 0, false))
-                            {
-                                frame.Foreground[yy, xx] = 9;
-                                frame.Background[yy, xx] = 0;
-                                frame.BlockData[yy, xx] = 0;
-                                frame.BlockData1[yy, xx] = 0;
-                                frame.BlockData2[yy, xx] = 0;
-                                frame.BlockData3[yy, xx] = "Unknown";
-                                frame.BlockData4[yy, xx] = "Unknown";
-                                frame.BlockData5[yy, xx] = "Unknown";
-                                frame.BlockData6[yy, xx] = "Unknown";
-                            }
+
+                            frame.Foreground[yy, xx] = 9;
+                            frame.Background[yy, xx] = 0;
+                            frame.BlockData[yy, xx] = 0;
+                            frame.BlockData1[yy, xx] = 0;
+                            frame.BlockData2[yy, xx] = 0;
+                            frame.BlockData3[yy, xx] = "Unknown";
+                            frame.BlockData4[yy, xx] = "Unknown";
+                            frame.BlockData5[yy, xx] = "Unknown";
+                            frame.BlockData6[yy, xx] = "Unknown";
+
 
                             //if (frame.Foreground[yy, xx] == 0) Back[y, x] = Convert.ToString(frame.Background[yy, xx]);
 
@@ -532,7 +506,7 @@ namespace EEditor
                                 frame.Foreground[yy, xx] = Convert.ToInt32(Front[y, x]);
                                 if (frame.Background[yy, xx] == 0) frame.Background[yy, xx] = Convert.ToInt32(Back[y, x]);
                             }
-                            
+
 
                             /*else
                             {
@@ -552,15 +526,15 @@ namespace EEditor
                             //if (frame.Background[yy, xx] == 0) frame.Background[yy, xx] = Convert.ToInt32(Back[y, x]);
                             //frame.Background[yy, xx] = Convert.ToInt32(Back[y, x]);
 
-                                if (Coins[y, x] != null) frame.BlockData[yy, xx] = Convert.ToInt32(Coins[y, x]);
-                                if (Id1[y, x] != null) frame.BlockData1[yy, xx] = Convert.ToInt32(Id1[y, x]);
-                                if (Target1[y, x] != null) frame.BlockData2[yy, xx] = Convert.ToInt32(Target1[y, x]);
-                                if (Text1[y, x] != null) frame.BlockData3[yy, xx] = Text1[y, x];
-                                if (Text2 != null)
-                                    if (Text2[y, x] != null) frame.BlockData4[yy, xx] = Text2[y, x];
-                                if (Text3[y, x] != null) frame.BlockData5[yy, xx] = Text3[y, x];
-                                if (Text4[y, x] != null) frame.BlockData6[yy, xx] = Text4[y, x];
-                            
+                            if (Coins[y, x] != null) frame.BlockData[yy, xx] = Convert.ToInt32(Coins[y, x]);
+                            if (Id1[y, x] != null) frame.BlockData1[yy, xx] = Convert.ToInt32(Id1[y, x]);
+                            if (Target1[y, x] != null) frame.BlockData2[yy, xx] = Convert.ToInt32(Target1[y, x]);
+                            if (Text1[y, x] != null) frame.BlockData3[yy, xx] = Text1[y, x];
+                            if (Text2 != null)
+                                if (Text2[y, x] != null) frame.BlockData4[yy, xx] = Text2[y, x];
+                            if (Text3[y, x] != null) frame.BlockData5[yy, xx] = Text3[y, x];
+                            if (Text4[y, x] != null) frame.BlockData6[yy, xx] = Text4[y, x];
+
                             editArea.Draw(xx, yy, g, MainForm.userdata.thisColor);
                             //g.DrawImage(editArea.Bricks[frame.Map[yy, xx]], (x + Rect.X) * 16, (y + Rect.Y) * 16);
                         }

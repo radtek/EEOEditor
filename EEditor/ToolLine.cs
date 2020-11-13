@@ -64,7 +64,7 @@ namespace EEditor
                     {
                         editArea.CurFrame.BlockData[y, x] = ToolPen.rotation[PenID];
                     }
-                    if (IsPaintable(x, y, PenID, true) && IsPaintable(x, y, PenID, false)) editArea.CurFrame.Foreground[y, x] = PenID;
+                    editArea.CurFrame.Foreground[y, x] = PenID;
                 }
                 editArea.Draw(x, y, g, MainForm.userdata.thisColor);
                 editArea.Invalidate();
@@ -145,25 +145,23 @@ namespace EEditor
                 {
                     Point p = GetLocation(e);
 
-                    if (IsPaintable(p.X, p.Y))
-                    {
+
                         start = GetLocation(e);
                         ToolPen.undolist.Push(PenID + ":" + editArea.CurFrame.Foreground[start.Y, start.X] + ":" + start.X + ":" + start.Y + ":");
                         PlaceBlock(start.X, start.Y);
                         editArea.Invalidate();
-                    }
+                    
                 }
                 else if (!start.IsEmpty)
                 {
                     Point p = GetLocation(e);
 
-                    if (IsPaintable(p.X, p.Y))
-                    {
+
                         end = GetLocation(e);
                         ToolPen.undolist.Push(PenID + ":" + editArea.CurFrame.Foreground[end.Y, end.X] + ":" + end.X + ":" + end.Y + ":");
                         PlaceBlock(end.X, end.Y);
                         editArea.Invalidate();
-                    }
+                    
                 }
             }
         }
