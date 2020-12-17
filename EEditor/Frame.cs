@@ -534,7 +534,7 @@ namespace EEditor
 
                             f.BlockData[y, x] = ((Blocks.PortalBlock)lvl[0, x, y]).Rotation;
                             f.BlockData1[y, x] = ((Blocks.PortalBlock)lvl[0, x, y]).ID;
-                            f.BlockData1[y, x] = ((Blocks.PortalBlock)lvl[0, x, y]).Target;
+                            f.BlockData2[y, x] = ((Blocks.PortalBlock)lvl[0, x, y]).Target;
                         }
                         if (Blocks.IsType(lvl[0, x, y].BlockID, Blocks.BlockType.Morphable))
                         {
