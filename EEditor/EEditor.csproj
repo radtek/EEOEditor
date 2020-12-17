@@ -57,7 +57,7 @@
     <StartupObject />
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>eeditor_1.ico</ApplicationIcon>
+    <ApplicationIcon>eeditor.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -410,7 +410,6 @@
     <None Include="Resources\picker.png" />
     <None Include="Resources\debug.png" />
     <Content Include="eeditor.ico" />
-    <Content Include="eeditor_1.ico" />
     <Content Include="output.ico" />
     <None Include="Resources\ag_icon.png" />
     <None Include="Resources\add.png" />
