@@ -1092,7 +1092,7 @@ namespace EEditor
 
         protected void SetupImages()
         {
-            editArea.unknowBricks = EEditor.Properties.Resources.unknown;
+            editArea.unknowBricks = Properties.Resources.unknown;
             editArea.misc = new Bitmap(Properties.Resources.misc, new System.Drawing.Size(Properties.Resources.misc.Width, 16));
 
             //Foreground
@@ -1557,159 +1557,160 @@ namespace EEditor
             }
             else
             {
-                if (!unknown)
+                if (doihave)
                 {
-                    if (doihave && !debug)
+
+                    int[] values = new int[ids.Length];
+                    List<int> vala = new List<int>();
+                    for (int i = 0; i < ids.Length; i++)
                     {
-                        int[] values = new int[ids.Length];
-                        List<int> vala = new List<int>();
-                        for (int i = 0; i < ids.Length; i++)
-                        {
-                            if (mode == 0)
-                            {
-                                values[i] += blocks[ids[i]];
-
-                            }
-                            else if (mode == 1)
-                            {
-                                values[i] += misc[ids[i]];
-
-                            }
-                            else if (mode == 2)
-                            {
-                                values[i] += decos[ids[i]];
-                            }
-                            else if (mode == 3)
-                            {
-                                values[i] += bgs[ids[i]];
-                            }
-
-                        }
-                        blocksdb.Add(new listofBlocks() { mode = mode, blocks = values, name = desc });
-                    }
-
-                    int length = ids.Length;
-                    Bitmap bitmap = new Bitmap(target);
-                    int n = bitmap.Width / 16;
-                    var bid = 0;
-                    BrickButton[] items = new BrickButton[length];
-
-                    for (int j = 0; j < length; ++j)
-                    {
-                        bid = ids[j];
-                        Bitmap brick = bitmap.Clone(new Rectangle(16 * ids[j], 0, 16, 16), System.Drawing.Imaging.PixelFormat.DontCare);
-
-
                         if (mode == 0)
                         {
-                            if (toolstrip == 0)
-                            {
-                                if (!ForegroundBlocks.ContainsKey(blocks[bid]))
-                                {
-
-                                    ForegroundBlocks.Add(blocks[bid], foregroundBMD.Clone(new Rectangle(bid * 16, 0, 16, 16), foregroundBMD.PixelFormat));
-
-                                }
-                            }
-                            else
-                            {
-                                if (!ActionBlocks.ContainsKey(blocks[bid]))
-                                {
-
-                                    ActionBlocks.Add(blocks[bid], foregroundBMD.Clone(new Rectangle(bid * 16, 0, 16, 16), foregroundBMD.PixelFormat));
-
-                                }
-                            }
-
-                            ids[j] = blocks[ids[j]];
+                            values[i] += blocks[ids[i]];
 
                         }
-                        if (mode == 1)
+                        else if (mode == 1)
                         {
-                            if (!ActionBlocks.ContainsKey(misc[bid]))
-                            {
-                                ActionBlocks.Add(misc[bid], miscBMD.Clone(new Rectangle(bid * 16, 0, 16, 16), miscBMD.PixelFormat));
-                            }
-                            ids[j] = misc[ids[j]];
-
+                            values[i] += misc[ids[i]];
 
                         }
-                        if (mode == 2)
+                        else if (mode == 2)
                         {
-                            if (toolstrip == 2)
-                            {
-                                if (!DecorationBlocks.ContainsKey(decos[bid]))
-                                {
-                                    DecorationBlocks.Add(decos[bid], decosBMD.Clone(new Rectangle(bid * 16, 0, 16, 16), decosBMD.PixelFormat));
-                                }
-                            }
-                            else if (toolstrip == 1)
-                            {
-                                if (!ActionBlocks.ContainsKey(decos[bid]))
-                                {
-                                    ActionBlocks.Add(decos[bid], decosBMD.Clone(new Rectangle(bid * 16, 0, 16, 16), decosBMD.PixelFormat));
-                                }
-                            }
-                            ids[j] = decos[ids[j]];
-
+                            values[i] += decos[ids[i]];
                         }
-                        if (mode == 3)
+                        else if (mode == 3)
                         {
-                            if (!BackgroundBlocks.ContainsKey(bgs[bid]))
-                            {
-                                BackgroundBlocks.Add(bgs[bid], backgroundBMD.Clone(new Rectangle(bid * 16, 0, 16, 16), backgroundBMD.PixelFormat));
-                            }
-                            ids[j] = bgs[ids[j]];
-
+                            values[i] += bgs[ids[i]];
                         }
-                        int i = ids[j];
 
-                        editArea.Bricks[ids[j]] = brick;
-
-                        //editArea.BricksFade[ids[j]] = Fade(brick);
-
-                        items[j] = new BrickButton(brick, this, SetBrick, ids[j], bid, true, mode, desc);
-                        //else items[j] = new BrickButton(brick, this, SetBrick, ids[j], bid, false, mode, desc);
-                        items[j].MainForm = this;
-                        if (ids[j] == 9 && setFirst)
-                        {
-                            selectedBrick = items[j];
-                            selectedBrick.Checked = true;
-                            editArea.Tool.PenID = i;
-                        }
-                        if (colors != null)
-                        {
-                            Minimap.Colors[ids[j]] = (0xffu << 24) | colors[j];
-                            /*using (StreamWriter sw = new StreamWriter("output.txt",true))
-                            {
-                                sw.WriteLine($"{ids[j]},{(0xffu << 24) | colors[j]}");
-                            }*/
-                            Minimap.ImageColor[ids[j]] = true;
-                            if (i < 500 || i >= 1001)
-                            {
-                                if (bdata.morphable.Contains(ids[j]))
-                                {
-                                    InsertImageForm.SpecialMorph.Add(i);
-                                }
-                                else if (bdata.goal.Contains(ids[j]))
-                                {
-                                    InsertImageForm.SpecialAction.Add(i);
-                                }
-                                else if (!bdata.rotate.Contains(ids[j]) && !bdata.portals.Contains(ids[j]))
-                                {
-                                    InsertImageForm.Blocks.Add(i);
-                                }
-                            }
-                            else if (i >= 500 && i <= 999)
-                            {
-                                InsertImageForm.Background.Add(i);
-                            }
-
-                        }
                     }
+                    blocksdb.Add(new listofBlocks() { mode = mode, blocks = values, name = desc });
+
+                }
+
+                int length = ids.Length;
+                Bitmap bitmap = new Bitmap(target);
+                int n = bitmap.Width / 16;
+                var bid = 0;
+                BrickButton[] items = new BrickButton[length];
+
+                for (int j = 0; j < length; ++j)
+                {
+                    bid = ids[j];
+                    Bitmap brick = bitmap.Clone(new Rectangle(16 * ids[j], 0, 16, 16), System.Drawing.Imaging.PixelFormat.DontCare);
 
 
+                    if (mode == 0)
+                    {
+                        if (toolstrip == 0)
+                        {
+                            if (!ForegroundBlocks.ContainsKey(blocks[bid]))
+                            {
 
+                                ForegroundBlocks.Add(blocks[bid], foregroundBMD.Clone(new Rectangle(bid * 16, 0, 16, 16), foregroundBMD.PixelFormat));
+
+                            }
+                        }
+                        else
+                        {
+                            if (!ActionBlocks.ContainsKey(blocks[bid]))
+                            {
+
+                                ActionBlocks.Add(blocks[bid], foregroundBMD.Clone(new Rectangle(bid * 16, 0, 16, 16), foregroundBMD.PixelFormat));
+
+                            }
+                        }
+
+                        ids[j] = blocks[ids[j]];
+
+                    }
+                    if (mode == 1)
+                    {
+                        if (!ActionBlocks.ContainsKey(misc[bid]))
+                        {
+                            ActionBlocks.Add(misc[bid], miscBMD.Clone(new Rectangle(bid * 16, 0, 16, 16), miscBMD.PixelFormat));
+                        }
+                        ids[j] = misc[ids[j]];
+
+
+                    }
+                    if (mode == 2)
+                    {
+                        if (toolstrip == 2)
+                        {
+                            if (!DecorationBlocks.ContainsKey(decos[bid]))
+                            {
+                                DecorationBlocks.Add(decos[bid], decosBMD.Clone(new Rectangle(bid * 16, 0, 16, 16), decosBMD.PixelFormat));
+                            }
+                        }
+                        else if (toolstrip == 1)
+                        {
+                            if (!ActionBlocks.ContainsKey(decos[bid]))
+                            {
+                                ActionBlocks.Add(decos[bid], decosBMD.Clone(new Rectangle(bid * 16, 0, 16, 16), decosBMD.PixelFormat));
+                            }
+                        }
+                        ids[j] = decos[ids[j]];
+
+                    }
+                    if (mode == 3)
+                    {
+                        if (!BackgroundBlocks.ContainsKey(bgs[bid]))
+                        {
+                            BackgroundBlocks.Add(bgs[bid], backgroundBMD.Clone(new Rectangle(bid * 16, 0, 16, 16), backgroundBMD.PixelFormat));
+                        }
+                        ids[j] = bgs[ids[j]];
+
+                    }
+                    int i = ids[j];
+
+                    editArea.Bricks[ids[j]] = brick;
+
+                    //editArea.BricksFade[ids[j]] = Fade(brick);
+
+                    items[j] = new BrickButton(brick, this, SetBrick, ids[j], bid, true, mode, desc);
+                    //else items[j] = new BrickButton(brick, this, SetBrick, ids[j], bid, false, mode, desc);
+                    items[j].MainForm = this;
+                    if (ids[j] == 9 && setFirst)
+                    {
+                        selectedBrick = items[j];
+                        selectedBrick.Checked = true;
+                        editArea.Tool.PenID = i;
+                    }
+                    if (colors != null)
+                    {
+                        Minimap.Colors[ids[j]] = (0xffu << 24) | colors[j];
+                        /*using (StreamWriter sw = new StreamWriter("output.txt",true))
+                        {
+                            sw.WriteLine($"{ids[j]},{(0xffu << 24) | colors[j]}");
+                        }*/
+                        Minimap.ImageColor[ids[j]] = true;
+                        if (i < 500 || i >= 1001)
+                        {
+                            if (bdata.morphable.Contains(ids[j]))
+                            {
+                                InsertImageForm.SpecialMorph.Add(i);
+                            }
+                            else if (bdata.goal.Contains(ids[j]))
+                            {
+                                InsertImageForm.SpecialAction.Add(i);
+                            }
+                            else if (!bdata.rotate.Contains(ids[j]) && !bdata.portals.Contains(ids[j]))
+                            {
+                                InsertImageForm.Blocks.Add(i);
+                            }
+                        }
+                        else if (i >= 500 && i <= 999)
+                        {
+                            InsertImageForm.Background.Add(i);
+                        }
+
+                    }
+                }
+
+
+                if (doihave)
+                {
                     ToolStrip strip = new ToolStrip();
 
                     if (searched != null && items[0].blockInfo.ToLower().Contains(searched) || filterTextBox.Text == string.Empty)
@@ -1755,8 +1756,9 @@ namespace EEditor
                         }
                     }
                 }
-
             }
+
+
         }
 
         public class BrickButton : ToolStripButton
