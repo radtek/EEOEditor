@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(About));
             this.BugsOrFeatureButton = new System.Windows.Forms.Button();
             this.WikiButton = new System.Windows.Forms.Button();
             this.HomepageButton = new System.Windows.Forms.Button();
@@ -50,12 +51,10 @@
             this.BresenLALinkLabel = new System.Windows.Forms.LinkLabel();
             this.JSONLinkLabel = new System.Windows.Forms.LinkLabel();
             this.lPlayerIOLinkLabel = new System.Windows.Forms.LinkLabel();
-            this.CosturaLinkLabel = new System.Windows.Forms.LinkLabel();
             this.ZIPLinkLabel = new System.Windows.Forms.LinkLabel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lukemLinkLabel = new System.Windows.Forms.LinkLabel();
-            this.InitParserLinkLabel = new System.Windows.Forms.LinkLabel();
             this.label10 = new System.Windows.Forms.Label();
+            this.lukemLinkLabel = new System.Windows.Forms.LinkLabel();
             this.groupBox4.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -110,8 +109,8 @@
             this.AboutLabel.Name = "AboutLabel";
             this.AboutLabel.Size = new System.Drawing.Size(305, 36);
             this.AboutLabel.TabIndex = 0;
-            this.AboutLabel.Text = "EEditor is an offline Everybody Edits level editor, \r\nmade to simplify level crea" +
-    "tion and manipulation.";
+            this.AboutLabel.Text = "EEOditor is an offline Everybody Edits Offline level editor, \r\nmade to simplify l" +
+    "evel creation and manipulation.";
             // 
             // groupBox4
             // 
@@ -303,23 +302,10 @@
             this.lPlayerIOLinkLabel.MouseEnter += new System.EventHandler(this.linkLabel_MouseHover);
             this.lPlayerIOLinkLabel.MouseLeave += new System.EventHandler(this.linkLabel_MouseLeave);
             // 
-            // CosturaLinkLabel
-            // 
-            this.CosturaLinkLabel.AutoSize = true;
-            this.CosturaLinkLabel.Location = new System.Drawing.Point(8, 275);
-            this.CosturaLinkLabel.Name = "CosturaLinkLabel";
-            this.CosturaLinkLabel.Size = new System.Drawing.Size(135, 13);
-            this.CosturaLinkLabel.TabIndex = 20;
-            this.CosturaLinkLabel.TabStop = true;
-            this.CosturaLinkLabel.Text = "Costura Fody - DLL Packer";
-            this.CosturaLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
-            this.CosturaLinkLabel.MouseEnter += new System.EventHandler(this.linkLabel_MouseHover);
-            this.CosturaLinkLabel.MouseLeave += new System.EventHandler(this.linkLabel_MouseLeave);
-            // 
             // ZIPLinkLabel
             // 
             this.ZIPLinkLabel.AutoSize = true;
-            this.ZIPLinkLabel.Location = new System.Drawing.Point(149, 275);
+            this.ZIPLinkLabel.Location = new System.Drawing.Point(10, 274);
             this.ZIPLinkLabel.Name = "ZIPLinkLabel";
             this.ZIPLinkLabel.Size = new System.Drawing.Size(127, 13);
             this.ZIPLinkLabel.TabIndex = 21;
@@ -333,12 +319,10 @@
             // 
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.lukemLinkLabel);
-            this.groupBox1.Controls.Add(this.InitParserLinkLabel);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.ZIPLinkLabel);
             this.groupBox1.Controls.Add(this.FontAndTextInsertionLinkLabel);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.CosturaLinkLabel);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.lPlayerIOLinkLabel);
             this.groupBox1.Controls.Add(this.label4);
@@ -353,36 +337,10 @@
             this.groupBox1.Controls.Add(this.MaterialDesignLinkLabel);
             this.groupBox1.Location = new System.Drawing.Point(12, 153);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(325, 328);
+            this.groupBox1.Size = new System.Drawing.Size(325, 302);
             this.groupBox1.TabIndex = 22;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Credits / License";
-            // 
-            // lukemLinkLabel
-            // 
-            this.lukemLinkLabel.AutoSize = true;
-            this.lukemLinkLabel.Location = new System.Drawing.Point(156, 298);
-            this.lukemLinkLabel.Name = "lukemLinkLabel";
-            this.lukemLinkLabel.Size = new System.Drawing.Size(106, 13);
-            this.lukemLinkLabel.TabIndex = 23;
-            this.lukemLinkLabel.TabStop = true;
-            this.lukemLinkLabel.Text = "Lukem\'s .eelvl parser";
-            this.lukemLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
-            this.lukemLinkLabel.MouseEnter += new System.EventHandler(this.linkLabel_MouseHover);
-            this.lukemLinkLabel.MouseLeave += new System.EventHandler(this.linkLabel_MouseLeave);
-            // 
-            // InitParserLinkLabel
-            // 
-            this.InitParserLinkLabel.AutoSize = true;
-            this.InitParserLinkLabel.Location = new System.Drawing.Point(8, 298);
-            this.InitParserLinkLabel.Name = "InitParserLinkLabel";
-            this.InitParserLinkLabel.Size = new System.Drawing.Size(146, 13);
-            this.InitParserLinkLabel.TabIndex = 22;
-            this.InitParserLinkLabel.TabStop = true;
-            this.InitParserLinkLabel.Text = "Yonom/Processor\'s InitParser";
-            this.InitParserLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
-            this.InitParserLinkLabel.MouseEnter += new System.EventHandler(this.linkLabel_MouseHover);
-            this.InitParserLinkLabel.MouseLeave += new System.EventHandler(this.linkLabel_MouseLeave);
             // 
             // label10
             // 
@@ -393,17 +351,30 @@
             this.label10.TabIndex = 24;
             this.label10.Text = "Habbogame/HG added unknown blocks";
             // 
+            // lukemLinkLabel
+            // 
+            this.lukemLinkLabel.AutoSize = true;
+            this.lukemLinkLabel.Location = new System.Drawing.Point(143, 274);
+            this.lukemLinkLabel.Name = "lukemLinkLabel";
+            this.lukemLinkLabel.Size = new System.Drawing.Size(106, 13);
+            this.lukemLinkLabel.TabIndex = 23;
+            this.lukemLinkLabel.TabStop = true;
+            this.lukemLinkLabel.Text = "Lukem\'s .eelvl parser";
+            this.lukemLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
+            this.lukemLinkLabel.MouseEnter += new System.EventHandler(this.linkLabel_MouseHover);
+            this.lukemLinkLabel.MouseLeave += new System.EventHandler(this.linkLabel_MouseLeave);
+            // 
             // About
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(351, 490);
+            this.ClientSize = new System.Drawing.Size(351, 465);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox4);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "About";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "About EEditor";
+            this.Text = "About EEOditor";
             this.Load += new System.EventHandler(this.About_Load);
             this.groupBox4.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
@@ -434,10 +405,8 @@
         private System.Windows.Forms.LinkLabel BresenLALinkLabel;
         private System.Windows.Forms.LinkLabel JSONLinkLabel;
         private System.Windows.Forms.LinkLabel lPlayerIOLinkLabel;
-        private System.Windows.Forms.LinkLabel CosturaLinkLabel;
         private System.Windows.Forms.LinkLabel ZIPLinkLabel;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.LinkLabel InitParserLinkLabel;
         private System.Windows.Forms.LinkLabel lukemLinkLabel;
         private System.Windows.Forms.Button DownloadButton;
         private System.Windows.Forms.Label label10;
