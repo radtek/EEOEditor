@@ -1,2 +1,2 @@
 # EEOEditor
-just beta
+More information will come.
