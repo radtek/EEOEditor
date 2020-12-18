@@ -15,7 +15,7 @@ namespace EEditor
         public About(MainForm F)
         {
             InitializeComponent();
-            this.Text = "About EEditor " + this.ProductVersion;
+            this.Text = "About EEOditor " + this.ProductVersion;
             Frm1 = F;
         }
 
@@ -65,19 +65,19 @@ namespace EEditor
             switch (((Button)sender).Name.ToString())
             {
                 case "ForumButton":
-                        link1 = "http://forums.everybodyedits.com/viewtopic.php?id=32502";
+                        link1 = "https://forums.everybodyedits.com/viewtopic.php?id=47253";
                     break;
                 case "BugsOrFeatureButton":
-                        link1 = "https://github.com/capasha/EEditor-/issues";
+                        link1 = "https://github.com/capasha/EEOEditor/issues";
                     break;
                 case "CreditButton":
-                        link1 = "https://github.com/capasha/EEditor-/wiki/Credits";
+                        link1 = "https://github.com/capasha/EEOEditor/wiki/Credits";
                     break;
                 case "WikiButton":
-                        link1 = "https://github.com/capasha/EEditor-/wiki";
+                        link1 = "https://github.com/capasha/EEOEditor/wiki";
                     break;
                 case "HomepageButton":
-                        link1 = "https://github.com/capasha/EEditor-";
+                        link1 = "https://github.com/capasha/EEOEditor";
                     break;
             }
             DialogResult dgresult = MessageBox.Show($"Do you want to open {link1}\nin your webbrowser?", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
@@ -118,14 +118,8 @@ namespace EEditor
                 case "PlayerIO SDK":
                     link = "https://playerio.com/download/";
                     break;
-                case "Costura Fody - DLL Packer":
-                    link = "https://github.com/Fody/Costura";
-                    break;
                 case "SharpCompress - ZIP tool":
                     link = "https://github.com/adamhathcock/sharpcompress";
-                    break;
-                case "Yonom/Processor's InitParser":
-                    link = "https://gist.github.com/Yonom/3c9ebfe69b1432452f9b";
                     break;
                 case "Lukem's .eelvl parser":
                     link = "https://gitlab.com/LukeM212/EELVL/tree/legacy";
