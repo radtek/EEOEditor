@@ -48,10 +48,16 @@ namespace EEditor
             MainForm.tsc.Items.Clear();
             MainForm.tsc.Items.Add("Background");
             MainForm.tsc.Text = "Background";
-            MainForm.Text = "EEOditor " + MainForm.ProductVersion;
+            var title = tbtitle.Text;
+            var name = tbowner.Text;
+            if (string.IsNullOrEmpty(title)) title = "Untitled World";
+            if (string.IsNullOrEmpty(name)) name = "Player";
+            MainForm.Text = $"({title}) [{name}] ({nUWidth.Value}x{nUHeight.Value}) EEOditor { MainForm.ProductVersion}";
             #region Listbox selection
             SizeWidth = Convert.ToInt32(nUWidth.Value);
             SizeHeight = Convert.ToInt32(nUHeight.Value);
+            MainForm.EEONickname = name;
+            MainForm.EEOTitle = title;
             #endregion
             DialogResult = System.Windows.Forms.DialogResult.OK;
             Close();
