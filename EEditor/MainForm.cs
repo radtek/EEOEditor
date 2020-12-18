@@ -34,6 +34,8 @@ namespace EEditor
         private int[] misc = new int[3000];
         private int[] decos = new int[3000];
         private int[] bgs = new int[3000];
+        public static string EEONickname = "Player";
+        public static string EEOTitle = "Untitled World";
         private System.Timers.Timer timer = new System.Timers.Timer(1000);
         public static int[] foregroundBMI = new int[3000];
         public static int[] miscBMI = new int[3000];
@@ -2783,7 +2785,7 @@ namespace EEditor
                         message = "Guitar";
                         break;
                 }
-                MessageBox.Show("EEditor doesn't support " + message + " Blocks yet.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("EEOditor doesn't support " + message + " Blocks yet.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 selectedBrick.Checked = false;
                 editArea.Tool.PenID = cur.ID;
                 selectedBrick = cur;
@@ -2997,7 +2999,7 @@ namespace EEditor
                     fs.Close();
                     if (frame != null)
                     {
-                        this.Text = $"({Path.GetFileName(ofd.FileName)}) [Unknown] ({frame.Width}x{frame.Height}) - EEditor {this.ProductVersion}";
+                        this.Text = $"({Path.GetFileName(ofd.FileName)}) [Unknown] ({frame.Width}x{frame.Height}) - EEOditor {this.ProductVersion}";
                         editArea.Init(frame, false);
                     }
                     else MessageBox.Show("The selected EELevel is either invalid or corrupt.", "Invalid EELevel", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -3033,7 +3035,7 @@ namespace EEditor
                 fs.Close();
                 if (frame != null)
                 {
-                    this.Text = $"({Path.GetFileName(ofd.FileName)}) [Unknown] ({frame.Width}x{frame.Height}) - EEditor {this.ProductVersion}";
+                    this.Text = $"({Path.GetFileName(ofd.FileName)}) [Unknown] ({frame.Width}x{frame.Height}) - EEOditor {this.ProductVersion}";
                     editArea.Init(frame, false);
                 }
                 else MessageBox.Show("The selected EELevel is either invalid or corrupt.", "Invalid EELevel", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -3067,7 +3069,7 @@ namespace EEditor
                 fs.Close();
                 if (frame != null)
                 {
-                    this.Text = $"({Path.GetFileName(ofd.FileName)}) [Unknown] ({frame.Width}x{frame.Height}) - EEditor {this.ProductVersion}";
+                    this.Text = $"({Path.GetFileName(ofd.FileName)}) [Unknown] ({frame.Width}x{frame.Height}) - EEOditor {this.ProductVersion}";
                     editArea.Init(frame, false);
                 }
                 else MessageBox.Show("The selected EELevel is either invalid or corrupt.", "Invalid EELevel", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -3101,7 +3103,7 @@ namespace EEditor
                 fs.Close();
                 if (frame != null)
                 {
-                    this.Text = $"({Path.GetFileName(ofd.FileName)}) [Unknown] ({frame.Width}x{frame.Height}) - EEditor {this.ProductVersion}";
+                    this.Text = $"({Path.GetFileName(ofd.FileName)}) [Unknown] ({frame.Width}x{frame.Height}) - EEOditor {this.ProductVersion}";
                     editArea.Init(frame, false);
                 }
                 else MessageBox.Show("The selected EELevel is either invalid or corrupt.", "Invalid EELevel", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -3137,7 +3139,7 @@ namespace EEditor
                 fs.Close();
                 if (frame != null)
                 {
-                    this.Text = $"({Path.GetFileName(ofd.FileName)}) [Unknown] ({frame.Width}x{frame.Height}) - EEditor {this.ProductVersion}";
+                    this.Text = $"({Path.GetFileName(ofd.FileName)}) [Unknown] ({frame.Width}x{frame.Height}) - EEOditor {this.ProductVersion}";
                     editArea.Init(frame, false);
                 }
                 else MessageBox.Show("The selected file was made by an unknown EEAnimator version.", "Unknown version", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -4183,9 +4185,10 @@ namespace EEditor
         {
             if (MainForm.userdata.confirmClose)
             {
-                DialogResult dr = MessageBox.Show("Are you sure you want to exit EEditor?", "Quit EEditor?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult dr = MessageBox.Show("Are you sure you want to exit EEOditor?", "Quit EEOditor?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.Yes)
                 {
+                
                     e.Cancel = false;
                 }
                 else
@@ -4272,7 +4275,7 @@ namespace EEditor
                         Frame frame = Frame.LoadJSONDatabaseWorld(path);
                         if (frame != null)
                         {
-                            this.Text = $"({Path.GetFileName(ofd.FileName)}) [Unknown] ({frame.Width}x{frame.Height}) - EEditor {this.ProductVersion}";
+                            this.Text = $"({Path.GetFileName(ofd.FileName)}) [Unknown] ({frame.Width}x{frame.Height}) - EEOditor {this.ProductVersion}";
                             editArea.Init(frame, false);
                         }
                         else MessageBox.Show("The selected JSON Database World is either corrupt or invalid.", "Invalid JSON Database World", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -4346,7 +4349,7 @@ namespace EEditor
                     fs.Close();
                     if (frame != null)
                     {
-                        this.Text = $"({Path.GetFileName(ofd.FileName)}) [Unknown] ({frame.Width}x{frame.Height}) - EEditor {this.ProductVersion}";
+                        this.Text = $"({Path.GetFileName(ofd.FileName)}) [Unknown] ({frame.Width}x{frame.Height}) - EEOditor {this.ProductVersion}";
                         editArea.Init(frame, false);
                     }
                     else MessageBox.Show("The selected EELevel is either invalid or corrupt.", "Invalid EELevel", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -4393,7 +4396,7 @@ namespace EEditor
                 if (frame != null)
                 {
 
-                    this.Text = $"({Path.GetFileName(ofd.FileName)}) [Unknown] ({frame.Width}x{frame.Height}) - EEditor {this.ProductVersion}";
+                    this.Text = $"({Path.GetFileName(ofd.FileName)}) [Unknown] ({frame.Width}x{frame.Height}) - EEOditor {this.ProductVersion}";
                     editArea.Init(frame, false);
                 }
                 else MessageBox.Show("The selected EELevel is either invalid or corrupt.", "Invalid EELevel", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -4451,7 +4454,7 @@ namespace EEditor
                     Frame frame = Frame.LoadFromEELVL(filename);
                     if (frame != null)
                     {
-                        this.Text = $".eelvl - ({frame.levelname}) [{frame.nickname}] ({frame.Width}x{frame.Height}) - EEditor {this.ProductVersion}";
+                        this.Text = $".eelvl - ({frame.levelname}) [{frame.nickname}] ({frame.Width}x{frame.Height}) - EEOditor {this.ProductVersion}";
                         editArea.Init(frame, false);
                     }
                     else MessageBox.Show("The selected EELVL is either invalid or corrupt.", "Invalid EELVL", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -4562,7 +4565,7 @@ namespace EEditor
                         Frame frame = Frame.LoadJSONDatabaseWorld(path);
                         if (frame != null)
                         {
-                            this.Text = $"({Path.GetFileName(ofd.FileName)}) - [Unknown] ({frame.Width}x{frame.Height}) - EEditor {this.ProductVersion}";
+                            this.Text = $"({Path.GetFileName(ofd.FileName)}) - [Unknown] ({frame.Width}x{frame.Height}) - EEOditor {this.ProductVersion}";
                             editArea.Init(frame, false);
                         }
                         else MessageBox.Show("The selected JSON Database World is either corrupt or invalid.", "Invalid JSON Database World", MessageBoxButtons.OK, MessageBoxIcon.Error);

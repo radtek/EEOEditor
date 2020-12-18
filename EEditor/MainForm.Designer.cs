@@ -499,33 +499,33 @@
             // saveWorldToolStripMenuItem
             // 
             this.saveWorldToolStripMenuItem.Name = "saveWorldToolStripMenuItem";
-            this.saveWorldToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.saveWorldToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveWorldToolStripMenuItem.Text = "EEditor World";
             this.saveWorldToolStripMenuItem.Click += new System.EventHandler(this.saveWorldToolStripMenuItem_Click);
             // 
             // eelvlToolStripMenuItem1
             // 
             this.eelvlToolStripMenuItem1.Name = "eelvlToolStripMenuItem1";
-            this.eelvlToolStripMenuItem1.Size = new System.Drawing.Size(172, 22);
+            this.eelvlToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.eelvlToolStripMenuItem1.Text = "EE Offline Level";
             this.eelvlToolStripMenuItem1.Click += new System.EventHandler(this.EelvlToolStripMenuItem1_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(169, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
             // 
             // worldAsImageToolStripMenuItem
             // 
             this.worldAsImageToolStripMenuItem.Name = "worldAsImageToolStripMenuItem";
-            this.worldAsImageToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.worldAsImageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.worldAsImageToolStripMenuItem.Text = "World as image";
             this.worldAsImageToolStripMenuItem.Click += new System.EventHandler(this.worldAsImageToolStripMenuItem_Click);
             // 
             // minimapAsImageToolStripMenuItem
             // 
             this.minimapAsImageToolStripMenuItem.Name = "minimapAsImageToolStripMenuItem";
-            this.minimapAsImageToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.minimapAsImageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.minimapAsImageToolStripMenuItem.Text = "Minimap as image";
             this.minimapAsImageToolStripMenuItem.Click += new System.EventHandler(this.minimapAsImageToolStripMenuItem_Click);
             // 
@@ -801,7 +801,7 @@
             this.topFlowLayoutPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.topFlowLayoutPanel.Location = new System.Drawing.Point(0, 0);
             this.topFlowLayoutPanel.Name = "topFlowLayoutPanel";
-            this.topFlowLayoutPanel.Size = new System.Drawing.Size(1005, 27);
+            this.topFlowLayoutPanel.Size = new System.Drawing.Size(784, 27);
             this.topFlowLayoutPanel.TabIndex = 0;
             // 
             // historyToolStrip
@@ -878,10 +878,10 @@
             this.flowLayoutPanel6.AutoSize = true;
             this.flowLayoutPanel6.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel6.Location = new System.Drawing.Point(0, 523);
+            this.flowLayoutPanel6.Location = new System.Drawing.Point(0, 498);
             this.flowLayoutPanel6.Margin = new System.Windows.Forms.Padding(2);
             this.flowLayoutPanel6.Name = "flowLayoutPanel6";
-            this.flowLayoutPanel6.Size = new System.Drawing.Size(1005, 0);
+            this.flowLayoutPanel6.Size = new System.Drawing.Size(784, 0);
             this.flowLayoutPanel6.TabIndex = 3;
             // 
             // flowLayoutPanel5
@@ -889,10 +889,10 @@
             this.flowLayoutPanel5.AutoSize = true;
             this.flowLayoutPanel5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel5.Location = new System.Drawing.Point(0, 523);
+            this.flowLayoutPanel5.Location = new System.Drawing.Point(0, 498);
             this.flowLayoutPanel5.Margin = new System.Windows.Forms.Padding(2);
             this.flowLayoutPanel5.Name = "flowLayoutPanel5";
-            this.flowLayoutPanel5.Size = new System.Drawing.Size(1005, 0);
+            this.flowLayoutPanel5.Size = new System.Drawing.Size(784, 0);
             this.flowLayoutPanel5.TabIndex = 1;
             // 
             // flowLayoutPanel4
@@ -900,10 +900,10 @@
             this.flowLayoutPanel4.AutoSize = true;
             this.flowLayoutPanel4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel4.Location = new System.Drawing.Point(0, 523);
+            this.flowLayoutPanel4.Location = new System.Drawing.Point(0, 498);
             this.flowLayoutPanel4.Margin = new System.Windows.Forms.Padding(2);
             this.flowLayoutPanel4.Name = "flowLayoutPanel4";
-            this.flowLayoutPanel4.Size = new System.Drawing.Size(1005, 0);
+            this.flowLayoutPanel4.Size = new System.Drawing.Size(784, 0);
             this.flowLayoutPanel4.TabIndex = 0;
             // 
             // flowLayoutPanel2
@@ -911,10 +911,10 @@
             this.flowLayoutPanel2.AutoSize = true;
             this.flowLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 523);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 498);
             this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(2);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(1005, 0);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(784, 0);
             this.flowLayoutPanel2.TabIndex = 0;
             // 
             // flowLayoutPanel3
@@ -922,10 +922,10 @@
             this.flowLayoutPanel3.AutoSize = true;
             this.flowLayoutPanel3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(0, 523);
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(0, 498);
             this.flowLayoutPanel3.Margin = new System.Windows.Forms.Padding(2);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(1005, 0);
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(784, 0);
             this.flowLayoutPanel3.TabIndex = 0;
             // 
             // bottomFlowLayoutPanel
@@ -938,9 +938,9 @@
             this.bottomFlowLayoutPanel.Controls.Add(this.viewToolStrip);
             this.bottomFlowLayoutPanel.Controls.Add(this.lastUsedToolStrip);
             this.bottomFlowLayoutPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomFlowLayoutPanel.Location = new System.Drawing.Point(0, 523);
+            this.bottomFlowLayoutPanel.Location = new System.Drawing.Point(0, 498);
             this.bottomFlowLayoutPanel.Name = "bottomFlowLayoutPanel";
-            this.bottomFlowLayoutPanel.Size = new System.Drawing.Size(1005, 27);
+            this.bottomFlowLayoutPanel.Size = new System.Drawing.Size(784, 52);
             this.bottomFlowLayoutPanel.TabIndex = 4;
             // 
             // statusToolStrip
@@ -1195,7 +1195,7 @@
             this.lastUsedBlockButton2,
             this.lastUsedBlockButton3,
             this.lastUsedBlockButton4});
-            this.lastUsedToolStrip.Location = new System.Drawing.Point(774, 0);
+            this.lastUsedToolStrip.Location = new System.Drawing.Point(0, 27);
             this.lastUsedToolStrip.Name = "lastUsedToolStrip";
             this.lastUsedToolStrip.Size = new System.Drawing.Size(118, 25);
             this.lastUsedToolStrip.TabIndex = 3;
@@ -1255,7 +1255,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1005, 550);
+            this.ClientSize = new System.Drawing.Size(784, 550);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.topFlowLayoutPanel);
             this.Controls.Add(this.flowLayoutPanel2);
@@ -1265,7 +1265,7 @@
             this.Controls.Add(this.flowLayoutPanel6);
             this.Controls.Add(this.bottomFlowLayoutPanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(1021, 589);
+            this.MinimumSize = new System.Drawing.Size(800, 589);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EEOditor";
