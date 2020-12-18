@@ -95,6 +95,9 @@ namespace EEditor
         public void SaveLVL(FileStream file)
         {
             EELVL.Level savelvl = new Level(Width, Height, 0);
+            savelvl.WorldName = MainForm.EEOTitle;
+            savelvl.OwnerName = MainForm.EEONickname;
+            savelvl.OwnerID = "Created by EEODitor";
             for (int y = 0; y < Height; ++y)
             {
                 for (int x = 0; x < Width; ++x)
@@ -500,6 +503,8 @@ namespace EEditor
                 Frame f = new Frame(lvl.Width, lvl.Height);
                 f.levelname = lvl.WorldName;
                 f.nickname = lvl.OwnerName;
+                MainForm.EEONickname = lvl.OwnerName;
+                MainForm.EEOTitle = lvl.WorldName;
                 for (int x = 0; x < lvl.Width; ++x)
                 {
                     for (int y = 0; y < lvl.Height; ++y)
