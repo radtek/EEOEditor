@@ -436,7 +436,7 @@ namespace EEditor
                         if (0 <= xx && xx < editArea.BlockWidth && 0 <= yy && yy < editArea.BlockHeight)
                         {
 
-                            frame.Foreground[yy, xx] = 9;
+                            frame.Foreground[yy, xx] = 0;
                             frame.Background[yy, xx] = 0;
                             frame.BlockData[yy, xx] = 0;
                             frame.BlockData1[yy, xx] = 0;
