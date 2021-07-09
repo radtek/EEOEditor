@@ -499,7 +499,7 @@ namespace EEditor
         {
             using (FileStream fs = new FileStream(file, FileMode.Open))
             {
-                Level lvl = new Level(fs);
+                Level lvl = Level.Open(fs);
                 Frame f = new Frame(lvl.Width, lvl.Height);
                 f.levelname = lvl.WorldName;
                 f.nickname = lvl.OwnerName;
