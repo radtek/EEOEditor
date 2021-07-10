@@ -1447,7 +1447,7 @@ namespace EEditor
             AddToolStrip(miscBMD, 1, new int[] { 500 }, null, false, "NPC Skeleton", 1, 2, false);
             AddToolStrip(miscBMD, 1, new int[] { 501 }, null, false, "NPC Zombie", 1, 2, false);
             AddToolStrip(miscBMD, 1, new int[] { 502 }, null, false, "NPC Ghost", 1, 2, false);
-            AddToolStrip(miscBMD, 1, new int[] { 502 }, null, false, "NPC Astronaut", 1, 2, false);
+            AddToolStrip(miscBMD, 1, new int[] { 503 }, null, false, "NPC Astronaut", 1, 2, false);
             AddToolStrip(miscBMD, 1, new int[] { 551 }, null, false, "NPC Santa", 1, 2, false);
             AddToolStrip(miscBMD, 1, new int[] { 552 }, null, false, "NPC Snowman", 1, 2, false);
             AddToolStrip(miscBMD, 1, new int[] { 553 }, null, false, "NPC Walrus", 1, 2, false);
