@@ -138,6 +138,7 @@
             this.lastUsedBlockButton2 = new System.Windows.Forms.ToolStripButton();
             this.lastUsedBlockButton3 = new System.Windows.Forms.ToolStripButton();
             this.lastUsedBlockButton4 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.morphToolStrip.SuspendLayout();
             this.viewToolStrip.SuspendLayout();
             this.settingsToolStrip.SuspendLayout();
@@ -318,7 +319,7 @@
             this.settingsToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.settingsButton,
             this.aboutButton});
-            this.settingsToolStrip.Location = new System.Drawing.Point(402, 0);
+            this.settingsToolStrip.Location = new System.Drawing.Point(433, 0);
             this.settingsToolStrip.Name = "settingsToolStrip";
             this.settingsToolStrip.Padding = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.settingsToolStrip.Size = new System.Drawing.Size(54, 27);
@@ -357,7 +358,7 @@
             this.fileToolStrip.Location = new System.Drawing.Point(0, 0);
             this.fileToolStrip.Name = "fileToolStrip";
             this.fileToolStrip.Padding = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.fileToolStrip.Size = new System.Drawing.Size(96, 27);
+            this.fileToolStrip.Size = new System.Drawing.Size(127, 27);
             this.fileToolStrip.TabIndex = 7;
             // 
             // newWorldButton
@@ -383,6 +384,7 @@
             this.loadNewMenuItem,
             this.loadOldMenuItem,
             this.loadOldestMenuItem,
+            this.toolStripMenuItem1,
             this.toolStripSeparator3,
             this.savToolStripMenuItem,
             this.eEBuilderToolStripMenuItem,
@@ -499,33 +501,33 @@
             // saveWorldToolStripMenuItem
             // 
             this.saveWorldToolStripMenuItem.Name = "saveWorldToolStripMenuItem";
-            this.saveWorldToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveWorldToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.saveWorldToolStripMenuItem.Text = "EEditor World";
             this.saveWorldToolStripMenuItem.Click += new System.EventHandler(this.saveWorldToolStripMenuItem_Click);
             // 
             // eelvlToolStripMenuItem1
             // 
             this.eelvlToolStripMenuItem1.Name = "eelvlToolStripMenuItem1";
-            this.eelvlToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.eelvlToolStripMenuItem1.Size = new System.Drawing.Size(172, 22);
             this.eelvlToolStripMenuItem1.Text = "EE Offline Level";
             this.eelvlToolStripMenuItem1.Click += new System.EventHandler(this.EelvlToolStripMenuItem1_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(169, 6);
             // 
             // worldAsImageToolStripMenuItem
             // 
             this.worldAsImageToolStripMenuItem.Name = "worldAsImageToolStripMenuItem";
-            this.worldAsImageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.worldAsImageToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.worldAsImageToolStripMenuItem.Text = "World as image";
             this.worldAsImageToolStripMenuItem.Click += new System.EventHandler(this.worldAsImageToolStripMenuItem_Click);
             // 
             // minimapAsImageToolStripMenuItem
             // 
             this.minimapAsImageToolStripMenuItem.Name = "minimapAsImageToolStripMenuItem";
-            this.minimapAsImageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.minimapAsImageToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.minimapAsImageToolStripMenuItem.Text = "Minimap as image";
             this.minimapAsImageToolStripMenuItem.Click += new System.EventHandler(this.minimapAsImageToolStripMenuItem_Click);
             // 
@@ -543,7 +545,7 @@
             this.insertDropButton,
             this.toolStripSeparator8,
             this.replaceButton});
-            this.toolToolStrip.Location = new System.Drawing.Point(96, 0);
+            this.toolToolStrip.Location = new System.Drawing.Point(127, 0);
             this.toolToolStrip.Name = "toolToolStrip";
             this.toolToolStrip.Padding = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.toolToolStrip.Size = new System.Drawing.Size(204, 27);
@@ -813,7 +815,7 @@
             this.redoButton,
             this.historyButton,
             this.StatisticButton});
-            this.historyToolStrip.Location = new System.Drawing.Point(300, 0);
+            this.historyToolStrip.Location = new System.Drawing.Point(331, 0);
             this.historyToolStrip.Name = "historyToolStrip";
             this.historyToolStrip.Padding = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.historyToolStrip.Size = new System.Drawing.Size(102, 27);
@@ -1251,6 +1253,13 @@
             this.lastUsedBlockButton4.Size = new System.Drawing.Size(23, 22);
             this.lastUsedBlockButton4.Click += new System.EventHandler(this.lastUsedBlockButton);
             // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(188, 22);
+            this.toolStripMenuItem1.Text = "EEditor 2010";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1413,6 +1422,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
         private System.Windows.Forms.ToolStripButton BlockPicker10;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
     }
 }
 

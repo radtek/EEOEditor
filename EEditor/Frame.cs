@@ -594,6 +594,39 @@ namespace EEditor
             }
             Console.WriteLine(missed + " " + got);
             */
+            if (num == 7)
+            {
+                int width = reader.ReadInt32();
+                int height = reader.ReadInt32();
+                Frame f = new Frame(width, height);
+                for (int y = 0; y < height; ++y)
+                    for (int x = 0; x < width; ++x)
+                    {
+                        int t = reader.ReadByte();
+                        f.Foreground[y, x] = t;
+                        f.Background[y, x] = 0;
+                        if (t == 43 || t == 77 || t == 83)
+                        {
+                            f.BlockData[y, x] = reader.ReadByte();
+                        }
+                        else if (t == 242)
+                        {
+                           // f.BlockData[y, x] = reader.ReadInt32();
+                           try
+                            {
+                                var r = reader.ReadInt32();
+                                var a = r >> 16;
+                                var b = ((r >> 8) & 0xFF);
+                                var c = (r & 0xFF);
+                                f.BlockData[y, x] = Convert.ToInt32(a);
+                                f.BlockData1[y, x] = b;
+                                f.BlockData2[y, x] = c;
+                            }
+                            catch (Exception ex) { Console.WriteLine("didn't exists"); }
+                        }
+                    }
+                return f;
+            }
             if (num == 6)
             {
                 int width = reader.ReadInt32();
@@ -717,6 +750,8 @@ namespace EEditor
             if (num == 3)
             {
                 char[] filetype = reader.ReadChars(16);
+                string var = new string(filetype);
+                Console.WriteLine(var);
                 if (new string(filetype) == "ANIMATOR SAV V05")
                 {
                     reader.ReadInt16();

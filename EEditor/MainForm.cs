@@ -295,7 +295,7 @@ namespace EEditor
                 { 343,124 }, { 344,125 }, { 345,126 }, { 346, 127 }, { 347, 128 }, { 348, 129 }, { 349, 130 }, { 350, 131 }, { 351,132 },
                 { 352, 133}, { 353, 134}, { 354, 135}, { 355, 136}, { 356, 137},
                 { 357, 138},{ 358, 139},{ 359, 140},
-                { 362, 141},{ 363, 142},{ 364, 143},{ 365, 144},{ 366, 145},{ 367, 146},
+                { 362, 141},{ 363, 142},{ 364, 143},{ 365, 144},{ 366, 145},{ 367, 146},//{ 1000,176 }
                 { 398,165 },{ 399,166 },{ 400,167 },{ 401,168 },{ 402,169 },{ 403,170 },{ 404,171 },
                 { 405,172 },{ 406,173 },{ 407,174 },
                 { 415,175 },
@@ -1363,6 +1363,8 @@ namespace EEditor
             AddToolStrip(decosBMD, 2, new int[] { 199 }, null, false, "Tools", 1, 0, true);
             AddToolStrip(decosBMD, 2, new int[] { 231 }, null, false, "Tools", 1, 0, true);
             AddToolStrip(decosBMD, 2, new int[] { 266 }, null, false, "Tools", 1, 0, true);
+            AddToolStrip(decosBMD, 2, new int[] { 266 }, null, false, "Tools", 1, 0, true);
+            //AddToolStrip(decosBMD, 2, new int[] { 176 }, null, false, "Text", 1, 0, true);
             AddToolStrip(foregroundBMD, 0, new int[] { 5 }, new uint[] { 0x43391F }, false, "Crown", 1, 0, true);
             AddToolStrip(miscBMD, 1, new int[] { 341, 340 }, null, false, "Crown Doors", 1, 0, true);
             AddToolStrip(miscBMD, 1, new int[] { 8 }, null, false, "Tools", 1, 0, true);
@@ -3080,6 +3082,7 @@ namespace EEditor
             }
         }
 
+        
         private void loadOldestMenuItem_Click(object sender, EventArgs e)
         {
             SetDummy();
@@ -4371,6 +4374,44 @@ namespace EEditor
 
         }
 
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            SetDummy();
+            try
+            {
+                OpenFileDialog ofd = new OpenFileDialog()
+                {
+                    Title = "Select a level to load from",
+                    DefaultExt = ".eelevel",
+                    Filter = "EverybodyEdits level (*.eelevel)|*.eelevel",
+                    FilterIndex = 1,
+                    AddExtension = true,
+                    RestoreDirectory = true,
+                    CheckFileExists = true
+                };
+                if (ofd.ShowDialog() != DialogResult.OK) return;
+                string path = ofd.FileName;
+                FileStream fs = new FileStream(path, FileMode.Open);
+                BinaryReader reader = new BinaryReader(fs);
+                Frame frame = Frame.Load(reader, 7);
+                reader.Close();
+                fs.Close();
+                if (frame != null)
+                {
+
+                    this.Text = $"({Path.GetFileName(ofd.FileName)}) [Unknown] ({frame.Width}x{frame.Height}) - EEOditor {this.ProductVersion}";
+                    editArea.Init(frame, false);
+                }
+                else MessageBox.Show("The selected EELevel is either invalid or corrupt.", "Invalid EELevel", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ofd.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error has occured: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
         private void eEditor38ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SetDummy();
@@ -4608,6 +4649,8 @@ namespace EEditor
         {
             e.Effect = DragDropEffects.Copy;
         }
+
+
     }
 
     public class listofBlocks
