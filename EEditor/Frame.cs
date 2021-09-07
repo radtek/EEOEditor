@@ -8,6 +8,7 @@ using System.Drawing;
 using System.IO;
 using Newtonsoft.Json.Linq;
 using EELVL;
+using System.Threading;
 namespace EEditor
 {
     public class Frame
@@ -870,8 +871,58 @@ namespace EEditor
                 return null;
             }
         }
+        public static Frame LoadFromSPT(string filename)
+        {
+            var packets = SPTReader.Deserialize(File.ReadAllBytes(filename));
+            var binary_deserializer = new BinaryDeserializer();
 
-        static int eeanimator2blocks(int id)
+            int width = 200;
+            int height = 200;
+
+
+            var messages_deserialized = 0;
+
+            var blocks = new List<(int layer, int x, int y, int id)>();
+            binary_deserializer.OnDeserializedMessage += (m) =>
+            {
+                messages_deserialized++;
+
+                var layer = m.GetInt(0);
+                var x = m.GetInt(1);
+                var y = m.GetInt(2);
+                var id = m.GetInt(3);
+
+                blocks.Add((layer, x, y, id));
+            };
+
+            foreach (var packet in packets)
+                binary_deserializer.AddBytes(packet.Data);
+
+            while (messages_deserialized != packets.Count)
+                Thread.Sleep(1);
+
+            var world_width = 1 + blocks.OrderByDescending(t => t.x).First().x;
+            var world_height = 1 + blocks.OrderByDescending(t => t.y).First().y;
+
+            var f = new Frame(world_width, world_height);
+
+            foreach (var block in blocks)
+            {
+                switch (block.layer)
+                {
+                    case 0:
+                        f.Foreground[block.y, block.x] = block.id;
+                        break;
+                    case 1:
+                        f.Background[block.y, block.x] = block.id;
+                        break;
+                }
+            }
+
+            return f;
+        }
+    
+    static int eeanimator2blocks(int id)
         {
             if (id == 127)
             {

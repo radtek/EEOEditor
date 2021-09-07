@@ -1,4 +1,4 @@
-﻿namespace EEditor
+namespace EEditor
 {
     partial class MainForm
     {
@@ -139,6 +139,7 @@
             this.lastUsedBlockButton3 = new System.Windows.Forms.ToolStripButton();
             this.lastUsedBlockButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.sPTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.morphToolStrip.SuspendLayout();
             this.viewToolStrip.SuspendLayout();
             this.settingsToolStrip.SuspendLayout();
@@ -389,7 +390,8 @@
             this.savToolStripMenuItem,
             this.eEBuilderToolStripMenuItem,
             this.roomDatabaseToolStripMenuItem,
-            this.toolStripSeparator11});
+            this.toolStripSeparator11,
+            this.sPTToolStripMenuItem});
             this.openWorldDropButton.Image = global::EEditor.Properties.Resources.open;
             this.openWorldDropButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.openWorldDropButton.Name = "openWorldDropButton";
@@ -1260,6 +1262,13 @@
             this.toolStripMenuItem1.Text = "EEditor 2010";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
+            // sPTToolStripMenuItem
+            // 
+            this.sPTToolStripMenuItem.Name = "sPTToolStripMenuItem";
+            this.sPTToolStripMenuItem.Size = new System.Drawing.Size(238, 26);
+            this.sPTToolStripMenuItem.Text = "SPT";
+            this.sPTToolStripMenuItem.Click += new System.EventHandler(this.sPTToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1423,6 +1432,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
         private System.Windows.Forms.ToolStripButton BlockPicker10;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem sPTToolStripMenuItem;
     }
 }
 

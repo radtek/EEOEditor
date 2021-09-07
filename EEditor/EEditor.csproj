@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -204,6 +204,7 @@
     <Compile Include="Piano.Designer.cs">
       <DependentUpon>Piano.cs</DependentUpon>
     </Compile>
+    <Compile Include="PlayerIOLite.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -233,6 +234,7 @@
     <Compile Include="SprayCan.Designer.cs">
       <DependentUpon>SprayCan.cs</DependentUpon>
     </Compile>
+    <Compile Include="SPTReader.cs" />
     <Compile Include="Statistics.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -3012,7 +3012,48 @@ namespace EEditor
                 MessageBox.Show("An error has occured: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private void sPTToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetDummy();
+            try
+            {
+                MainForm.editArea.Back = null;
+                MainForm.editArea.Back1 = null;
+                OpenFileDialog ofd = new OpenFileDialog()
+                {
+                    Title = "Select a level to load from",
+                    DefaultExt = "spt",
+                    Filter = "SPT level (*.spt)|*.spt",
+                    FilterIndex = 1,
+                    AddExtension = true,
+                    RestoreDirectory = true,
+                    CheckFileExists = true
+                };
 
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    string filename = ofd.FileName;
+                    Frame frame = Frame.LoadFromSPT(filename);
+
+                    if (frame != null)
+                    {
+                        this.Text = $".spt - ({frame.levelname}) [{frame.nickname}] ({frame.Width}x{frame.Height}) - EEOditor {this.ProductVersion}";
+                        editArea.Init(frame, false);
+                    }
+                    else MessageBox.Show("The selected EELVL is either invalid or corrupt.", "Invalid EELVL", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    ofd.Dispose();
+                }
+                else
+                {
+                    ofd.Dispose();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error has occured: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private void loadNewMenuItem_Click(object sender, EventArgs e)
         {
             SetDummy();
