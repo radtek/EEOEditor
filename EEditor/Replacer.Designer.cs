@@ -196,6 +196,14 @@
             this.ClearBgsBlacklistButton.UseVisualStyleBackColor = true;
             this.ClearBgsBlacklistButton.Click += new System.EventHandler(this.ClearBgsBlacklistButton_Click);
             // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(0, 0);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(75, 23);
+            this.button9.TabIndex = 20;
+            this.button9.Visible = false;
+            // 
             // button5
             // 
             this.button5.Image = ((System.Drawing.Image)(resources.GetObject("button5.Image")));

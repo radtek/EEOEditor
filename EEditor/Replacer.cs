@@ -242,8 +242,8 @@ namespace EEditor
             {
                 if (MainForm.decosBMI[(int)numericUpDown2.Value] != 0)
                 {
-                    if (MainForm.userdata.replaceit)
-                    {
+                    //if (MainForm.userdata.replaceit)
+                    //{
                         Bitmap img1 = MainForm.decosBMD.Clone(new Rectangle(MainForm.decosBMI[Convert.ToInt32(numericUpDown2.Value)] * 16, 0, 16, 16), MainForm.decosBMD.PixelFormat);
                         ReplacePictureBox.Image = img1;
                         numericUpDown2.ForeColor = MainForm.themecolors.foreground;
@@ -252,14 +252,14 @@ namespace EEditor
                         button1.Enabled = true;
                         replaceRotate.Value = 1;
                         replaceRotating();
-                    }
+                    //}
                 }
 
                 else if (MainForm.miscBMI[(int)numericUpDown2.Value] != 0 || (int)numericUpDown2.Value == 119)
                 {
-                    if (MainForm.userdata.replaceit)
-                    {
-                        Bitmap img1 = MainForm.miscBMD.Clone(new Rectangle(MainForm.miscBMI[Convert.ToInt32(numericUpDown2.Value)] * 16, 0, 16, 16), MainForm.miscBMD.PixelFormat);
+                    //if (MainForm.userdata.replaceit)
+                    //{
+                    Bitmap img1 = MainForm.miscBMD.Clone(new Rectangle(MainForm.miscBMI[Convert.ToInt32(numericUpDown2.Value)] * 16, 0, 16, 16), MainForm.miscBMD.PixelFormat);
                         ReplacePictureBox.Image = img1;
                         numericUpDown2.ForeColor = MainForm.themecolors.foreground;
                         label4.Text = null;
@@ -267,35 +267,35 @@ namespace EEditor
                         button1.Enabled = true;
                         replaceRotate.Value = 1;
                         replaceRotating();
-                    }
+                    // }
                 }
                 else
                 {
-                    if (MainForm.userdata.replaceit)
-                    {
-                        Bitmap img1 = MainForm.foregroundBMD.Clone(new Rectangle(MainForm.foregroundBMI[Convert.ToInt32(numericUpDown2.Value)] * 16, 0, 16, 16), MainForm.foregroundBMD.PixelFormat);
+                    // if (MainForm.userdata.replaceit)
+                    //  {
+                    Bitmap img1 = MainForm.foregroundBMD.Clone(new Rectangle(MainForm.foregroundBMI[Convert.ToInt32(numericUpDown2.Value)] * 16, 0, 16, 16), MainForm.foregroundBMD.PixelFormat);
                         ReplacePictureBox.Image = img1;
                         numericUpDown2.ForeColor = MainForm.themecolors.foreground;
                         label4.Text = null;
                         button5.Enabled = true;
                         button1.Enabled = true;
                         replaceRotate.Value = 1;
-                    }
+                    //  }
 
                 }
             }
 
             else if (numericUpDown2.Value >= 500 && numericUpDown2.Value <= 999)
             {
-                if (MainForm.userdata.replaceit)
-                {
-                    Bitmap img6 = MainForm.backgroundBMD.Clone(new Rectangle(MainForm.backgroundBMI[Convert.ToInt32(numericUpDown2.Value)] * 16, 0, 16, 16), MainForm.backgroundBMD.PixelFormat);
+                //if (MainForm.userdata.replaceit)
+                //{
+                Bitmap img6 = MainForm.backgroundBMD.Clone(new Rectangle(MainForm.backgroundBMI[Convert.ToInt32(numericUpDown2.Value)] * 16, 0, 16, 16), MainForm.backgroundBMD.PixelFormat);
                     ReplacePictureBox.Image = img6;
                     numericUpDown2.ForeColor = MainForm.themecolors.foreground;
                     label4.Text = null;
                     button5.Enabled = true;
                     button1.Enabled = true;
-                }
+                //}
             }
         }
 
