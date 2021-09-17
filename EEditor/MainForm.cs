@@ -3174,19 +3174,55 @@ namespace EEditor
                     CheckFileExists = true
                 };
 
-                if (ofd.ShowDialog() != DialogResult.OK) return;
-                string path = ofd.FileName;
-                FileStream fs = new FileStream(path, FileMode.Open);
-                BinaryReader reader = new BinaryReader(fs);
-                Frame frame = Frame.Load(reader, 3);
-                reader.Close();
-                fs.Close();
-                if (frame != null)
+                if (ofd.ShowDialog() == DialogResult.OK)
                 {
-                    this.Text = $"({Path.GetFileName(ofd.FileName)}) [Unknown] ({frame.Width}x{frame.Height}) - EEOditor {this.ProductVersion}";
-                    editArea.Init(frame, false);
+                    string path = ofd.FileName;
+                    FileStream fs = new FileStream(ofd.FileName, FileMode.Open);
+                    BinaryReader reader = new BinaryReader(fs);
+                    char[] filetype = reader.ReadChars(16);
+                    string version = new string(filetype);
+                    if (version == "ANIMATOR SAV V04" || version == "ANIMATOR SAV V03" || version == "ANIMATOR SAV V02" || version == "ANIMATOR SAV V01")
+                    {
+                        fs.Close();
+                        reader.Close();
+                        MessageBox.Show($"The selected file was made by: {version} And is not supported.","Not Supported", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else if (version == "ANIMATOR SAV V05")
+                    {
+                        fs.Close();
+                        reader.Close();
+                        Frame frame = Frame.LoadSav(path);
+                        if (frame != null)
+                        {
+                            this.Text = $"({Path.GetFileName(ofd.FileName)}) [Unknown] ({frame.Width}x{frame.Height}) - EEOditor {this.ProductVersion}";
+                            editArea.Init(frame, false);
+                        }
+                        else
+                        {
+                            MessageBox.Show("The selected file was made by an unknown EEAnimator version.", "Unknown version", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    else
+                    {
+                        fs.Close();
+                        reader.Close();
+                        Frame frame = Frame.LoadSav(path);
+                        if (frame != null)
+                        {
+                            this.Text = $"({Path.GetFileName(ofd.FileName)}) [Unknown] ({frame.Width}x{frame.Height}) - EEOditor {this.ProductVersion}";
+                            editArea.Init(frame, false);
+                        }
+                        else
+                        {
+                            MessageBox.Show("The selected file was made by an unknown EEAnimator version.", "Unknown version", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    ofd.Dispose();
                 }
-                else MessageBox.Show("The selected file was made by an unknown EEAnimator version.", "Unknown version", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                {
+                    ofd.Dispose();
+                }
             }
             catch (Exception ex)
             {

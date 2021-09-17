@@ -748,43 +748,7 @@ namespace EEditor
                 }
                 return f;
             }
-            if (num == 3)
-            {
-                char[] filetype = reader.ReadChars(16);
-                string var = new string(filetype);
-                Console.WriteLine(var);
-                if (new string(filetype) == "ANIMATOR SAV V05")
-                {
-                    reader.ReadInt16();
-                    int LayerCount = Convert.ToInt16(reader.ReadInt16());
-                    int width = Convert.ToInt16(reader.ReadInt16());
-                    int height = Convert.ToInt16(reader.ReadInt16());
-                    Frame f = new Frame(width, height);
-                    for (int z = 1; z >= 0; z += -1)
-                    {
-                        for (int y = 0; y <= height - 1; y++)
-                        {
-                            for (int x = 0; x <= width - 1; x++)
-                            {
-                                int bid = eeanimator2blocks(Convert.ToInt16(reader.ReadInt16()));
-                                if (bid >= 500 && bid <= 900)
-                                {
-                                    f.Background[y, x] = bid;
-                                }
-                                else
-                                {
-                                    f.Foreground[y, x] = bid;
-                                }
-                            }
-                        }
-                    }
-                    return f;
-                }
-                else
-                {
-                    return null;
-                }
-            }
+                
 
             if (num >= 0 && num <= 2)
             {
@@ -871,6 +835,162 @@ namespace EEditor
                 return null;
             }
         }
+
+        public static Frame LoadSav(string filename)
+        {
+            FileStream fs = new FileStream(filename, FileMode.Open);
+            BinaryReader reader = new BinaryReader(fs);
+            char[] filetype = reader.ReadChars(16);
+            string version = new string(filetype);
+            Console.WriteLine(version);
+            if (version == "ANIMATOR SAV V05")
+            {
+                reader.ReadInt16();
+                int LayerCount = Convert.ToInt16(reader.ReadInt16());
+                int width = Convert.ToInt16(reader.ReadInt16());
+                int height = Convert.ToInt16(reader.ReadInt16());
+                Frame f = new Frame(width, height);
+                for (int z = 1; z >= 0; z += -1)
+                {
+                    for (int y = 0; y <= height - 1; y++)
+                    {
+                        for (int x = 0; x <= width - 1; x++)
+                        {
+                            int bid = eeanimator2blocks(Convert.ToInt16(reader.ReadInt16()));
+                            if (bid >= 500 && bid <= 900)
+                            {
+                                f.Background[y, x] = bid;
+                            }
+                            else
+                            {
+                                f.Foreground[y, x] = bid;
+                            }
+                        }
+                    }
+                }
+                return f;
+            }
+            /*else if (version == "ANIMATOR SAV V01")
+            {
+                int jk = 0;
+                int height = 200;
+                int width = 200;
+                int ind = 0;
+                int innum = 0;
+                width = reader.ReadInt32();
+                height = reader.ReadInt32();
+                int frame = reader.ReadInt32();
+                Console.WriteLine(frame);
+                int[,] world = new int[width, height];
+                //for (jk = 0; jk < frame_cnt2; jk++)
+                //{
+                //world = new int[200, 200];
+                for (int i = 1; i <= height - 2; i += 1)
+                {
+                    for (int ii = 1; ii <= width - 2; ii += 1)
+                    {
+                        if (innum == 0)
+                        {
+                            ind = reader.ReadByte();
+                            if (ind == 171) ind = 172;
+                            if (ind == 4) ind = reader.ReadByte() + 0x400;
+                            if (ind == 3)
+                            {
+                                innum = reader.ReadByte() + (reader.ReadByte() << 8);
+                                innum -= 1;
+                                ind = reader.ReadByte();
+
+                                if (ind == 4) ind = reader.ReadByte() + 0x400;
+                                if (ind == 5) ind = reader.ReadByte() + reader.ReadByte() << 8 + 0x50000;
+                                world[ii, i] = ind;
+                            }
+                            else
+                            {
+                                world[ii, i] = ind;
+                            }
+
+                        }
+                        else
+                        {
+                            innum -= 1;
+                            world[ii, i] = ind;
+                        }
+                    }
+
+                }
+                //}
+                var f = new Frame(width, height);
+                for (int y = 0; y < width; y++)
+                {
+                    for (int x = 0; x < height; x++)
+                    {
+                        f.Foreground[y, x] = eeanimator2blocks1(world[x, y]);
+                        Console.WriteLine(world[x, y]);
+                    }
+                }
+                return f;
+            }*/
+            else
+            {
+                int jk = 0;
+                int height = 200;
+                int width = 200;
+                int ind = 0;
+                int innum = 0;
+                reader.Close();
+                reader.Dispose();
+                fs = new FileStream(filename, FileMode.Open);
+                reader = new BinaryReader(fs);
+                //var frame_cnt2 = reader.ReadInt16();
+                int[,] world = new int[200, 200];
+                //for (jk = 0; jk < frame_cnt2; jk++)
+                //{
+                //world = new int[200, 200];
+                for (int i = 1; i <= height - 2; i += 1)
+                {
+                    for (int ii = 1; ii <= width - 2; ii += 1)
+                    {
+                        if (innum == 0)
+                        {
+                            ind = reader.ReadByte();
+                            if (ind == 171) ind = 172;
+                            if (ind == 4) ind = reader.ReadByte() + 0x400;
+                            if (ind == 3)
+                            {
+                                innum = reader.ReadByte() + (reader.ReadByte() << 8);
+                                innum -= 1;
+                                ind = reader.ReadByte();
+
+                                if (ind == 4) ind = reader.ReadByte() + 0x400;
+                                if (ind == 5) ind = reader.ReadByte() + reader.ReadByte() << 8 + 0x50000;
+                                world[ii, i] = ind;
+                            }
+                            else
+                            {
+                                world[ii, i] = ind;
+                            }
+
+                        }
+                        else
+                        {
+                            innum -= 1;
+                            world[ii, i] = ind;
+                        }
+                    }
+
+                }
+                //}
+                var f = new Frame(200, 200);
+                for (int y = 0; y < 200; y++)
+                {
+                    for (int x = 0; x < 200; x++)
+                    {
+                        f.Foreground[y, x] = eeanimator2blocks0(world[x, y]);
+                    }
+                }
+                return f;
+            }
+        }
         public static Frame LoadFromSPT(string filename)
         {
             var packets = SPTReader.Deserialize(File.ReadAllBytes(filename));
@@ -939,6 +1059,45 @@ namespace EEditor
             else
             {
                 return id - 1024;
+            }
+        }
+
+        static int eeanimator2blocks0(int id)
+        {
+            if (id == 127)
+            {
+                return 0;
+            }
+            else if (id - 128 >= 0 && id - 128 <= 63)
+            {
+                return id - 128;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        static int eeanimator2blocks1(int id)
+        {
+            if (id == 127)
+            {
+                return 0;
+            }
+            else if (id - 128 >= 0 && id - 128 <= 63)
+            {
+                return id - 128;
+            }
+            else
+            {
+                if (id - 128 != -128)
+                {
+                    return id - 128;
+                }
+                else
+                {
+                    return 9;
+                }
             }
         }
 
