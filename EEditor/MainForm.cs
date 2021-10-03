@@ -2977,8 +2977,6 @@ namespace EEditor
             SetDummy();
             try
             {
-                MainForm.editArea.Back = null;
-                MainForm.editArea.Back1 = null;
                 OpenFileDialog ofd = new OpenFileDialog()
                 {
                     Title = "Select a level to load from",
@@ -3017,8 +3015,7 @@ namespace EEditor
             SetDummy();
             try
             {
-                MainForm.editArea.Back = null;
-                MainForm.editArea.Back1 = null;
+
                 OpenFileDialog ofd = new OpenFileDialog()
                 {
                     Title = "Select a level to load from",
@@ -3032,6 +3029,8 @@ namespace EEditor
 
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
+                    MainForm.editArea.Back = null;
+                    MainForm.editArea.Back1 = null;
                     string filename = ofd.FileName;
                     Frame frame = Frame.LoadFromSPT(filename);
 
@@ -4319,8 +4318,6 @@ namespace EEditor
             SetDummy();
             try
             {
-                MainForm.editArea.Back = null;
-                MainForm.editArea.Back1 = null;
                 OpenFileDialog ofd = new OpenFileDialog()
                 {
                     Title = "Select a level to load from",
@@ -4405,8 +4402,6 @@ namespace EEditor
             SetDummy();
             try
             {
-                MainForm.editArea.Back = null;
-                MainForm.editArea.Back1 = null;
                 OpenFileDialog ofd = new OpenFileDialog()
                 {
                     Title = "Select a level to load from",
@@ -4553,8 +4548,7 @@ namespace EEditor
             SetDummy();
             try
             {
-                MainForm.editArea.Back = null;
-                MainForm.editArea.Back1 = null;
+
                 OpenFileDialog ofd = new OpenFileDialog()
                 {
                     Title = "Select a level to load from",
@@ -4647,8 +4641,6 @@ namespace EEditor
             SetDummy();
             try
             {
-                MainForm.editArea.Back = null;
-                MainForm.editArea.Back1 = null;
                 OpenFileDialog ofd = new OpenFileDialog()
                 {
                     Title = "Select a level to load from",
