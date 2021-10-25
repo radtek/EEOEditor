@@ -90,7 +90,6 @@ namespace EEditor
             list.Images.Add(name, image);
             listView1.SmallImageList = list;
             ListViewItem lvi = new ListViewItem(name);
-            lvi.SubItems.Add("0");
             lvi.ImageKey = name;
             lvi.Name = id.ToString();
             listView1.Items.Add(lvi);

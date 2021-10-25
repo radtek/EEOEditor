@@ -39,7 +39,6 @@
             this.NicknameLabel = new System.Windows.Forms.Label();
             this.listView1 = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // Message1TextBox
@@ -121,11 +120,11 @@
             // listView1
             // 
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2});
+            this.columnHeader1});
+            this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(228, 34);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(178, 221);
+            this.listView1.Size = new System.Drawing.Size(125, 221);
             this.listView1.TabIndex = 8;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -133,17 +132,13 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "Picture";
-            this.columnHeader1.Width = 100;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "Max";
+            this.columnHeader1.Width = 94;
             // 
             // NPC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(418, 275);
+            this.ClientSize = new System.Drawing.Size(370, 275);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.NicknameLabel);
             this.Controls.Add(this.Message3Label);
@@ -176,6 +171,5 @@
         private System.Windows.Forms.Label NicknameLabel;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
     }
 }
