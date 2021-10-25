@@ -285,50 +285,30 @@ IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
         {
             BlockHeight = height;
             BlockWidth = width;
-            int calc1 = BlockWidth * MainForm.Zoom;
-            int calc2 = BlockHeight * MainForm.Zoom;
-            int calc3 = calc1 + calc2;
-            if (calc3 > 23170)
-            {
-                MessageBox.Show("Can't load this world. It's too big.");
-            }
-            else
-            {
-                Size size = new Size(BlockWidth * MainForm.Zoom, BlockHeight * MainForm.Zoom);
-                Frame frame = new Frame(BlockWidth, BlockHeight);
-                frame.Reset(false);
-                Init(frame, false);
-            }
+            Size size = new Size(BlockWidth * MainForm.Zoom, BlockHeight * MainForm.Zoom);
+            Frame frame = new Frame(BlockWidth, BlockHeight);
+            frame.Reset(false);
+            Init(frame, false);
+
         }
 
         public void Init(Frame frame, bool frme)
         {
             BlockHeight = frame.Height;
             BlockWidth = frame.Width;
-            int calc1 = BlockWidth * MainForm.Zoom;
-            int calc2 = BlockHeight * MainForm.Zoom;
-            int calc3 = calc1 + calc2;
-            if (calc3 > 23170)
-            {
-                started = false;
-                MessageBox.Show("Can't load this world. It's too big.");
-                
-            }
-            else
-            {
-                Frames.Clear();
-                Frames.Add(frame);
-                curFrame = 0;
-                Size size = new Size(BlockWidth * MainForm.Zoom, BlockHeight * MainForm.Zoom);
-                //Bricks = new Bitmap[3000];
-                //BricksFade = new Bitmap[BlockWidth * MainForm.Zoom];
-                Back = new Bitmap(BlockWidth * MainForm.Zoom, BlockHeight * MainForm.Zoom);
-                Minimap.Init(BlockWidth, BlockHeight);
-                PaintCurFrame();
-                this.AutoScrollMinSize = size;
-                this.Invalidate();
-                started = true;
-            }
+            Frames.Clear();
+            Frames.Add(frame);
+            curFrame = 0;
+            Size size = new Size(BlockWidth * MainForm.Zoom, BlockHeight * MainForm.Zoom);
+            //Bricks = new Bitmap[3000];
+            //BricksFade = new Bitmap[BlockWidth * MainForm.Zoom];
+            Back = new Bitmap(BlockWidth * MainForm.Zoom, BlockHeight * MainForm.Zoom);
+            Minimap.Init(BlockWidth, BlockHeight);
+            PaintCurFrame();
+            this.AutoScrollMinSize = size;
+            this.Invalidate();
+            started = true;
+
         }
         public void zoomRefresh()
         {
@@ -487,11 +467,11 @@ IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
             }
             if (bdata.goal.Contains(fid) && fid != 423 && fid != 417 && fid != 418 && fid != 419 && fid != 420 && fid != 421 && fid != 422 && fid != 453 && fid != 1027 && fid != 1028 && fid != 1582)
             {
-                
+
                 int offSet = coins >= 10 ? 4 : 9;
                 if (fid == 467 || fid == 1079 || fid == 1080 || fid == 1012 || fid == 113 || fid == 184 || fid == 185 || fid == 461 || fid == 1619 || fid == 1620)
                 {
-                    
+
                     if (fid == 461 && coins == 0 || coins > 1 && coins <= 999)
                     {
                         DrawText(coins.ToString(), Back, Brushes.White, bfont.Families[0], 8, "bottom", "right", x * 16, y * 16, false);
@@ -524,7 +504,7 @@ IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
                 {
                     if (coins <= 999)
                     {
-                        DrawText(coins.ToString(), Back, fid == 43 ? Brushes.Black:Brushes.White, bfont.Families[0], 8, "bottom", "right", x * 16, y * 16, false);
+                        DrawText(coins.ToString(), Back, fid == 43 ? Brushes.Black : Brushes.White, bfont.Families[0], 8, "bottom", "right", x * 16, y * 16, false);
                     }
                     else
                     {
@@ -540,7 +520,7 @@ IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
                     }
                     else
                     {
-                        DrawText("999", Back,Brushes.Black, bfont.Families[0], 8, "bottom", "right", x * 16, y * 16, false);
+                        DrawText("999", Back, Brushes.Black, bfont.Families[0], 8, "bottom", "right", x * 16, y * 16, false);
                     }
                 }
             }
