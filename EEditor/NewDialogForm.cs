@@ -37,30 +37,39 @@ namespace EEditor
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MainForm.SetPenTool();
-            if (Clipboard.ContainsData("EEBrush")) Clipboard.Clear();
-            MainForm.userdata.thisColor = Color.Transparent;
-            MainForm.userdata.useColor = false;
-            ToolPen.undolist.Clear();
-            ToolPen.redolist.Clear();
-            ToolPen.rotation.Clear();
-            //Clipboard.Clear();
-            MainForm.tsc.Items.Clear();
-            MainForm.tsc.Items.Add("Background");
-            MainForm.tsc.Text = "Background";
-            var title = tbtitle.Text;
-            var name = tbowner.Text;
-            if (string.IsNullOrEmpty(title)) title = "Untitled World";
-            if (string.IsNullOrEmpty(name)) name = "Player";
-            MainForm.Text = $"({title}) [{name}] ({nUWidth.Value}x{nUHeight.Value}) EEOditor { MainForm.ProductVersion}";
-            #region Listbox selection
-            SizeWidth = Convert.ToInt32(nUWidth.Value);
-            SizeHeight = Convert.ToInt32(nUHeight.Value);
-            MainForm.EEONickname = name;
-            MainForm.EEOTitle = title;
-            #endregion
-            DialogResult = System.Windows.Forms.DialogResult.OK;
-            Close();
+            int calc = Convert.ToInt32(nUWidth.Value) * 16 + Convert.ToInt32(nUHeight.Value) * 16;
+            if (calc > Math.Round(Math.Sqrt(2147483648 / 16)))
+            {
+                MessageBox.Show("Can't load this world. It's too big.","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+
+            }
+            else
+            {
+                MainForm.SetPenTool();
+                if (Clipboard.ContainsData("EEBrush")) Clipboard.Clear();
+                MainForm.userdata.thisColor = Color.Transparent;
+                MainForm.userdata.useColor = false;
+                ToolPen.undolist.Clear();
+                ToolPen.redolist.Clear();
+                ToolPen.rotation.Clear();
+                //Clipboard.Clear();
+                MainForm.tsc.Items.Clear();
+                MainForm.tsc.Items.Add("Background");
+                MainForm.tsc.Text = "Background";
+                var title = tbtitle.Text;
+                var name = tbowner.Text;
+                if (string.IsNullOrEmpty(title)) title = "Untitled World";
+                if (string.IsNullOrEmpty(name)) name = "Player";
+                MainForm.Text = $"({title}) [{name}] ({nUWidth.Value}x{nUHeight.Value}) EEOditor { MainForm.ProductVersion}";
+                #region Listbox selection
+                SizeWidth = Convert.ToInt32(nUWidth.Value);
+                SizeHeight = Convert.ToInt32(nUHeight.Value);
+                MainForm.EEONickname = name;
+                MainForm.EEOTitle = title;
+                #endregion
+                DialogResult = System.Windows.Forms.DialogResult.OK;
+                Close();
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -146,6 +155,5 @@ namespace EEditor
                 }
             }
         }
-
     }
 }
