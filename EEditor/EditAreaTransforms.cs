@@ -103,7 +103,7 @@ namespace EEditor
             try {
             ToolMark tool = Tool as ToolMark;
             tool.RemoveBorder();
-            tool.Clear();
+            tool.ClearR();
                 int width = tool.Front.GetLength(1);
                 int height = tool.Front.GetLength(0);
                 string[,] Area = new string[height, width];
