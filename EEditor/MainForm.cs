@@ -1363,7 +1363,6 @@ namespace EEditor
             AddToolStrip(decosBMD, 2, new int[] { 199 }, null, false, "Tools", 1, 0, true);
             AddToolStrip(decosBMD, 2, new int[] { 231 }, null, false, "Tools", 1, 0, true);
             AddToolStrip(decosBMD, 2, new int[] { 266 }, null, false, "Tools", 1, 0, true);
-            AddToolStrip(decosBMD, 2, new int[] { 266 }, null, false, "Tools", 1, 0, true);
             //AddToolStrip(decosBMD, 2, new int[] { 176 }, null, false, "Text", 1, 0, true);
             AddToolStrip(foregroundBMD, 0, new int[] { 5 }, new uint[] { 0x43391F }, false, "Crown", 1, 0, true);
             AddToolStrip(miscBMD, 1, new int[] { 341, 340 }, null, false, "Crown Doors", 1, 0, true);
