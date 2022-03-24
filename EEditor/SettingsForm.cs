@@ -35,7 +35,6 @@ namespace EEditor
             tp.SetToolTip(UpdateCheckCheckBox, "Check for new updates.");
             tp.SetToolTip(DarkThemeCheckBox, "Choose between light and dark theme.");
             tp.SetToolTip(cBHotkeyBar, "Show or hide HotkeyBar.");
-            tp.SetToolTip(cBOldSel, "Use the new selection tool way");
             usePenToolCheckBox.Checked = MainForm.userdata.usePenTool;
             selectAllBorderCheckBox.Checked = MainForm.userdata.selectAllBorder;
             confirmCloseCheckBox.Checked = MainForm.userdata.confirmClose;
@@ -43,7 +42,6 @@ namespace EEditor
             UpdateCheckCheckBox.Checked = MainForm.userdata.checkUpdate;
             DarkThemeCheckBox.Checked = MainForm.userdata.darkTheme;
             cBHotkeyBar.Checked = MainForm.userdata.HotkeyBar;
-            cBOldSel.Checked = MainForm.userdata.oldmark;
             #endregion
 
             clearComboBox.SelectedIndex = 0; //Show "Clear settings..." by default
@@ -258,9 +256,5 @@ namespace EEditor
             }
         }
 
-        private void cBOldSel_CheckedChanged(object sender, EventArgs e)
-        {
-            MainForm.userdata.oldmark = cBOldSel.Checked;
-        }
     }
 }

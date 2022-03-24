@@ -41,7 +41,6 @@
             this.UpdateCheckCheckBox = new System.Windows.Forms.CheckBox();
             this.DarkThemeCheckBox = new System.Windows.Forms.CheckBox();
             this.cBHotkeyBar = new System.Windows.Forms.CheckBox();
-            this.cBOldSel = new System.Windows.Forms.CheckBox();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -80,7 +79,7 @@
             "",
             "Old EEditor settings & logins",
             "Current EEditor settings"});
-            this.clearComboBox.Location = new System.Drawing.Point(11, 208);
+            this.clearComboBox.Location = new System.Drawing.Point(11, 171);
             this.clearComboBox.Name = "clearComboBox";
             this.clearComboBox.Size = new System.Drawing.Size(139, 21);
             this.clearComboBox.TabIndex = 27;
@@ -90,7 +89,7 @@
             // 
             this.clearButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.clearButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.clearButton.Location = new System.Drawing.Point(156, 206);
+            this.clearButton.Location = new System.Drawing.Point(156, 171);
             this.clearButton.Name = "clearButton";
             this.clearButton.Size = new System.Drawing.Size(49, 23);
             this.clearButton.TabIndex = 28;
@@ -114,7 +113,7 @@
             // 
             this.FasterShapeStyleCheckBox.AutoSize = true;
             this.FasterShapeStyleCheckBox.Enabled = false;
-            this.FasterShapeStyleCheckBox.Location = new System.Drawing.Point(11, 185);
+            this.FasterShapeStyleCheckBox.Location = new System.Drawing.Point(11, 148);
             this.FasterShapeStyleCheckBox.Name = "FasterShapeStyleCheckBox";
             this.FasterShapeStyleCheckBox.Size = new System.Drawing.Size(111, 17);
             this.FasterShapeStyleCheckBox.TabIndex = 30;
@@ -129,7 +128,7 @@
             this.StatusTextToolStripStatusLabel,
             this.StatusToolStripStatusLabel,
             this.StatusColorToolStripStatusLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 246);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 211);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(231, 22);
             this.statusStrip1.TabIndex = 31;
@@ -190,25 +189,11 @@
             this.cBHotkeyBar.UseVisualStyleBackColor = true;
             this.cBHotkeyBar.CheckedChanged += new System.EventHandler(this.cBHotkeyBar_CheckedChanged);
             // 
-            // cBOldSel
-            // 
-            this.cBOldSel.AutoSize = true;
-            this.cBOldSel.Checked = true;
-            this.cBOldSel.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cBOldSel.Location = new System.Drawing.Point(11, 148);
-            this.cBOldSel.Name = "cBOldSel";
-            this.cBOldSel.Size = new System.Drawing.Size(120, 17);
-            this.cBOldSel.TabIndex = 36;
-            this.cBOldSel.Text = "New Selection Way";
-            this.cBOldSel.UseVisualStyleBackColor = true;
-            this.cBOldSel.CheckedChanged += new System.EventHandler(this.cBOldSel_CheckedChanged);
-            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(231, 268);
-            this.Controls.Add(this.cBOldSel);
+            this.ClientSize = new System.Drawing.Size(231, 233);
             this.Controls.Add(this.cBHotkeyBar);
             this.Controls.Add(this.DarkThemeCheckBox);
             this.Controls.Add(this.UpdateCheckCheckBox);
@@ -246,6 +231,5 @@
         private System.Windows.Forms.CheckBox UpdateCheckCheckBox;
         private System.Windows.Forms.CheckBox DarkThemeCheckBox;
         private System.Windows.Forms.CheckBox cBHotkeyBar;
-        private System.Windows.Forms.CheckBox cBOldSel;
     }
 }
