@@ -483,48 +483,9 @@ namespace EEditor
                         if (0 <= xx && xx < editArea.BlockWidth && 0 <= yy && yy < editArea.BlockHeight)
                         {
 
-                            /*if (frame.Foreground[yy, xx] == 0 && Back[y, x] != "0") { frame.Background[yy, xx] = Convert.ToInt32(Back[y, x]); }
-                            else { frame.Background[yy, xx] = 0; }
-                            */
-                            /*if (Back[y, x] == "0") { frame.Foreground[yy, xx] = Convert.ToInt32(Front[y, x]); }
-                            else
-                            {
-                                frame.Foreground[yy, xx] = frame.Foreground[yy, xx];
-                            }*/
-                            //frame.Foreground[yy, xx] = Convert.ToInt32(Front[y, x]);
-                            //if (frame.Background[yy, xx] == 0) frame.Background[yy, xx] = Convert.ToInt32(Back[y, x]);
-
-                            if (MainForm.userdata.oldmark)
-                            {
-                                frame.Foreground[yy, xx] = Convert.ToInt32(Front[y, x]);
-
-                                if (frame.Background[yy, xx] == 0) frame.Background[yy, xx] = Convert.ToInt32(Back[y, x]);
-                                else if (Convert.ToInt32(Back[y, x]) != 0) frame.Background[yy, xx] = Convert.ToInt32(Back[y, x]);
-                            }
-                            else
-                            {
-                                frame.Foreground[yy, xx] = Convert.ToInt32(Front[y, x]);
-                                if (frame.Background[yy, xx] == 0) frame.Background[yy, xx] = Convert.ToInt32(Back[y, x]);
-                            }
-
-
-                            /*else
-                            {
-                                if (frame.Foreground[yy, xx] != 0 && Convert.ToInt32(Back[y, x]) != 0)
-                                {
-
-                                }
-                                else
-                                {
-                                    frame.Foreground[yy, xx] = Convert.ToInt32(Front[y, x]);
-                                    if (frame.Background[yy, xx] == 0) frame.Background[yy, xx] = Convert.ToInt32(Back[y, x]);
-                                }
-                                
-                            }*/
-
-                            //frame.Foreground[yy, xx] = Convert.ToInt32(0);
-                            //if (frame.Background[yy, xx] == 0) frame.Background[yy, xx] = Convert.ToInt32(Back[y, x]);
-                            //frame.Background[yy, xx] = Convert.ToInt32(Back[y, x]);
+                            frame.Foreground[yy, xx] = Convert.ToInt32(Front[y, x]);
+                            if (frame.Background[yy, xx] == 0 || frame.Background[yy, xx] != 0 && Convert.ToInt32(Back[y, x]) != 0) frame.Background[yy, xx] = Convert.ToInt32(Back[y, x]);
+                            else if (Convert.ToInt32(Back[y, x]) == 0) frame.Background[yy, xx] = 0;
 
                             if (Coins[y, x] != null) frame.BlockData[yy, xx] = Convert.ToInt32(Coins[y, x]);
                             if (Id1[y, x] != null) frame.BlockData1[yy, xx] = Convert.ToInt32(Id1[y, x]);
