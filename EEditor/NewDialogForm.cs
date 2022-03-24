@@ -155,5 +155,19 @@ namespace EEditor
                 }
             }
         }
+
+        private void btnSizeList_Click(object sender, EventArgs e)
+        {
+            NewDialogList lst = new NewDialogList();
+            if (lst.ShowDialog() == DialogResult.OK)
+            {
+                string[] split = lst.worldSize.Split('x');
+                if (split.Length == 2)
+                {
+                    nUWidth.Value = Convert.ToDecimal(split[0]);
+                    nUHeight.Value = Convert.ToDecimal(split[1]);
+                }
+            }
+        }
     }
 }

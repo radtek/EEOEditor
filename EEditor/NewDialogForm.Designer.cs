@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewDialogForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnSizeList = new System.Windows.Forms.Button();
             this.nUHeight = new System.Windows.Forms.NumericUpDown();
             this.lHeight = new System.Windows.Forms.Label();
             this.nUWidth = new System.Windows.Forms.NumericUpDown();
@@ -51,22 +52,33 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnSizeList);
             this.groupBox1.Controls.Add(this.nUHeight);
             this.groupBox1.Controls.Add(this.lHeight);
             this.groupBox1.Controls.Add(this.nUWidth);
             this.groupBox1.Controls.Add(this.lWidth);
             this.groupBox1.Location = new System.Drawing.Point(12, 128);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(168, 85);
+            this.groupBox1.Size = new System.Drawing.Size(218, 85);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Size";
+            // 
+            // btnSizeList
+            // 
+            this.btnSizeList.Location = new System.Drawing.Point(139, 19);
+            this.btnSizeList.Name = "btnSizeList";
+            this.btnSizeList.Size = new System.Drawing.Size(75, 60);
+            this.btnSizeList.TabIndex = 4;
+            this.btnSizeList.Text = "Size List";
+            this.btnSizeList.UseVisualStyleBackColor = true;
+            this.btnSizeList.Click += new System.EventHandler(this.btnSizeList_Click);
             // 
             // nUHeight
             // 
             this.nUHeight.Location = new System.Drawing.Point(56, 49);
             this.nUHeight.Maximum = new decimal(new int[] {
-            600,
+            400,
             0,
             0,
             0});
@@ -97,7 +109,7 @@
             // 
             this.nUWidth.Location = new System.Drawing.Point(56, 25);
             this.nUWidth.Maximum = new decimal(new int[] {
-            600,
+            636,
             0,
             0,
             0});
@@ -244,5 +256,6 @@
         private System.Windows.Forms.TextBox tbtitle;
         private System.Windows.Forms.Label lname;
         private System.Windows.Forms.Label ltitle;
+        private System.Windows.Forms.Button btnSizeList;
     }
 }
