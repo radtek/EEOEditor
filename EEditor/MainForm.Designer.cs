@@ -42,6 +42,7 @@ namespace EEditor
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.hideBlocksButton = new System.Windows.Forms.ToolStripButton();
             this.minimapButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.settingsToolStrip = new System.Windows.Forms.ToolStrip();
             this.settingsButton = new System.Windows.Forms.ToolStripButton();
             this.aboutButton = new System.Windows.Forms.ToolStripButton();
@@ -226,11 +227,12 @@ namespace EEditor
             this.showDecorationsButton,
             this.toolStripSeparator1,
             this.hideBlocksButton,
-            this.minimapButton});
-            this.viewToolStrip.Location = new System.Drawing.Point(618, 0);
+            this.minimapButton,
+            this.toolStripSeparator12});
+            this.viewToolStrip.Location = new System.Drawing.Point(0, 27);
             this.viewToolStrip.Name = "viewToolStrip";
             this.viewToolStrip.Padding = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.viewToolStrip.Size = new System.Drawing.Size(156, 27);
+            this.viewToolStrip.Size = new System.Drawing.Size(162, 27);
             this.viewToolStrip.TabIndex = 0;
             this.viewToolStrip.Text = "toolStrip5";
             // 
@@ -312,6 +314,11 @@ namespace EEditor
             this.minimapButton.Text = "Minimap";
             this.minimapButton.ToolTipText = "Toggle minimap (M)";
             this.minimapButton.Click += new System.EventHandler(this.minimapButton_Click);
+            // 
+            // toolStripSeparator12
+            // 
+            this.toolStripSeparator12.Name = "toolStripSeparator12";
+            this.toolStripSeparator12.Size = new System.Drawing.Size(6, 27);
             // 
             // settingsToolStrip
             // 
@@ -896,7 +903,7 @@ namespace EEditor
             this.flowLayoutPanel6.AutoSize = true;
             this.flowLayoutPanel6.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel6.Location = new System.Drawing.Point(0, 498);
+            this.flowLayoutPanel6.Location = new System.Drawing.Point(0, 496);
             this.flowLayoutPanel6.Margin = new System.Windows.Forms.Padding(2);
             this.flowLayoutPanel6.Name = "flowLayoutPanel6";
             this.flowLayoutPanel6.Size = new System.Drawing.Size(784, 0);
@@ -907,7 +914,7 @@ namespace EEditor
             this.flowLayoutPanel5.AutoSize = true;
             this.flowLayoutPanel5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel5.Location = new System.Drawing.Point(0, 498);
+            this.flowLayoutPanel5.Location = new System.Drawing.Point(0, 496);
             this.flowLayoutPanel5.Margin = new System.Windows.Forms.Padding(2);
             this.flowLayoutPanel5.Name = "flowLayoutPanel5";
             this.flowLayoutPanel5.Size = new System.Drawing.Size(784, 0);
@@ -918,7 +925,7 @@ namespace EEditor
             this.flowLayoutPanel4.AutoSize = true;
             this.flowLayoutPanel4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel4.Location = new System.Drawing.Point(0, 498);
+            this.flowLayoutPanel4.Location = new System.Drawing.Point(0, 496);
             this.flowLayoutPanel4.Margin = new System.Windows.Forms.Padding(2);
             this.flowLayoutPanel4.Name = "flowLayoutPanel4";
             this.flowLayoutPanel4.Size = new System.Drawing.Size(784, 0);
@@ -929,7 +936,7 @@ namespace EEditor
             this.flowLayoutPanel2.AutoSize = true;
             this.flowLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 498);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 496);
             this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(2);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(784, 0);
@@ -940,7 +947,7 @@ namespace EEditor
             this.flowLayoutPanel3.AutoSize = true;
             this.flowLayoutPanel3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(0, 498);
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(0, 496);
             this.flowLayoutPanel3.Margin = new System.Windows.Forms.Padding(2);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
             this.flowLayoutPanel3.Size = new System.Drawing.Size(784, 0);
@@ -956,9 +963,9 @@ namespace EEditor
             this.bottomFlowLayoutPanel.Controls.Add(this.viewToolStrip);
             this.bottomFlowLayoutPanel.Controls.Add(this.lastUsedToolStrip);
             this.bottomFlowLayoutPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomFlowLayoutPanel.Location = new System.Drawing.Point(0, 498);
+            this.bottomFlowLayoutPanel.Location = new System.Drawing.Point(0, 496);
             this.bottomFlowLayoutPanel.Name = "bottomFlowLayoutPanel";
-            this.bottomFlowLayoutPanel.Size = new System.Drawing.Size(784, 52);
+            this.bottomFlowLayoutPanel.Size = new System.Drawing.Size(784, 54);
             this.bottomFlowLayoutPanel.TabIndex = 4;
             // 
             // statusToolStrip
@@ -1047,7 +1054,7 @@ namespace EEditor
             this.findToolStrip.Location = new System.Drawing.Point(218, 0);
             this.findToolStrip.Name = "findToolStrip";
             this.findToolStrip.Padding = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.findToolStrip.Size = new System.Drawing.Size(138, 27);
+            this.findToolStrip.Size = new System.Drawing.Size(169, 27);
             this.findToolStrip.TabIndex = 1;
             this.findToolStrip.Text = "toolStrip1";
             // 
@@ -1068,7 +1075,7 @@ namespace EEditor
             this.pickerButton.Size = new System.Drawing.Size(24, 24);
             this.pickerButton.Text = "Block by color";
             this.pickerButton.ToolTipText = "Use a block that matches chosen color (Ctrl + P)";
-            this.pickerButton.Click += new System.EventHandler(this.pickerButton_Click);
+            this.pickerButton.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pickerButton_MouseUp);
             // 
             // toolStripSeparator10
             // 
@@ -1092,7 +1099,7 @@ namespace EEditor
             this.BlockPicker9,
             this.BlockPicker10,
             this.toolStripSeparator9});
-            this.BlockPickerToolStrip.Location = new System.Drawing.Point(356, 0);
+            this.BlockPickerToolStrip.Location = new System.Drawing.Point(387, 0);
             this.BlockPickerToolStrip.Name = "BlockPickerToolStrip";
             this.BlockPickerToolStrip.Size = new System.Drawing.Size(262, 25);
             this.BlockPickerToolStrip.TabIndex = 4;
@@ -1213,7 +1220,7 @@ namespace EEditor
             this.lastUsedBlockButton2,
             this.lastUsedBlockButton3,
             this.lastUsedBlockButton4});
-            this.lastUsedToolStrip.Location = new System.Drawing.Point(0, 27);
+            this.lastUsedToolStrip.Location = new System.Drawing.Point(162, 27);
             this.lastUsedToolStrip.Name = "lastUsedToolStrip";
             this.lastUsedToolStrip.Size = new System.Drawing.Size(118, 25);
             this.lastUsedToolStrip.TabIndex = 3;
@@ -1433,6 +1440,7 @@ namespace EEditor
         private System.Windows.Forms.ToolStripButton BlockPicker10;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem sPTToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
     }
 }
 

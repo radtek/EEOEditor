@@ -37,7 +37,6 @@
             this.lWidth = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tbowner = new System.Windows.Forms.TextBox();
             this.tbtitle = new System.Windows.Forms.TextBox();
@@ -46,7 +45,6 @@
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nUHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUWidth)).BeginInit();
-            this.groupBox4.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -66,9 +64,9 @@
             // 
             // btnSizeList
             // 
-            this.btnSizeList.Location = new System.Drawing.Point(139, 19);
+            this.btnSizeList.Location = new System.Drawing.Point(139, 38);
             this.btnSizeList.Name = "btnSizeList";
-            this.btnSizeList.Size = new System.Drawing.Size(75, 60);
+            this.btnSizeList.Size = new System.Drawing.Size(75, 26);
             this.btnSizeList.TabIndex = 4;
             this.btnSizeList.Text = "Size List";
             this.btnSizeList.UseVisualStyleBackColor = true;
@@ -138,7 +136,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(48, 219);
+            this.button1.Location = new System.Drawing.Point(12, 219);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(86, 26);
             this.button1.TabIndex = 7;
@@ -148,25 +146,13 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(7, 19);
+            this.button2.Location = new System.Drawing.Point(104, 219);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 39);
+            this.button2.Size = new System.Drawing.Size(122, 26);
             this.button2.TabIndex = 21;
             this.button2.Text = "Background color";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Visible = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.button2);
-            this.groupBox4.Location = new System.Drawing.Point(288, 12);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(96, 64);
-            this.groupBox4.TabIndex = 31;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Properties";
-            this.groupBox4.Visible = false;
             // 
             // groupBox2
             // 
@@ -219,9 +205,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(243, 255);
+            this.ClientSize = new System.Drawing.Size(246, 261);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -235,7 +221,6 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nUHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUWidth)).EndInit();
-            this.groupBox4.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
@@ -246,7 +231,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.NumericUpDown nUHeight;
         private System.Windows.Forms.Label lHeight;
         private System.Windows.Forms.NumericUpDown nUWidth;
