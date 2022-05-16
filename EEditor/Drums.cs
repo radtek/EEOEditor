@@ -9,7 +9,7 @@ namespace EEditor
     {
         Rectangle[] rec = new Rectangle[10];
         Bitmap bmp;
-        public Label Label2 { get { return label2; } set { label2 = value; } }
+        //public Label Label2 { get { return label2; } set { label2 = value; } }
         public Drums()
         {
             InitializeComponent();

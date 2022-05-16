@@ -8,7 +8,7 @@ namespace EEditor
     public partial class Piano : Form
     {
         Rectangle[] rec = new Rectangle[25];
-        public Label Label2 { get { return label2; } set { label2 = value; } }
+        //public Label Label2 { get { return label2; } set { label2 = value; } }
         Bitmap bmp;
         public Piano()
         {
