@@ -23,11 +23,9 @@ namespace EEditor
         private Dictionary<string, string> data = new Dictionary<string, string>();
         private Semaphore s = new Semaphore(0, 1);
         private Semaphore s1 = new Semaphore(0, 1);
-        //private bool errors = false;
         public NewDialogForm(MainForm mainForm)
         {
             InitializeComponent();
-            //levelPassTextBox.Text = EEditor.Properties.Settings.Default.LevelPass;
             MainForm = mainForm;
             mainform = mainForm;
             CheckForIllegalCrossThreadCalls = false;
@@ -47,8 +45,6 @@ namespace EEditor
             {
                 MainForm.SetPenTool();
                 if (Clipboard.ContainsData("EEBrush")) Clipboard.Clear();
-                MainForm.userdata.thisColor = Color.Transparent;
-                MainForm.userdata.useColor = false;
                 ToolPen.undolist.Clear();
                 ToolPen.redolist.Clear();
                 ToolPen.rotation.Clear();
@@ -67,7 +63,7 @@ namespace EEditor
                 MainForm.EEONickname = name;
                 MainForm.EEOTitle = title;
                 #endregion
-                DialogResult = System.Windows.Forms.DialogResult.OK;
+                DialogResult = DialogResult.OK;
                 Close();
             }
         }
@@ -85,24 +81,6 @@ namespace EEditor
                 MainForm.userdata.useColor = false;
                 MainForm.userdata.thisColor = Color.Transparent;
             }
-            Graphics g = Graphics.FromImage(MainForm.editArea.Back);
-            for (int y = 0; y < MainForm.editArea.Frames[0].Height; y++)
-            {
-                for (int x = 0; x < MainForm.editArea.Frames[0].Width; x++)
-                {
-                    if (x == 0 || y == 0 || x == MainForm.editArea.Frames[0].Width - 1 || y == MainForm.editArea.Frames[0].Height - 1)
-                    {
-                        MainForm.editArea.Draw(x, y, g, Color.Transparent);
-                    }
-                    else
-                    {
-                        MainForm.editArea.Draw(x, y, g, MainForm.userdata.thisColor);
-                    }
-                }
-            }
-            MainForm.editArea.Invalidate();
-            //Properties.Settings.Default.usecolor = false;
-            //Properties.Settings.Default.Save();
         }
 
 
@@ -120,7 +98,8 @@ namespace EEditor
         {
             this.ForeColor = MainForm.themecolors.foreground;
             this.BackColor = MainForm.themecolors.background;
-
+            MainForm.userdata.thisColor = Color.Transparent;
+            MainForm.userdata.useColor = false;
             foreach (Control cntr in this.Controls)
             {
                 if (cntr.GetType() == typeof(Button))
@@ -167,6 +146,32 @@ namespace EEditor
                     nUWidth.Value = Convert.ToDecimal(split[0]);
                     nUHeight.Value = Convert.ToDecimal(split[1]);
                 }
+            }
+        }
+
+        private void btnBgColor_Click(object sender, EventArgs e)
+        {
+            BgColor col = new BgColor();
+            if (col.ShowDialog() == DialogResult.OK)
+            {
+                if (MainForm.userdata.useColor) MainForm.userdata.thisColor = col.setCol;
+                else MainForm.userdata.thisColor = Color.Transparent;
+                Graphics g = Graphics.FromImage(MainForm.editArea.Back);
+                for (int y = 0; y < MainForm.editArea.Frames[0].Height; y++)
+                {
+                    for (int x = 0; x < MainForm.editArea.Frames[0].Width; x++)
+                    {
+                        if (x == 0 || y == 0 || x == MainForm.editArea.Frames[0].Width - 1 || y == MainForm.editArea.Frames[0].Height - 1)
+                        {
+                            MainForm.editArea.Draw(x, y, g, Color.Transparent);
+                        }
+                        else
+                        {
+                            MainForm.editArea.Draw(x, y, g, MainForm.userdata.thisColor);
+                        }
+                    }
+                }
+                MainForm.editArea.Invalidate();
             }
         }
     }

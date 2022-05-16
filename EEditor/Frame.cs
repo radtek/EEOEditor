@@ -27,6 +27,7 @@ namespace EEditor
         public string nickname { get; set; }
         public string owner { get; set; }
         public string levelname { get; set; }
+        public uint backgroundColor { get; set; }
         public static byte[] xx;
         public static byte[] yy;
         public static byte[] xx1;
@@ -98,6 +99,7 @@ namespace EEditor
             EELVL.Level savelvl = new Level(Width, Height, 0);
             savelvl.WorldName = MainForm.EEOTitle;
             savelvl.OwnerName = MainForm.EEONickname;
+            if (MainForm.userdata.useColor) savelvl.BackgroundColor = ColorToUInt(MainForm.userdata.thisColor);
             savelvl.OwnerID = "Created by EEODitor";
             for (int y = 0; y < Height; ++y)
             {
@@ -149,6 +151,10 @@ namespace EEditor
                     if (Blocks.IsType(bid, Blocks.BlockType.Normal))
                     {
                         savelvl[1, x, y] = new Blocks.Block(bid);
+                    }
+                    if (Blocks.IsType(fid,Blocks.BlockType.Label))
+                    {
+                        savelvl[0, x, y] = new Blocks.LabelBlock(fid, BlockData3[y, x], BlockData4[y, x], BlockData[y, x]);
                     }
                 }
             }
@@ -504,6 +510,16 @@ namespace EEditor
                 Frame f = new Frame(lvl.Width, lvl.Height);
                 f.levelname = lvl.WorldName;
                 f.nickname = lvl.OwnerName;
+                if (lvl.BackgroundColor != 0)
+                {
+                    MainForm.userdata.useColor = true;
+                    MainForm.userdata.thisColor = UIntToColor(lvl.BackgroundColor);
+                }
+                else
+                {
+                    MainForm.userdata.useColor = false;
+                    MainForm.userdata.thisColor = Color.Transparent;
+                }
                 MainForm.EEONickname = lvl.OwnerName;
                 MainForm.EEOTitle = lvl.WorldName;
                 for (int x = 0; x < lvl.Width; ++x)
@@ -573,11 +589,23 @@ namespace EEditor
                         {
                             f.Background[y, x] = lvl[1, x, y].BlockID;
                         }
+                        if (Blocks.IsType(lvl[0,x,y].BlockID, Blocks.BlockType.Label)) {
+                            f.Foreground[y,x] = lvl[0, x, y].BlockID;
+                            f.BlockData[y, x] = ((Blocks.LabelBlock)lvl[0, x, y]).Wrap;
+                            f.BlockData3[y, x] = ((Blocks.LabelBlock)lvl[0, x, y]).Text;
+                            f.BlockData4[y, x] = ((Blocks.LabelBlock)lvl[0, x, y]).Color;
+                        }
 
                     }
                 }
                 return f;
             }
+        }
+
+        private uint ColorToUInt(Color color)
+        {
+            return (uint)((color.A << 24) | (color.R << 16) |
+                          (color.G << 8) | (color.B << 0));
         }
         public static Frame Load(System.IO.BinaryReader reader, int num)
         {
