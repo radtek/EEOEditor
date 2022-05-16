@@ -36,6 +36,7 @@ namespace EEditor
         private int[] bgs = new int[3000];
         public static string EEONickname = "Player";
         public static string EEOTitle = "Untitled World";
+        public static uint EEOBackgroundColor = 0;
         private System.Timers.Timer timer = new System.Timers.Timer(1000);
         public static int[] foregroundBMI = new int[3000];
         public static int[] miscBMI = new int[3000];
@@ -317,7 +318,7 @@ namespace EEditor
                 { 1543, 250 },{1544, 251 },{ 1545, 252 },{ 1546, 253 },{ 1547, 254 },{ 1548, 255 },{ 1549, 256 },
                 { 1560, 257 },{ 1561, 258 },{ 1562, 259 },{ 1564, 260 },{ 1565, 261 },{ 1566, 262 },
                 { 1567, 263 },{ 1568, 264 },{ 1582, 265 },{ 1583, 266 }, { 1589, 267 }, { 1590, 268 },{ 1591, 269},{ 1598, 270},
-                { 1599, 271},{ 1600, 272},{ 1601, 273}, { 1603, 274 }, { 1604, 275}, { 1622,276}, { 1623, 277 }, { 1624, 278 }
+                { 1599, 271},{ 1600, 272},{ 1601, 273}, { 1603, 274 }, { 1604, 275}, { 1622,276}, { 1623, 277 }, { 1624, 278 }, { 1000, 176 }
             };
             for (int i = 0; i < decorInit.Length / 2; i++)
             {
@@ -1363,7 +1364,7 @@ namespace EEditor
             AddToolStrip(decosBMD, 2, new int[] { 199 }, null, false, "Tools", 1, 0, true);
             AddToolStrip(decosBMD, 2, new int[] { 231 }, null, false, "Tools", 1, 0, true);
             AddToolStrip(decosBMD, 2, new int[] { 266 }, null, false, "Tools", 1, 0, true);
-            //AddToolStrip(decosBMD, 2, new int[] { 176 }, null, false, "Text", 1, 0, true);
+            AddToolStrip(decosBMD, 2, new int[] { 176 }, null, false, "Label", 1, 0, true);
             AddToolStrip(foregroundBMD, 0, new int[] { 5 }, new uint[] { 0x43391F }, false, "Crown", 1, 0, true);
             AddToolStrip(miscBMD, 1, new int[] { 341, 340 }, null, false, "Crown Doors", 1, 0, true);
             AddToolStrip(miscBMD, 1, new int[] { 8 }, null, false, "Tools", 1, 0, true);
@@ -3896,7 +3897,6 @@ namespace EEditor
         }
 
         //Block by color
-        private void pickerButton_Click(object sender, EventArgs e) { SetColorPicker(); }
 
         public void SetColorPicker()
         {
@@ -4618,7 +4618,7 @@ namespace EEditor
         }
         private void checkUpdate()
         {
-            string file = $"{Directory.GetCurrentDirectory()}\\EEditorUpdater.exe";
+            string file = $"{Directory.GetCurrentDirectory()}\\EEOditorUpdater.exe";
             if (File.Exists(file))
             {
                 if (userdata.checkUpdate)
@@ -4718,7 +4718,60 @@ namespace EEditor
             e.Effect = DragDropEffects.Copy;
         }
 
+        private void tsbLight_Click(object sender, EventArgs e)
+        {
+            userdata.thisColor = Color.Gray;
+            userdata.useColor = true;
+            Graphics g = Graphics.FromImage(MainForm.editArea.Back);
+            for (int y = 0; y < MainForm.editArea.Frames[0].Height; y++)
+            {
+                for (int x = 0; x < MainForm.editArea.Frames[0].Width; x++)
+                {
+                    if (x == 0 || y == 0 || x == MainForm.editArea.Frames[0].Width - 1 || y == MainForm.editArea.Frames[0].Height - 1)
+                    {
+                        MainForm.editArea.Draw(x, y, g, Color.Transparent);
+                    }
+                    else
+                    {
+                        MainForm.editArea.Draw(x, y, g, MainForm.userdata.thisColor);
+                    }
+                }
+            }
+            MainForm.editArea.Invalidate();
+        }
 
+        private void pickerButton_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                SetColorPicker();
+            }
+            else
+            {
+                BgColor col = new BgColor();
+                if (col.ShowDialog() == DialogResult.OK)
+                {
+                    if (userdata.useColor) userdata.thisColor = col.setCol;
+                    else userdata.thisColor = Color.Transparent;
+                    Graphics g = Graphics.FromImage(MainForm.editArea.Back);
+                    for (int y = 0; y < MainForm.editArea.Frames[0].Height; y++)
+                    {
+                        for (int x = 0; x < MainForm.editArea.Frames[0].Width; x++)
+                        {
+                            if (x == 0 || y == 0 || x == MainForm.editArea.Frames[0].Width - 1 || y == MainForm.editArea.Frames[0].Height - 1)
+                            {
+                                MainForm.editArea.Draw(x, y, g, Color.Transparent);
+                            }
+                            else
+                            {
+                                MainForm.editArea.Draw(x, y, g, MainForm.userdata.thisColor);
+                            }
+                        }
+                    }
+                    editArea.Invalidate();
+                }
+            }
+        }
     }
 
     public class listofBlocks
