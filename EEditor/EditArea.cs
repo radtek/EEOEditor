@@ -25,6 +25,8 @@ namespace EEditor
         public Tool Tool { get; set; }
         public Bitmap Back { get; set; }
         public Bitmap Back1 { get; set; }
+
+        public Bitmap Label { get; set; }
         public Bitmap adminText { get; set; }
         public Bitmap[] Bricks { get; set; }
         public Bitmap unknowBricks { get; set; }
@@ -38,11 +40,6 @@ namespace EEditor
         public bool mouseDown { set { IsMouseDown = value; } }
         public string incfg = null;
         protected int curFrame;
-        [System.Runtime.InteropServices.DllImport("gdi32.dll")]
-        private static extern IntPtr AddFontMemResourceEx(IntPtr pbFont, uint cbFont,
-IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
-
-        private PrivateFontCollection fonts = new PrivateFontCollection();
         PrivateFontCollection bfont = new PrivateFontCollection();
 
         protected bool IsMouseDown = false;
@@ -95,6 +92,17 @@ IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
                     InsertImageForm.path2file = files[0];
                     InsertImageForm open = new InsertImageForm();
                     open.ShowDialog();
+                }
+                else if (Regex.IsMatch(Path.GetExtension(files[0]).ToLower(),"^.eelvl$"))
+                {
+                    string filename = files[0];
+                    Frame frame = Frame.LoadFromEELVL(filename);
+                    if (frame != null)
+                    {
+                        this.Text = $".eelvl - ({frame.levelname}) [{frame.nickname}] ({frame.Width}x{frame.Height}) - EEOditor {this.ProductVersion}";
+                        Init(frame, false);
+                    }
+                    else MessageBox.Show("The dropped EELVL is either invalid or corrupt.", "Invalid EELVL", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -525,7 +533,14 @@ IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
                 }
             }
             else
+
             {
+                if (fid == 1000)
+                {
+                    string texta = text;
+                    g.DrawRectangle(new Pen(ColorTranslator.FromHtml(text1)), new Rectangle(x * 16,y * 16,15,15));
+                    //DrawText(text, Back1, Brushes.White, null, 8, null,null, x * 16, y * 16, true);
+                }
                 /*if (fid == 1000)
                 {
                     Font trFont = new Font("System", 11.0f, FontStyle.Bold, GraphicsUnit.Point);
@@ -617,6 +632,10 @@ IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
                 //e.Graphics.DrawImage(Back, e.ClipRectangle, new Rectangle(new Point(xStart, yStart), e.ClipRectangle.Size), GraphicsUnit.Pixel);
                 //e.Graphics.DrawImage(Back, e.ClipRectangle, e.ClipRectangle, GraphicsUnit.Pixel);
             }
+            else if (Label != null)
+            {
+                e.Graphics.DrawImage(Label, e.ClipRectangle, new Rectangle(xStart,yStart,100,100),GraphicsUnit.Pixel);
+            }
 
         }
 
@@ -642,9 +661,9 @@ IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
                     string text = null;
                     if (CurFrame.BlockData3[p.Y, p.X] != null)
                     {
-                        if (CurFrame.BlockData3[p.Y, p.X].Length >= 20)
+                        if (CurFrame.BlockData3[p.Y, p.X].Length >= 14)
                         {
-                            text = CurFrame.BlockData3[p.Y, p.X].Substring(0, 20) + "....";
+                            text = CurFrame.BlockData3[p.Y, p.X].Substring(0, 14) + "....";
                         }
                         else
                         {
@@ -659,9 +678,9 @@ IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
                     try
                     {
                         string text = null;
-                        if (CurFrame.BlockData3[p.Y, p.X].Length >= 20)
+                        if (CurFrame.BlockData3[p.Y, p.X].Length >= 14)
                         {
-                            text = CurFrame.BlockData3[p.Y, p.X].Substring(0, 20) + "....";
+                            text = CurFrame.BlockData3[p.Y, p.X].Substring(0, 14) + "....";
                         }
                         else
                         {
@@ -673,6 +692,23 @@ IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
                     catch
                     {
 
+                    }
+                }
+                else if (CurFrame.Foreground[p.Y, p.X] == 1000)
+                {
+                    string text = null;
+                    if (CurFrame.BlockData3[p.Y, p.X] != null)
+                    {
+                        if (CurFrame.BlockData3[p.Y, p.X].Length >= 14)
+                        {
+                            text = CurFrame.BlockData3[p.Y, p.X].Substring(0, 14) + "....";
+                        }
+                        else
+                        {
+                            text = CurFrame.BlockData3[p.Y, p.X];
+                        }
+                        MainForm.rot.Text = CurFrame.BlockData[p.Y, p.X].ToString();
+                        MainForm.txt.Text = CurFrame.BlockData3[p.Y, p.X];
                     }
                 }
                 else if (bdata.portals.Contains(CurFrame.Foreground[p.Y, p.X]))
@@ -906,14 +942,7 @@ IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
 
         private void EditArea_Load(object sender, EventArgs e)
         {
-            byte[] fontData = Properties.Resources.blocktext;
-            IntPtr fontPtr = System.Runtime.InteropServices.Marshal.AllocCoTaskMem(fontData.Length);
-            System.Runtime.InteropServices.Marshal.Copy(fontData, 0, fontPtr, fontData.Length);
-            uint dummy = 0;
-            fonts.AddMemoryFont(fontPtr, Properties.Resources.blocktext.Length);
-            AddFontMemResourceEx(fontPtr, (uint)Properties.Resources.blocktext.Length, IntPtr.Zero, ref dummy);
-            System.Runtime.InteropServices.Marshal.FreeCoTaskMem(fontPtr);
-            bfont = fonts;
+            bfont = bdata.fontz();
             //if (File.Exists(Directory.GetCurrentDirectory() + @"\blocktext.ttf")) bfont.AddFontFile(Directory.GetCurrentDirectory() + @"\blocktext.ttf");
         }
 
