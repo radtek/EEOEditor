@@ -3,11 +3,16 @@ using System.Linq;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
+using System.Drawing.Text;
 
 namespace EEditor
 {
     class bdata
     {
+        [System.Runtime.InteropServices.DllImport("gdi32.dll")]
+        private static extern IntPtr AddFontMemResourceEx(IntPtr pbFont, uint cbFont,
+IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
+
         public static string gameID = "everybody-edits-su9rn58o40itdbnw69plyw";
         public static int[] goal = { 77, 83, 43, 165, 213, 214, 417, 418, 419, 420, 421, 422, 423, 1027, 1028, 113, 185, 184, 1011, 1012, 453, 461, 467, 1079, 1080, 1520,1582,1619,1620 };
         //public static int[] effects = { 417, 418, 419, 420, 421, 422, 453 };
@@ -36,6 +41,27 @@ namespace EEditor
         public static int[] increase5 = { 440, 481, 482, 497, 1581 };
         public static int[] increase11 = { 1538 };
 
+
+        public static PrivateFontCollection fontz()
+        {
+            PrivateFontCollection fonts = new PrivateFontCollection();
+            byte[] fontData = Properties.Resources.blocktext;
+            IntPtr fontPtr = System.Runtime.InteropServices.Marshal.AllocCoTaskMem(fontData.Length);
+            System.Runtime.InteropServices.Marshal.Copy(fontData, 0, fontPtr, fontData.Length);
+            uint dummy = 0;
+            fonts.AddMemoryFont(fontPtr, Properties.Resources.blocktext.Length);
+            AddFontMemResourceEx(fontPtr, (uint)Properties.Resources.blocktext.Length, IntPtr.Zero, ref dummy);
+            System.Runtime.InteropServices.Marshal.FreeCoTaskMem(fontPtr);
+
+            byte[] fontData1 = Properties.Resources.nokiafc22;
+            IntPtr fontPtr1 = System.Runtime.InteropServices.Marshal.AllocCoTaskMem(fontData1.Length);
+            System.Runtime.InteropServices.Marshal.Copy(fontData1, 0, fontPtr1, fontData1.Length);
+            uint dummy1 = 0;
+            fonts.AddMemoryFont(fontPtr1, Properties.Resources.nokiafc22.Length);
+            AddFontMemResourceEx(fontPtr1, (uint)Properties.Resources.nokiafc22.Length, IntPtr.Zero, ref dummy1);
+            System.Runtime.InteropServices.Marshal.FreeCoTaskMem(fontPtr1);
+            return fonts;
+        }
         public static bool isBg(int id)
         {
             if (id >= 500 && id <= 999) return true;
