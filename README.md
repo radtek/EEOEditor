@@ -1,4 +1,8 @@
-## EEOditor - Everybody Edits offline editor  
+### Last message  
+This project is no longer maintained. I have lost motivation and don't care about EE at all.
+
+
+## EEOditor - Everybody Edits Offline Editor  
    
 Welcome to the EEOditor GitHub page! Here we host sourcecode and latest version of EEOditor.
   
