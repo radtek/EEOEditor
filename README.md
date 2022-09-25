@@ -1,6 +1,5 @@
-### Last message  
-This project is no longer maintained. I have lost motivation and don't care about EE at all.
-
+### Message to everyone
+EEOditor is going to be updated soon. I can't say an ETA.
 
 ## EEOditor - Everybody Edits Offline Editor  
    
