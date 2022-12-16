@@ -16,6 +16,10 @@ namespace EEditor
         public string NPCtempMessage2 { get; set; }
         public string NPCtempMessage3 { get; set; }
         public string NPCtempMessage4 { get; set; }
+
+        public string LabelText { get; set; }
+        public int LabelWrap { get; set; }
+        public string LabelColor { get; set; }
         public int NPCId { get; set; }
         public static int PenSize { get; set; }
 

@@ -79,7 +79,7 @@ namespace EEditor
                 table.Size = new Size(60, 30);
                 Bitmap bmp = new Bitmap(table.Width, table.Height);
                 Bitmap block = new Bitmap(16, 16);
-                if (val.Key < 500 || val.Key >= 1001)
+                if (val.Key < 500 || val.Key >= 1000)
                 {
                     if (MainForm.ForegroundBlocks.ContainsKey(val.Key) && (id == 0 || id == 1))
                     {
@@ -87,7 +87,7 @@ namespace EEditor
                         using (Graphics gr = Graphics.FromImage(bmp))
                         {
                             gr.FillRectangle(new SolidBrush(Color.Gray), new Rectangle(5, 5, 100, 50));
-                            gr.DrawRectangle(new Pen(Color.White), new Rectangle(5, 5, 54, 24));
+                            gr.DrawRectangle(new Pen(MainForm.userdata.darkTheme ? Color.White : Color.Black), new Rectangle(5, 5, 54, 24));
                             gr.DrawImage(block, new Point(8, 8));
                             //gr.DrawString($"{val.Value}", new Font("Arial", 8, FontStyle.Regular), new SolidBrush(Color.Black), new Point(25, 9));
                             gr.DrawString($"{val.Value}", new Font("Arial", 8, FontStyle.Regular), new SolidBrush(Color.White), new Point(24, 8));
@@ -109,7 +109,7 @@ namespace EEditor
                         using (Graphics gr = Graphics.FromImage(bmp))
                         {
                             gr.FillRectangle(new SolidBrush(Color.Gray), new Rectangle(5, 5, 100, 50));
-                            gr.DrawRectangle(new Pen(Color.White), new Rectangle(5, 5, 54, 24));
+                            gr.DrawRectangle(new Pen(MainForm.userdata.darkTheme ? Color.White : Color.Black), new Rectangle(5, 5, 54, 24));
                             gr.DrawImage(block, new Point(8, 8));
                             //gr.DrawString($"{val.Value}", new Font("Arial", 8, FontStyle.Regular), new SolidBrush(Color.Black), new Point(25, 9));
                             gr.DrawString($"{val.Value}", new Font("Arial", 8, FontStyle.Regular), new SolidBrush(Color.White), new Point(24, 8));
@@ -128,8 +128,9 @@ namespace EEditor
                         block = MainForm.DecorationBlocks[val.Key];
                         using (Graphics gr = Graphics.FromImage(bmp))
                         {
+                            
                             gr.FillRectangle(new SolidBrush(Color.Gray), new Rectangle(5, 5, 100, 50));
-                            gr.DrawRectangle(new Pen(Color.White), new Rectangle(5, 5, 54, 24));
+                            gr.DrawRectangle(new Pen(MainForm.userdata.darkTheme ? Color.White:Color.Black), new Rectangle(5, 5, 54, 24));
                             gr.DrawImage(block, new Point(8, 8));
                             //gr.DrawString($"{val.Value}", new Font("Arial", 8, FontStyle.Regular), new SolidBrush(Color.Black), new Point(25, 9));
                             gr.DrawString($"{val.Value}", new Font("Arial", 8, FontStyle.Regular), new SolidBrush(Color.White), new Point(24, 8));
@@ -153,7 +154,7 @@ namespace EEditor
                         using (Graphics gr = Graphics.FromImage(bmp))
                         {
                             gr.FillRectangle(new SolidBrush(Color.Gray), new Rectangle(5, 5, 100, 50));
-                            gr.DrawRectangle(new Pen(Color.White), new Rectangle(5, 5, 54, 24));
+                            gr.DrawRectangle(new Pen(MainForm.userdata.darkTheme ? Color.White : Color.Black), new Rectangle(5, 5, 54, 24));
                             gr.DrawImage(block, new Point(8, 8));
                             //gr.DrawString($"{val.Value}", new Font("Arial", 8, FontStyle.Regular), new SolidBrush(Color.Black), new Point(25, 9));
                             gr.DrawString($"{val.Value}", new Font("Arial", 8, FontStyle.Regular), new SolidBrush(Color.White), new Point(24, 8));

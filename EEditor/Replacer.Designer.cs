@@ -198,7 +198,7 @@
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(0, 0);
+            this.button9.Location = new System.Drawing.Point(26, 315);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(75, 23);
             this.button9.TabIndex = 20;
@@ -861,7 +861,7 @@
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Replacer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

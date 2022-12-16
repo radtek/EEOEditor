@@ -3122,7 +3122,7 @@ namespace EEditor
             }
         }
 
-        
+
         private void loadOldestMenuItem_Click(object sender, EventArgs e)
         {
             SetDummy();
@@ -3184,7 +3184,7 @@ namespace EEditor
                     {
                         fs.Close();
                         reader.Close();
-                        MessageBox.Show($"The selected file was made by: {version} And is not supported.","Not Supported", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show($"The selected file was made by: {version} And is not supported.", "Not Supported", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else if (version == "ANIMATOR SAV V05")
                     {
@@ -4266,7 +4266,7 @@ namespace EEditor
                 DialogResult dr = MessageBox.Show("Are you sure you want to exit EEOditor?", "Quit EEOditor?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.Yes)
                 {
-                
+
                     e.Cancel = false;
                 }
                 else

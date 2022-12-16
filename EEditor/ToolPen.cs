@@ -355,7 +355,7 @@ namespace EEditor
                     {
                         if (button)
                         {
-                            /*using (Label lbl = new Label())
+                            using (Label lbl = new Label())
                             {
                                 lbl.sz = new Point(x, y);
                                 lbl.labelText = editArea.CurFrame.BlockData3[y, x];
@@ -371,20 +371,22 @@ namespace EEditor
                                 else
                                 {
                                     if (lbl.labelColor != null) { editArea.CurFrame.BlockData4[y, x] = lbl.labelColor; }
-                                    else { editArea.CurFrame.BlockData4[y, x] = "#FF00FF"; }
+                                    else { editArea.CurFrame.BlockData4[y, x] = "#FFFFFF"; }
                                     if (lbl.labelText != null) { editArea.CurFrame.BlockData3[y, x] = lbl.labelText; }
-                                    else { editArea.CurFrame.BlockData3[y, x] = "Welcome"; }
+                                    else { editArea.CurFrame.BlockData3[y, x] = "Welcome to EEOditor!"; }
+                                    if (lbl.labelWrap >= 0) { editArea.CurFrame.BlockData[y, x] = lbl.labelWrap; }
+                                    else { editArea.CurFrame.BlockData[y, x] = 200; }
                                 }
                                 editArea.mouseDown = false;
-                            };*/
-                            editArea.mouseDown = false;
+                            }
                         }
+                        
                         else
                         {
-                           editArea.CurFrame.Foreground[y, x] = 1000;
+                            editArea.CurFrame.Foreground[y, x] = 1000;
                             editArea.CurFrame.BlockData[y, x] = 200;
-                            editArea.CurFrame.BlockData3[y, x] = "Hello World!";
-                            editArea.CurFrame.BlockData4[y, x] = "#FF00FF";
+                            editArea.CurFrame.BlockData3[y, x] = "Welcome to EEOditor!";
+                            editArea.CurFrame.BlockData4[y, x] = "#FFFFFF";
                         }
 
                     }

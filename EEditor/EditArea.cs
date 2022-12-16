@@ -661,24 +661,7 @@ namespace EEditor
                     string text = null;
                     if (CurFrame.BlockData3[p.Y, p.X] != null)
                     {
-                        if (CurFrame.BlockData3[p.Y, p.X].Length >= 14)
-                        {
-                            text = CurFrame.BlockData3[p.Y, p.X].Substring(0, 14) + "....";
-                        }
-                        else
-                        {
-                            text = CurFrame.BlockData3[p.Y, p.X];
-                        }
-                        MainForm.rot.Text = CurFrame.BlockData[p.Y, p.X].ToString();
-                        MainForm.txt.Text = CurFrame.BlockData3[p.Y, p.X];
-                    }
-                }
-                else if (CurFrame.Foreground[p.Y, p.X] == 385)
-                {
-                    try
-                    {
-                        string text = null;
-                        if (CurFrame.BlockData3[p.Y, p.X].Length >= 14)
+                        if (CurFrame.BlockData3[p.Y, p.X].Length >= 10)
                         {
                             text = CurFrame.BlockData3[p.Y, p.X].Substring(0, 14) + "....";
                         }
@@ -689,10 +672,21 @@ namespace EEditor
                         MainForm.rot.Text = CurFrame.BlockData[p.Y, p.X].ToString();
                         MainForm.txt.Text = text;
                     }
-                    catch
-                    {
+                }
+                else if (CurFrame.Foreground[p.Y, p.X] == 385)
+                {
 
-                    }
+                        string text = null;
+                        if (CurFrame.BlockData3[p.Y, p.X].Length >= 10)
+                        {
+                            text = CurFrame.BlockData3[p.Y, p.X].Substring(0, 10) + "....";
+                        }
+                        else
+                        {
+                            text = CurFrame.BlockData3[p.Y, p.X];
+                        }
+                        MainForm.rot.Text = CurFrame.BlockData[p.Y, p.X].ToString();
+                        MainForm.txt.Text = text;
                 }
                 else if (CurFrame.Foreground[p.Y, p.X] == 1000)
                 {
@@ -701,14 +695,14 @@ namespace EEditor
                     {
                         if (CurFrame.BlockData3[p.Y, p.X].Length >= 14)
                         {
-                            text = CurFrame.BlockData3[p.Y, p.X].Substring(0, 14) + "....";
+                            text = CurFrame.BlockData3[p.Y, p.X].Substring(0, 10) + "....";
                         }
                         else
                         {
                             text = CurFrame.BlockData3[p.Y, p.X];
                         }
                         MainForm.rot.Text = CurFrame.BlockData[p.Y, p.X].ToString();
-                        MainForm.txt.Text = CurFrame.BlockData3[p.Y, p.X];
+                        MainForm.txt.Text = text;
                     }
                 }
                 else if (bdata.portals.Contains(CurFrame.Foreground[p.Y, p.X]))
