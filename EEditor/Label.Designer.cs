@@ -85,7 +85,7 @@
             this.nupdWrap.Size = new System.Drawing.Size(81, 20);
             this.nupdWrap.TabIndex = 6;
             this.nupdWrap.Value = new decimal(new int[] {
-            20,
+            4,
             0,
             0,
             0});

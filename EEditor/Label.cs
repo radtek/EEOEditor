@@ -19,13 +19,16 @@ namespace EEditor
 
         public string labelColor { get; set; }
 
+        public bool acceptWrap = false;
+        public bool loading = false;
+
         Font fnt = new Font(bdata.fontz().Families[1], 12, FontStyle.Regular, GraphicsUnit.Pixel);
 
         public Label()
         {
             InitializeComponent();
             this.BackColor = MainForm.themecolors.background;
-           
+
             foreach (Control cntr in this.Controls)
             {
                 if (cntr.GetType() == typeof(Button))
@@ -49,55 +52,84 @@ namespace EEditor
 
         private void Label_Load(object sender, EventArgs e)
         {
+            loading = true;
             if (labelWrap >= 4 && labelWrap <= 200)
             {
+                acceptWrap = true;
+                nupdWrap.Value = labelWrap;
+                txtbText.Text = labelText;
+                this.txtbText.Select(txtbText.Text.Length, txtbText.Text.Length - 1);
+                UpdateText(labelText, labelWrap, labelColor);
             }
             else
             {
-                labelWrap = 200;
+                if (MessageBox.Show("Your Wrap is too big, Do you want to change that?", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                {
+                    acceptWrap = true;
+                    nupdWrap.Value = 200;
+                    txtbText.Text = labelText;
+                    this.txtbText.Select(txtbText.Text.Length, txtbText.Text.Length - 1);
+                    UpdateText(labelText, labelWrap, labelColor);
+                }
+                else
+                {
+                    acceptWrap = false;
+                    this.Close();
+                }
             }
-            nupdWrap.Value = labelWrap;
-            txtbText.Text = labelText;
-            this.txtbText.Select(txtbText.Text.Length, txtbText.Text.Length - 1);
-            UpdateText(labelText, labelWrap, labelColor);
-            
+            loading = false;
         }
 
         private void UpdateText(string text, int wrap, string color = "#FFFFFF")
         {
             var size = TextRenderer.MeasureText(text, fnt, new Size(wrap, 12));
             RectangleF rectf1 = new RectangleF(0, 0, wrap, size.Height * 7 - 7);
-            Bitmap bmp = new Bitmap(labelWrap, size.Height * 7 - 7);
+            Bitmap bmp = new Bitmap(wrap, size.Height * 7 - 7);
             using (Graphics gr = Graphics.FromImage(bmp))
             {
-                
+
                 gr.Clear(GetContrastColor(ColorTranslator.FromHtml(color)));
                 gr.TextRenderingHint = TextRenderingHint.SingleBitPerPixel;
                 gr.DrawString(text, fnt, new SolidBrush(ColorTranslator.FromHtml(color)), rectf1);
             }
+            Image prev = pictureBox1.Image;
             pictureBox1.Image = bmp;
+            if (prev != null)
+            {
+                prev.Dispose();
+            }
             pictureBox1.Width = wrap;
-            labelText = text;
-            labelWrap = wrap;
-            labelColor = color;
+
 
         }
 
         private void Label_FormClosing(object sender, FormClosingEventArgs e)
         {
-            this.DialogResult = DialogResult.OK;
+            if (acceptWrap) this.DialogResult = DialogResult.OK;
         }
 
         private void txtbText_TextChanged(object sender, EventArgs e)
         {
-            labelText = txtbText.Text;
-            UpdateText(labelText, labelWrap, labelColor);
+            if (!loading)
+            {
+                if (txtbText.Text.Length > 0)
+                {
+                    labelText = txtbText.Text;
+                    UpdateText(labelText, labelWrap, labelColor);
+                }
+            }
         }
 
         private void nupdWrap_ValueChanged(object sender, EventArgs e)
         {
-            labelWrap = Convert.ToInt32(nupdWrap.Value);
-            UpdateText(labelText, labelWrap, labelColor);
+            if (!loading)
+            {
+                if (nupdWrap.Value >= 4 && nupdWrap.Value <= 200)
+                {
+                    labelWrap = Convert.ToInt32(nupdWrap.Value);
+                    UpdateText(labelText, labelWrap, labelColor);
+                }
+            }
         }
 
         private Color GetContrastColor(Color color)

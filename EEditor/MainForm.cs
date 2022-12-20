@@ -445,14 +445,12 @@ namespace EEditor
 
             hideBlocksButton.PerformClick();
 
-            /*if (userdata.updateChecker)
+            if (userdata.checkUpdate)
             {
-                About ab = new About(this);
-                Thread thread = new Thread(delegate () { ab.checkVersion(true); });
-                thread.Start();
-            }*/
+                checkUpdate();
+            }
             SetPenTool();
-            checkUpdate();
+            //checkUpdate();
             loadBlockPicker();
             MainForm.editArea.Focus();
         }
