@@ -40,6 +40,11 @@ namespace EEditor
         public bool mouseDown { set { IsMouseDown = value; } }
         public string incfg = null;
         protected int curFrame;
+        [System.Runtime.InteropServices.DllImport("gdi32.dll")]
+        private static extern IntPtr AddFontMemResourceEx(IntPtr pbFont, uint cbFont,
+IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
+
+        private PrivateFontCollection fonts = new PrivateFontCollection();
         PrivateFontCollection bfont = new PrivateFontCollection();
 
         protected bool IsMouseDown = false;
@@ -936,39 +941,50 @@ namespace EEditor
 
         private void EditArea_Load(object sender, EventArgs e)
         {
-            bfont = bdata.fontz();
+            byte[] fontData = Properties.Resources.blocktext;
+            IntPtr fontPtr = System.Runtime.InteropServices.Marshal.AllocCoTaskMem(fontData.Length);
+            System.Runtime.InteropServices.Marshal.Copy(fontData, 0, fontPtr, fontData.Length);
+            uint dummy = 0;
+            fonts.AddMemoryFont(fontPtr, Properties.Resources.blocktext.Length);
+            AddFontMemResourceEx(fontPtr, (uint)Properties.Resources.blocktext.Length, IntPtr.Zero, ref dummy);
+            System.Runtime.InteropServices.Marshal.FreeCoTaskMem(fontPtr);
+            bfont = fonts;
+            Font fontz;
             //if (File.Exists(Directory.GetCurrentDirectory() + @"\blocktext.ttf")) bfont.AddFontFile(Directory.GetCurrentDirectory() + @"\blocktext.ttf");
         }
 
         private void DrawText(string line, Bitmap bmp, System.Drawing.Brush brush1, FontFamily fonte, int size, string aligment0, string aligment1, int x, int y, bool admintext)
         {
-            Graphics gge = Graphics.FromImage(bmp);
-            gge.TextRenderingHint = TextRenderingHint.SingleBitPerPixel;
-            if (fonte != null) fontz = new Font(fonte, size, FontStyle.Regular, GraphicsUnit.Pixel);
-            if (fonte == null) fontz = new Font("System", size, FontStyle.Regular, GraphicsUnit.Pixel);
-            if (line.Length <= 2) rect = new Rectangle(x - 2, y, 19, 16);
-            else { rect = new Rectangle(x - 1, y, 19, 16); }
+            using (Graphics gge = Graphics.FromImage(bmp))
+            {
+                    gge.TextRenderingHint = TextRenderingHint.SingleBitPerPixel;
+                    if (fonte != null) fontz = new Font(fonte, size, FontStyle.Regular, GraphicsUnit.Pixel);
+                    if (fonte == null) fontz = new Font("System", size, FontStyle.Regular, GraphicsUnit.Pixel);
+                    if (line.Length <= 2) rect = new Rectangle(x - 2, y, 19, 16);
+                    else { rect = new Rectangle(x - 1, y, 19, 16); }
 
-            if (aligment0 != null && aligment1 != null)
-            {
-                using (StringFormat sf = new StringFormat())
-                {
-                    if (aligment0 == "top") { sf.LineAlignment = StringAlignment.Near; }
-                    if (aligment0 == "middle") { sf.LineAlignment = StringAlignment.Center; }
-                    if (aligment0 == "bottom") { sf.LineAlignment = StringAlignment.Far; }
-                    if (aligment1 == "left") { sf.Alignment = StringAlignment.Near; }
-                    if (aligment1 == "right") { sf.Alignment = StringAlignment.Far; }
-                    if (aligment1 == "center") { sf.Alignment = StringAlignment.Center; }
-                    gge.DrawString(line, fontz, brush1, rect, sf);
-                    gge.Save();
-                }
-            }
-            else
-            {
-                //gge.DrawString(line, fontz, brush1, rect);
-                //Console.WriteLine(line);
-                //gge.DrawRectangle(new Pen(Color.Red), new Rectangle(x, y, 180, 39));
-                //gge.DrawString(line, fontz, brush1, new Point(x,y));
+                    if (aligment0 != null && aligment1 != null)
+                    {
+                        using (StringFormat sf = new StringFormat())
+                        {
+                            if (aligment0 == "top") { sf.LineAlignment = StringAlignment.Near; }
+                            if (aligment0 == "middle") { sf.LineAlignment = StringAlignment.Center; }
+                            if (aligment0 == "bottom") { sf.LineAlignment = StringAlignment.Far; }
+                            if (aligment1 == "left") { sf.Alignment = StringAlignment.Near; }
+                            if (aligment1 == "right") { sf.Alignment = StringAlignment.Far; }
+                            if (aligment1 == "center") { sf.Alignment = StringAlignment.Center; }
+                            gge.DrawString(line, fontz, brush1, rect, sf);
+                            gge.Save();
+                        }
+                    }
+                    else
+                    {
+                        //gge.DrawString(line, fontz, brush1, rect);
+                        //Console.WriteLine(line);
+                        //gge.DrawRectangle(new Pen(Color.Red), new Rectangle(x, y, 180, 39));
+                        //gge.DrawString(line, fontz, brush1, new Point(x,y));
+                    }
+                
             }
             //Draw(x, y, gge, Color.Transparent);
             //Invalidate();

@@ -22,7 +22,12 @@ namespace EEditor
         public bool acceptWrap = false;
         public bool loading = false;
 
-        Font fnt = new Font(bdata.fontz().Families[1], 12, FontStyle.Regular, GraphicsUnit.Pixel);
+        [System.Runtime.InteropServices.DllImport("gdi32.dll")]
+        private static extern IntPtr AddFontMemResourceEx(IntPtr pbFont, uint cbFont,
+IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
+
+        private PrivateFontCollection fonts = new PrivateFontCollection();
+        PrivateFontCollection bfont = new PrivateFontCollection();
 
         public Label()
         {
@@ -53,6 +58,14 @@ namespace EEditor
         private void Label_Load(object sender, EventArgs e)
         {
             loading = true;
+            byte[] fontData = Properties.Resources.nokiafc22;
+            IntPtr fontPtr = System.Runtime.InteropServices.Marshal.AllocCoTaskMem(fontData.Length);
+            System.Runtime.InteropServices.Marshal.Copy(fontData, 0, fontPtr, fontData.Length);
+            uint dummy = 0;
+            fonts.AddMemoryFont(fontPtr, Properties.Resources.nokiafc22.Length);
+            AddFontMemResourceEx(fontPtr, (uint)Properties.Resources.nokiafc22.Length, IntPtr.Zero, ref dummy);
+            System.Runtime.InteropServices.Marshal.FreeCoTaskMem(fontPtr);
+            bfont = fonts;
             if (labelWrap >= 4 && labelWrap <= 200)
             {
                 acceptWrap = true;
@@ -82,23 +95,30 @@ namespace EEditor
 
         private void UpdateText(string text, int wrap, string color = "#FFFFFF")
         {
+            var fnt = new Font(bfont.Families[0], 12, FontStyle.Regular, GraphicsUnit.Pixel);
             var size = TextRenderer.MeasureText(text, fnt, new Size(wrap, 12));
             RectangleF rectf1 = new RectangleF(0, 0, wrap, size.Height * 7 - 7);
             Bitmap bmp = new Bitmap(wrap, size.Height * 7 - 7);
+
             using (Graphics gr = Graphics.FromImage(bmp))
             {
+                using (var solidBrush = new SolidBrush(ColorTranslator.FromHtml(color)))
+                {
+                    gr.Clear(GetContrastColor(ColorTranslator.FromHtml(color)));
+                    gr.TextRenderingHint = TextRenderingHint.SingleBitPerPixel;
+                    gr.DrawString(text, fnt, solidBrush, rectf1);
 
-                gr.Clear(GetContrastColor(ColorTranslator.FromHtml(color)));
-                gr.TextRenderingHint = TextRenderingHint.SingleBitPerPixel;
-                gr.DrawString(text, fnt, new SolidBrush(ColorTranslator.FromHtml(color)), rectf1);
+                    Image prev = pictureBox1.Image;
+                    pictureBox1.Image = bmp;
+                    pictureBox1.Width = wrap;
+                    if (prev != null) prev.Dispose();
+                    if (fnt != null) fnt.Dispose();
+                }
+
+
             }
-            Image prev = pictureBox1.Image;
-            pictureBox1.Image = bmp;
-            if (prev != null)
-            {
-                prev.Dispose();
-            }
-            pictureBox1.Width = wrap;
+
+
 
 
         }

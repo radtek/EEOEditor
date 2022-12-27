@@ -62,6 +62,15 @@ IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
             System.Runtime.InteropServices.Marshal.FreeCoTaskMem(fontPtr1);
             return fonts;
         }
+
+        public static PrivateFontCollection fontzz()
+        {
+            PrivateFontCollection fonts = new PrivateFontCollection();
+            byte[] fontData = Properties.Resources.nokiafc22;
+            IntPtr fontPtr = System.Runtime.InteropServices.Marshal.AllocCoTaskMem(fontData.Length);
+            System.Runtime.InteropServices.Marshal.Copy(fontData, 0, fontPtr, fontData.Length);
+            return fonts;
+        }
         public static bool isBg(int id)
         {
             if (id >= 500 && id <= 999) return true;
