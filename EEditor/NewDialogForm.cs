@@ -56,12 +56,14 @@ namespace EEditor
                 var name = tbowner.Text;
                 if (string.IsNullOrEmpty(title)) title = "Untitled World";
                 if (string.IsNullOrEmpty(name)) name = "Player";
+
                 MainForm.Text = $"({title}) [{name}] ({nUWidth.Value}x{nUHeight.Value}) EEOditor { MainForm.ProductVersion}";
                 #region Listbox selection
                 SizeWidth = Convert.ToInt32(nUWidth.Value);
                 SizeHeight = Convert.ToInt32(nUHeight.Value);
                 MainForm.EEONickname = name;
                 MainForm.EEOTitle = title;
+                MainForm.EEOMade = rbEEOffline.Checked ? "made offline" : "Created by EEOditor";
                 #endregion
                 DialogResult = DialogResult.OK;
                 Close();
@@ -140,11 +142,17 @@ namespace EEditor
             NewDialogList lst = new NewDialogList();
             if (lst.ShowDialog() == DialogResult.OK)
             {
-                string[] split = lst.worldSize.Split('x');
-                if (split.Length == 2)
+                if (lst.worldSize != null)
                 {
-                    nUWidth.Value = Convert.ToDecimal(split[0]);
-                    nUHeight.Value = Convert.ToDecimal(split[1]);
+                    if (lst.worldSize.Contains("x"))
+                    {
+                        string[] split = lst.worldSize.Split('x');
+                        if (split.Length == 2)
+                        {
+                            nUWidth.Value = Convert.ToDecimal(split[0]);
+                            nUHeight.Value = Convert.ToDecimal(split[1]);
+                        }
+                    }
                 }
             }
         }
@@ -174,5 +182,6 @@ namespace EEditor
                 MainForm.editArea.Invalidate();
             }
         }
+
     }
 }
