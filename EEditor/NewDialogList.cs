@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace EEditor
 {
@@ -33,6 +34,10 @@ namespace EEditor
             Gen("400x50", "Wide");
             Gen("400x200", "Great");
             Gen("636x50", "Ultra Wide");
+            this.BackColor = MainForm.themecolors.background;
+            this.ForeColor= MainForm.themecolors.foreground;
+            Listviewlos.BackColor = MainForm.themecolors.background;
+            Listviewlos.ForeColor= MainForm.themecolors.foreground;
         }
         private void Gen(string size,string name)
         {
@@ -40,22 +45,25 @@ namespace EEditor
             listItem.SubItems.Add(name);
             listItem.Text = size;
             Listviewlos.Items.Add(listItem);
+          
         }
 
 
         private void NewDialogList_FormClosing(object sender, FormClosingEventArgs e)
         {
-            this.DialogResult = DialogResult.OK;
+            if (worldSize != null && worldSize.Contains("x")) this.DialogResult = DialogResult.OK;
+            
         }
 
         private void Listviewlos_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (Listviewlos.SelectedItems.Count > 0)
+            if (Listviewlos.SelectedIndices.Count > 0)
             {
 
                 worldSize = Listviewlos.SelectedItems[0].Text;
+                this.Close();
             }
-            this.Close();
+            
         }
     }
 }
