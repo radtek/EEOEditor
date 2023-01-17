@@ -36,6 +36,7 @@ namespace EEditor
         private int[] bgs = new int[3000];
         public static string EEONickname = "Player";
         public static string EEOTitle = "Untitled World";
+        public static string EEOMade = "made offline";
         public static uint EEOBackgroundColor = 0;
         private System.Timers.Timer timer = new System.Timers.Timer(1000);
         public static int[] foregroundBMI = new int[3000];
@@ -4616,7 +4617,7 @@ namespace EEditor
         }
         private void checkUpdate()
         {
-            string file = $"{Directory.GetCurrentDirectory()}\\EEOditorUpdater.exe";
+            string file = $"{Directory.GetCurrentDirectory()}\\SoftwareUpdater.exe";
             if (File.Exists(file))
             {
                 if (userdata.checkUpdate)
@@ -4626,7 +4627,7 @@ namespace EEditor
                     {
                         //WindowStyle = ProcessWindowStyle.Hidden,
                         FileName = file,
-                        Arguments = "/silent"
+                        Arguments = "-silent"
                     };
                     process.Start();
                 }
@@ -4768,6 +4769,21 @@ namespace EEditor
                     }
                     editArea.Invalidate();
                 }
+            }
+        }
+
+        private void eelvlaToolstripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetDummy();
+            try
+            {
+                FileStream fs = new FileStream($"{Directory.GetCurrentDirectory()}\\{MainForm.EEOTitle.Replace(" ", "_")}_-_{MainForm.EEONickname}.eelvl", FileMode.OpenOrCreate);
+                editArea.CurFrame.SaveLVL(fs);
+                fs.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error has occured: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
