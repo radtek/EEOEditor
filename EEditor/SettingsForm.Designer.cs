@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
             this.usePenToolCheckBox = new System.Windows.Forms.CheckBox();
             this.selectAllBorderCheckBox = new System.Windows.Forms.CheckBox();
             this.clearComboBox = new System.Windows.Forms.ComboBox();
@@ -41,7 +42,11 @@
             this.UpdateCheckCheckBox = new System.Windows.Forms.CheckBox();
             this.DarkThemeCheckBox = new System.Windows.Forms.CheckBox();
             this.cBHotkeyBar = new System.Windows.Forms.CheckBox();
+            this.rbBackground = new System.Windows.Forms.RadioButton();
+            this.rbEmpty = new System.Windows.Forms.RadioButton();
+            this.gbSelectionTool = new System.Windows.Forms.GroupBox();
             this.statusStrip1.SuspendLayout();
+            this.gbSelectionTool.SuspendLayout();
             this.SuspendLayout();
             // 
             // usePenToolCheckBox
@@ -79,7 +84,7 @@
             "",
             "Old EEditor settings & logins",
             "Current EEditor settings"});
-            this.clearComboBox.Location = new System.Drawing.Point(11, 171);
+            this.clearComboBox.Location = new System.Drawing.Point(12, 261);
             this.clearComboBox.Name = "clearComboBox";
             this.clearComboBox.Size = new System.Drawing.Size(139, 21);
             this.clearComboBox.TabIndex = 27;
@@ -89,7 +94,7 @@
             // 
             this.clearButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.clearButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.clearButton.Location = new System.Drawing.Point(156, 171);
+            this.clearButton.Location = new System.Drawing.Point(157, 261);
             this.clearButton.Name = "clearButton";
             this.clearButton.Size = new System.Drawing.Size(49, 23);
             this.clearButton.TabIndex = 28;
@@ -103,9 +108,9 @@
             this.confirmCloseCheckBox.Location = new System.Drawing.Point(11, 57);
             this.confirmCloseCheckBox.Margin = new System.Windows.Forms.Padding(2);
             this.confirmCloseCheckBox.Name = "confirmCloseCheckBox";
-            this.confirmCloseCheckBox.Size = new System.Drawing.Size(117, 17);
+            this.confirmCloseCheckBox.Size = new System.Drawing.Size(125, 17);
             this.confirmCloseCheckBox.TabIndex = 29;
-            this.confirmCloseCheckBox.Text = "Confirm EEditor exit";
+            this.confirmCloseCheckBox.Text = "Confirm EEOditor exit";
             this.confirmCloseCheckBox.UseVisualStyleBackColor = true;
             this.confirmCloseCheckBox.CheckedChanged += new System.EventHandler(this.confirmCloseCheckBox_CheckedChanged);
             // 
@@ -113,7 +118,7 @@
             // 
             this.FasterShapeStyleCheckBox.AutoSize = true;
             this.FasterShapeStyleCheckBox.Enabled = false;
-            this.FasterShapeStyleCheckBox.Location = new System.Drawing.Point(11, 148);
+            this.FasterShapeStyleCheckBox.Location = new System.Drawing.Point(12, 238);
             this.FasterShapeStyleCheckBox.Name = "FasterShapeStyleCheckBox";
             this.FasterShapeStyleCheckBox.Size = new System.Drawing.Size(111, 17);
             this.FasterShapeStyleCheckBox.TabIndex = 30;
@@ -128,9 +133,9 @@
             this.StatusTextToolStripStatusLabel,
             this.StatusToolStripStatusLabel,
             this.StatusColorToolStripStatusLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 211);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 299);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(231, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(259, 22);
             this.statusStrip1.TabIndex = 31;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -157,8 +162,6 @@
             // UpdateCheckCheckBox
             // 
             this.UpdateCheckCheckBox.AutoSize = true;
-            this.UpdateCheckCheckBox.Checked = true;
-            this.UpdateCheckCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.UpdateCheckCheckBox.Location = new System.Drawing.Point(11, 79);
             this.UpdateCheckCheckBox.Name = "UpdateCheckCheckBox";
             this.UpdateCheckCheckBox.Size = new System.Drawing.Size(113, 17);
@@ -189,11 +192,47 @@
             this.cBHotkeyBar.UseVisualStyleBackColor = true;
             this.cBHotkeyBar.CheckedChanged += new System.EventHandler(this.cBHotkeyBar_CheckedChanged);
             // 
+            // rbBackground
+            // 
+            this.rbBackground.AutoSize = true;
+            this.rbBackground.Checked = true;
+            this.rbBackground.Location = new System.Drawing.Point(7, 19);
+            this.rbBackground.Name = "rbBackground";
+            this.rbBackground.Size = new System.Drawing.Size(120, 17);
+            this.rbBackground.TabIndex = 36;
+            this.rbBackground.TabStop = true;
+            this.rbBackground.Text = "Ignore empty blocks";
+            this.rbBackground.UseVisualStyleBackColor = true;
+            this.rbBackground.CheckedChanged += new System.EventHandler(this.rbBackground_CheckedChanged);
+            // 
+            // rbEmpty
+            // 
+            this.rbEmpty.AutoSize = true;
+            this.rbEmpty.Location = new System.Drawing.Point(7, 42);
+            this.rbEmpty.Name = "rbEmpty";
+            this.rbEmpty.Size = new System.Drawing.Size(109, 17);
+            this.rbEmpty.TabIndex = 37;
+            this.rbEmpty.Text = "Use empty blocks";
+            this.rbEmpty.UseVisualStyleBackColor = true;
+            this.rbEmpty.CheckedChanged += new System.EventHandler(this.rbEmpty_CheckedChanged);
+            // 
+            // gbSelectionTool
+            // 
+            this.gbSelectionTool.Controls.Add(this.rbBackground);
+            this.gbSelectionTool.Controls.Add(this.rbEmpty);
+            this.gbSelectionTool.Location = new System.Drawing.Point(11, 148);
+            this.gbSelectionTool.Name = "gbSelectionTool";
+            this.gbSelectionTool.Size = new System.Drawing.Size(176, 78);
+            this.gbSelectionTool.TabIndex = 38;
+            this.gbSelectionTool.TabStop = false;
+            this.gbSelectionTool.Text = "Selection Tool";
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(231, 233);
+            this.ClientSize = new System.Drawing.Size(259, 321);
+            this.Controls.Add(this.gbSelectionTool);
             this.Controls.Add(this.cBHotkeyBar);
             this.Controls.Add(this.DarkThemeCheckBox);
             this.Controls.Add(this.UpdateCheckCheckBox);
@@ -204,7 +243,7 @@
             this.Controls.Add(this.confirmCloseCheckBox);
             this.Controls.Add(this.clearComboBox);
             this.Controls.Add(this.clearButton);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SettingsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EEditor Settings";
@@ -212,6 +251,8 @@
             this.Load += new System.EventHandler(this.SettingsForm_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.gbSelectionTool.ResumeLayout(false);
+            this.gbSelectionTool.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -231,5 +272,8 @@
         private System.Windows.Forms.CheckBox UpdateCheckCheckBox;
         private System.Windows.Forms.CheckBox DarkThemeCheckBox;
         private System.Windows.Forms.CheckBox cBHotkeyBar;
+        private System.Windows.Forms.RadioButton rbBackground;
+        private System.Windows.Forms.RadioButton rbEmpty;
+        private System.Windows.Forms.GroupBox gbSelectionTool;
     }
 }
