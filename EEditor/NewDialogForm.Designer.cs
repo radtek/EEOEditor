@@ -42,6 +42,9 @@
             this.tbtitle = new System.Windows.Forms.TextBox();
             this.lname = new System.Windows.Forms.Label();
             this.ltitle = new System.Windows.Forms.Label();
+            this.lblMade = new System.Windows.Forms.Label();
+            this.rbEEOEditor = new System.Windows.Forms.RadioButton();
+            this.rbEEOffline = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nUHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUWidth)).BeginInit();
@@ -55,7 +58,7 @@
             this.groupBox1.Controls.Add(this.lHeight);
             this.groupBox1.Controls.Add(this.nUWidth);
             this.groupBox1.Controls.Add(this.lWidth);
-            this.groupBox1.Location = new System.Drawing.Point(12, 128);
+            this.groupBox1.Location = new System.Drawing.Point(11, 172);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(218, 85);
             this.groupBox1.TabIndex = 6;
@@ -136,7 +139,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 219);
+            this.button1.Location = new System.Drawing.Point(11, 263);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(86, 26);
             this.button1.TabIndex = 7;
@@ -146,7 +149,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(104, 219);
+            this.button2.Location = new System.Drawing.Point(103, 263);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(122, 26);
             this.button2.TabIndex = 21;
@@ -156,13 +159,16 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.rbEEOffline);
+            this.groupBox2.Controls.Add(this.rbEEOEditor);
+            this.groupBox2.Controls.Add(this.lblMade);
             this.groupBox2.Controls.Add(this.tbowner);
             this.groupBox2.Controls.Add(this.tbtitle);
             this.groupBox2.Controls.Add(this.lname);
             this.groupBox2.Controls.Add(this.ltitle);
             this.groupBox2.Location = new System.Drawing.Point(12, 8);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(218, 114);
+            this.groupBox2.Size = new System.Drawing.Size(218, 158);
             this.groupBox2.TabIndex = 32;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Information";
@@ -201,11 +207,42 @@
             this.ltitle.TabIndex = 0;
             this.ltitle.Text = "Title:";
             // 
+            // lblMade
+            // 
+            this.lblMade.AutoSize = true;
+            this.lblMade.Location = new System.Drawing.Point(13, 109);
+            this.lblMade.Name = "lblMade";
+            this.lblMade.Size = new System.Drawing.Size(62, 13);
+            this.lblMade.TabIndex = 4;
+            this.lblMade.Text = "Made With:";
+            // 
+            // rbEEOEditor
+            // 
+            this.rbEEOEditor.AutoSize = true;
+            this.rbEEOEditor.Location = new System.Drawing.Point(93, 128);
+            this.rbEEOEditor.Name = "rbEEOEditor";
+            this.rbEEOEditor.Size = new System.Drawing.Size(67, 17);
+            this.rbEEOEditor.TabIndex = 5;
+            this.rbEEOEditor.Text = "EEOditor";
+            this.rbEEOEditor.UseVisualStyleBackColor = true;
+            // 
+            // rbEEOffline
+            // 
+            this.rbEEOffline.AutoSize = true;
+            this.rbEEOffline.Checked = true;
+            this.rbEEOffline.Location = new System.Drawing.Point(15, 128);
+            this.rbEEOffline.Name = "rbEEOffline";
+            this.rbEEOffline.Size = new System.Drawing.Size(72, 17);
+            this.rbEEOffline.TabIndex = 6;
+            this.rbEEOffline.TabStop = true;
+            this.rbEEOffline.Text = "EE Offline";
+            this.rbEEOffline.UseVisualStyleBackColor = true;
+            // 
             // NewDialogForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(246, 261);
+            this.ClientSize = new System.Drawing.Size(241, 301);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.button1);
@@ -241,5 +278,8 @@
         private System.Windows.Forms.Label lname;
         private System.Windows.Forms.Label ltitle;
         private System.Windows.Forms.Button btnSizeList;
+        private System.Windows.Forms.Label lblMade;
+        private System.Windows.Forms.RadioButton rbEEOffline;
+        private System.Windows.Forms.RadioButton rbEEOEditor;
     }
 }
