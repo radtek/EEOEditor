@@ -134,7 +134,7 @@ namespace EEditor
 
         private void DownloadButton_Click(object sender, EventArgs e)
         {
-            var file = $"{Directory.GetCurrentDirectory()}\\EEOditorUpdater.exe";
+            var file = $"{Directory.GetCurrentDirectory()}\\SoftwareUpdater.exe";
             if (File.Exists(file))
             {
                 Process.Start(file);
