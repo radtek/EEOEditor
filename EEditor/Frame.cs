@@ -99,8 +99,8 @@ namespace EEditor
             EELVL.Level savelvl = new Level(Width, Height, 0);
             savelvl.WorldName = MainForm.EEOTitle;
             savelvl.OwnerName = MainForm.EEONickname;
+            savelvl.OwnerID = MainForm.EEOMade;
             if (MainForm.userdata.useColor) savelvl.BackgroundColor = ColorToUInt(MainForm.userdata.thisColor);
-            savelvl.OwnerID = "Created by EEODitor";
             for (int y = 0; y < Height; ++y)
             {
                 for (int x = 0; x < Width; ++x)
@@ -510,6 +510,7 @@ namespace EEditor
                 Frame f = new Frame(lvl.Width, lvl.Height);
                 f.levelname = lvl.WorldName;
                 f.nickname = lvl.OwnerName;
+                f.owner = lvl.OwnerID;
                 if (lvl.BackgroundColor != 0)
                 {
                     MainForm.userdata.useColor = true;
@@ -522,6 +523,7 @@ namespace EEditor
                 }
                 MainForm.EEONickname = lvl.OwnerName;
                 MainForm.EEOTitle = lvl.WorldName;
+                MainForm.EEOMade = lvl.OwnerID;
                 for (int x = 0; x < lvl.Width; ++x)
                 {
                     for (int y = 0; y < lvl.Height; ++y)
