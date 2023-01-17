@@ -42,6 +42,8 @@ namespace EEditor
             UpdateCheckCheckBox.Checked = MainForm.userdata.checkUpdate;
             DarkThemeCheckBox.Checked = MainForm.userdata.darkTheme;
             cBHotkeyBar.Checked = MainForm.userdata.HotkeyBar;
+            if (rbBackground.Checked) MainForm.userdata.oldmark = true;
+            else if (rbEmpty.Checked) MainForm.userdata.oldmark = false;
             #endregion
 
             clearComboBox.SelectedIndex = 0; //Show "Clear settings..." by default
@@ -59,6 +61,8 @@ namespace EEditor
             clearButton.ForeColor = MainForm.themecolors.foreground;
             clearButton.BackColor = MainForm.themecolors.accent;
             clearButton.FlatStyle = FlatStyle.Flat;
+            gbSelectionTool.ForeColor = MainForm.themecolors.foreground;
+
             var items = ((StatusStrip)statusStrip1).Items;
             for (int o = 0; o < items.Count; o++)
             {
@@ -256,5 +260,14 @@ namespace EEditor
             }
         }
 
+        private void rbBackground_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbBackground.Checked) { MainForm.userdata.oldmark = true; }
+        }
+
+        private void rbEmpty_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbEmpty.Checked) { MainForm.userdata.oldmark = false; }
+        }
     }
 }
