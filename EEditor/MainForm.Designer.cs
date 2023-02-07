@@ -45,6 +45,7 @@ namespace EEditor
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.settingsToolStrip = new System.Windows.Forms.ToolStrip();
             this.settingsButton = new System.Windows.Forms.ToolStripButton();
+            this.worldButton = new System.Windows.Forms.ToolStripButton();
             this.aboutButton = new System.Windows.Forms.ToolStripButton();
             this.fileToolStrip = new System.Windows.Forms.ToolStrip();
             this.newWorldButton = new System.Windows.Forms.ToolStripButton();
@@ -67,7 +68,6 @@ namespace EEditor
             this.saveDropButton = new System.Windows.Forms.ToolStripDropDownButton();
             this.saveWorldToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eelvlToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.eelvlaToolstripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.worldAsImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.minimapAsImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -327,11 +327,12 @@ namespace EEditor
             this.settingsToolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.settingsToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.settingsButton,
+            this.worldButton,
             this.aboutButton});
             this.settingsToolStrip.Location = new System.Drawing.Point(402, 0);
             this.settingsToolStrip.Name = "settingsToolStrip";
             this.settingsToolStrip.Padding = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.settingsToolStrip.Size = new System.Drawing.Size(54, 27);
+            this.settingsToolStrip.Size = new System.Drawing.Size(78, 27);
             this.settingsToolStrip.TabIndex = 9;
             // 
             // settingsButton
@@ -344,6 +345,17 @@ namespace EEditor
             this.settingsButton.Text = "Settings";
             this.settingsButton.ToolTipText = "EEditor settings";
             this.settingsButton.Click += new System.EventHandler(this.settingsButton_Click);
+            // 
+            // worldButton
+            // 
+            this.worldButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.worldButton.Image = global::EEditor.Properties.Resources.globecog;
+            this.worldButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.worldButton.Name = "worldButton";
+            this.worldButton.Size = new System.Drawing.Size(24, 24);
+            this.worldButton.Text = "toolStripButton1";
+            this.worldButton.ToolTipText = "World Settings";
+            this.worldButton.Click += new System.EventHandler(this.worldButton_Click);
             // 
             // aboutButton
             // 
@@ -512,7 +524,6 @@ namespace EEditor
             this.saveDropButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.saveWorldToolStripMenuItem,
             this.eelvlToolStripMenuItem1,
-            this.eelvlaToolstripMenuItem,
             this.toolStripSeparator4,
             this.worldAsImageToolStripMenuItem,
             this.minimapAsImageToolStripMenuItem});
@@ -526,40 +537,33 @@ namespace EEditor
             // saveWorldToolStripMenuItem
             // 
             this.saveWorldToolStripMenuItem.Name = "saveWorldToolStripMenuItem";
-            this.saveWorldToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.saveWorldToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveWorldToolStripMenuItem.Text = "EEditor World";
             this.saveWorldToolStripMenuItem.Click += new System.EventHandler(this.saveWorldToolStripMenuItem_Click);
             // 
             // eelvlToolStripMenuItem1
             // 
             this.eelvlToolStripMenuItem1.Name = "eelvlToolStripMenuItem1";
-            this.eelvlToolStripMenuItem1.Size = new System.Drawing.Size(184, 22);
+            this.eelvlToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.eelvlToolStripMenuItem1.Text = "EE Offline Level";
             this.eelvlToolStripMenuItem1.Click += new System.EventHandler(this.EelvlToolStripMenuItem1_Click);
-            // 
-            // eelvlaToolstripMenuItem
-            // 
-            this.eelvlaToolstripMenuItem.Name = "eelvlaToolstripMenuItem";
-            this.eelvlaToolstripMenuItem.Size = new System.Drawing.Size(184, 22);
-            this.eelvlaToolstripMenuItem.Text = "EE Offline Level Auto";
-            this.eelvlaToolstripMenuItem.Click += new System.EventHandler(this.eelvlaToolstripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(181, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
             // 
             // worldAsImageToolStripMenuItem
             // 
             this.worldAsImageToolStripMenuItem.Name = "worldAsImageToolStripMenuItem";
-            this.worldAsImageToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.worldAsImageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.worldAsImageToolStripMenuItem.Text = "World as image";
             this.worldAsImageToolStripMenuItem.Click += new System.EventHandler(this.worldAsImageToolStripMenuItem_Click);
             // 
             // minimapAsImageToolStripMenuItem
             // 
             this.minimapAsImageToolStripMenuItem.Name = "minimapAsImageToolStripMenuItem";
-            this.minimapAsImageToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.minimapAsImageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.minimapAsImageToolStripMenuItem.Text = "Minimap as image";
             this.minimapAsImageToolStripMenuItem.Click += new System.EventHandler(this.minimapAsImageToolStripMenuItem_Click);
             // 
@@ -1450,7 +1454,7 @@ namespace EEditor
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem sPTToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
-        private System.Windows.Forms.ToolStripMenuItem eelvlaToolstripMenuItem;
+        private System.Windows.Forms.ToolStripButton worldButton;
     }
 }
 

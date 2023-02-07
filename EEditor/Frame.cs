@@ -97,9 +97,11 @@ namespace EEditor
         public void SaveLVL(FileStream file)
         {
             EELVL.Level savelvl = new Level(Width, Height, 0);
-            savelvl.WorldName = MainForm.EEOTitle;
-            savelvl.OwnerName = MainForm.EEONickname;
-            savelvl.OwnerID = MainForm.EEOMade;
+            savelvl.WorldName = MainForm.WOTitle;
+            savelvl.OwnerName = MainForm.WONickname;
+            savelvl.OwnerID = MainForm.WOMade;
+            savelvl.Minimap = MainForm.WOMinimap;
+            if (!string.IsNullOrEmpty(MainForm.WODescription)) savelvl.Description = MainForm.WODescription;
             if (MainForm.userdata.useColor) savelvl.BackgroundColor = ColorToUInt(MainForm.userdata.thisColor);
             for (int y = 0; y < Height; ++y)
             {
@@ -152,7 +154,7 @@ namespace EEditor
                     {
                         savelvl[1, x, y] = new Blocks.Block(bid);
                     }
-                    if (Blocks.IsType(fid,Blocks.BlockType.Label))
+                    if (Blocks.IsType(fid, Blocks.BlockType.Label))
                     {
                         savelvl[0, x, y] = new Blocks.LabelBlock(fid, BlockData3[y, x], BlockData4[y, x], BlockData[y, x]);
                     }
@@ -274,6 +276,7 @@ namespace EEditor
                     {
                         var property = (JProperty)token;
                         var value = property.Value;
+                        Console.WriteLine(value);
 
                         switch (value.Type)
                         {
@@ -349,13 +352,12 @@ namespace EEditor
 
                             for (int k = 0; k < x.Length; k += 2)
                             {
-
-                                int yy = (y[k] << 8) | y[k + 1];
-                                int xx = (x[k] << 8) | x[k + 1];
-
-                                if (yy < height && xx < width)
+                                if (k < x.Length && k < y.Length && k + 1 < x.Length && k + 1 < y.Length)
                                 {
-                                    try
+                                    int yy = (y[k] << 8) + y[k + 1];
+                                    int xx = (x[k] << 8) + x[k + 1];
+
+                                    if (yy < height && xx < width)
                                     {
                                         if (Convert.ToInt32(obj["type"]) < 500 || Convert.ToInt32(obj["type"]) >= 1001)
                                         {
@@ -384,11 +386,8 @@ namespace EEditor
                                             f.Background[yy, xx] = Convert.ToInt32(obj["type"]);
                                         }
                                     }
-                                    catch (Exception ex)
-                                    {
-                                        Console.WriteLine(ex.ToString());
-                                    }
                                 }
+
 
 
 
@@ -521,9 +520,12 @@ namespace EEditor
                     MainForm.userdata.useColor = false;
                     MainForm.userdata.thisColor = Color.Transparent;
                 }
-                MainForm.EEONickname = lvl.OwnerName;
-                MainForm.EEOTitle = lvl.WorldName;
-                MainForm.EEOMade = lvl.OwnerID;
+                MainForm.WONickname = lvl.OwnerName;
+                MainForm.WOTitle = lvl.WorldName;
+                MainForm.WOMade = lvl.OwnerID;
+                MainForm.WODescription = lvl.Description;
+                MainForm.WOMinimap = lvl.Minimap;
+                MainForm.WOBackgroundColor = lvl.BackgroundColor;
                 for (int x = 0; x < lvl.Width; ++x)
                 {
                     for (int y = 0; y < lvl.Height; ++y)
@@ -591,8 +593,9 @@ namespace EEditor
                         {
                             f.Background[y, x] = lvl[1, x, y].BlockID;
                         }
-                        if (Blocks.IsType(lvl[0,x,y].BlockID, Blocks.BlockType.Label)) {
-                            f.Foreground[y,x] = lvl[0, x, y].BlockID;
+                        if (Blocks.IsType(lvl[0, x, y].BlockID, Blocks.BlockType.Label))
+                        {
+                            f.Foreground[y, x] = lvl[0, x, y].BlockID;
                             f.BlockData[y, x] = ((Blocks.LabelBlock)lvl[0, x, y]).Wrap;
                             f.BlockData3[y, x] = ((Blocks.LabelBlock)lvl[0, x, y]).Text;
                             f.BlockData4[y, x] = ((Blocks.LabelBlock)lvl[0, x, y]).Color;
@@ -642,8 +645,8 @@ namespace EEditor
                         }
                         else if (t == 242)
                         {
-                           // f.BlockData[y, x] = reader.ReadInt32();
-                           try
+                            // f.BlockData[y, x] = reader.ReadInt32();
+                            try
                             {
                                 var r = reader.ReadInt32();
                                 var a = r >> 16;
@@ -778,7 +781,7 @@ namespace EEditor
                 }
                 return f;
             }
-                
+
 
             if (num >= 0 && num <= 2)
             {
@@ -1071,8 +1074,8 @@ namespace EEditor
 
             return f;
         }
-    
-    static int eeanimator2blocks(int id)
+
+        static int eeanimator2blocks(int id)
         {
             if (id == 127)
             {

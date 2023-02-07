@@ -11,6 +11,10 @@ using System.Windows.Forms;
 using Microsoft.Win32;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
+using System.Xml.Linq;
+using EEditor.Properties;
+using SharpCompress.Common;
+using SharpCompress.Archives;
 
 namespace EEditor
 {
@@ -18,6 +22,7 @@ namespace EEditor
     {
         public static bool debug = false;
         public static int Zoom = 16;
+        private IArchiveEntry extract;
         public static theme themecolors = new theme();
         public static userData userdata = new userData();
         public static Dictionary<int, Bitmap> ActionBlocks = new Dictionary<int, Bitmap>();
@@ -34,10 +39,12 @@ namespace EEditor
         private int[] misc = new int[3000];
         private int[] decos = new int[3000];
         private int[] bgs = new int[3000];
-        public static string EEONickname = "Player";
-        public static string EEOTitle = "Untitled World";
-        public static string EEOMade = "made offline";
-        public static uint EEOBackgroundColor = 0;
+        public static string WONickname = "player";
+        public static string WOTitle = "Untitled World";
+        public static string WOMade = "made offline";
+        public static string WODescription = "";
+        public static bool WOMinimap = true;
+        public static uint WOBackgroundColor = 0;
         private System.Timers.Timer timer = new System.Timers.Timer(1000);
         public static int[] foregroundBMI = new int[3000];
         public static int[] miscBMI = new int[3000];
@@ -113,6 +120,7 @@ namespace EEditor
                     if (userdata.replaceit.ToString() == null) userdata.replaceit = false;
                     if (userdata.HotkeyBar.ToString() == null) userdata.HotkeyBar = false;
                     if (userdata.oldmark.ToString() == null) userdata.oldmark = true;
+                    if (userdata.lastcheck.ToString() == null) userdata.lastcheck = DateTime.Now;
                 }
                 else
                 {
@@ -132,10 +140,10 @@ namespace EEditor
                         imageSpecialblocksMorph = false,
                         imageSpecialblocksAction = false,
                         IgnoreBlocks = new List<JToken>()
-                            {
-                                146, 147, 148, 154, 158, 162, 163, 96, 97, 122, 123, 124, 125, 126, 127, 216, 1087, 61, 62, 63, 64, 194, 1050, 89, 90,
-                                91, 1051, 1, 2, 3, 1518, 4, 459, 114, 115, 116, 117, 6, 7, 8, 408, 409, 410, 26, 27, 28, 1008, 1009, 1010, 23, 24, 25,
-                                1005, 1006, 1007, 83, 77, 1520, 119, 165, 43, 214, 213, 118, 120, 98, 99, 472
+                        {
+                            146, 147, 148, 154, 158, 162, 163, 96, 97, 122, 123, 124, 125, 126, 127, 216, 1087, 61, 62, 63, 64, 194, 1050, 89, 90,
+                            91, 1051, 1, 2, 3, 1518, 4, 459, 114, 115, 116, 117, 6, 7, 8, 408, 409, 410, 26, 27, 28, 1008, 1009, 1010, 23, 24, 25,
+                            1005, 1006, 1007, 83, 77, 1520, 119, 165, 43, 214, 213, 118, 120, 98, 99, 472
                         },
                         ColorFG = true,
                         ColorBG = true,
@@ -145,7 +153,7 @@ namespace EEditor
                         oldmark = true,
                         darkTheme = false,
                         HotkeyBar = false,
-
+                        lastcheck = DateTime.Now,
 
 
                     };
@@ -178,6 +186,7 @@ namespace EEditor
                     darkTheme = false,
                     SaveXBlocks = 500,
                     HotkeyBar = false,
+                    lastcheck = DateTime.Now,
 
                 };
                 File.WriteAllText(pathSettings, JsonConvert.SerializeObject(userdata, Newtonsoft.Json.Formatting.Indented));
@@ -185,7 +194,7 @@ namespace EEditor
 
             userdata.useColor = false;
             userdata.thisColor = Color.Transparent;
-            updateTheme();
+            
             //starting = true;
             //starting1 = true;
             subButton.Enabled = false;
@@ -448,11 +457,12 @@ namespace EEditor
 
             if (userdata.checkUpdate)
             {
-                checkUpdate();
+                //checkUpdate();
             }
             SetPenTool();
             //checkUpdate();
             loadBlockPicker();
+            updateTheme();
             MainForm.editArea.Focus();
         }
 
@@ -547,8 +557,9 @@ namespace EEditor
                     link = Color.Orange,
                     activelink = Color.Yellow,
                     visitedlink = Color.Orange,
+                    groupbox = ColorTranslator.FromHtml("#FDB484"),
 
-                };
+            };
             }
             else
             {
@@ -561,7 +572,7 @@ namespace EEditor
                     link = Color.FromArgb(0, 0, 255),
                     visitedlink = Color.FromArgb(128, 0, 128),
                     activelink = Color.Red,
-
+                    groupbox = SystemColors.ControlText,
 
                 };
             }
@@ -2488,7 +2499,7 @@ namespace EEditor
                 if (MainForm.editArea.MainForm.lastUsedBlockButton0.Name != cur.ID.ToString() && MainForm.editArea.MainForm.lastUsedBlockButton1.Name != cur.ID.ToString() && MainForm.editArea.MainForm.lastUsedBlockButton2.Name != cur.ID.ToString() && MainForm.editArea.MainForm.lastUsedBlockButton3.Name != cur.ID.ToString() && MainForm.editArea.MainForm.lastUsedBlockButton4.Name != cur.ID.ToString())
                 {
                     Bitmap img4 = new Bitmap(16, 16); ;
-                    if (cur.ID < 500 || cur.ID >= 1001)
+                    if (cur.ID < 500 || cur.ID >= 1000)
                     {
                         if (cur.mode == 0 && foregroundBMI[bid] != 0)
                         {
@@ -4617,21 +4628,11 @@ namespace EEditor
         }
         private void checkUpdate()
         {
-            string file = $"{Directory.GetCurrentDirectory()}\\SoftwareUpdater.exe";
-            if (File.Exists(file))
+            /*Updater update = new Updater();
+            if (update.ShowDialog() == DialogResult.OK)
             {
-                if (userdata.checkUpdate)
-                {
-                    Process process = new Process();
-                    process.StartInfo = new ProcessStartInfo
-                    {
-                        //WindowStyle = ProcessWindowStyle.Hidden,
-                        FileName = file,
-                        Arguments = "-silent"
-                    };
-                    process.Start();
-                }
-            }
+                extract = update.extract;
+            }*/
         }
         private void RoomDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -4772,18 +4773,40 @@ namespace EEditor
             }
         }
 
-        private void eelvlaToolstripMenuItem_Click(object sender, EventArgs e)
+
+        private void worldButton_Click(object sender, EventArgs e)
         {
-            SetDummy();
-            try
+            WorldSettings wd = new WorldSettings();
+            if (wd.ShowDialog() == DialogResult.OK)
             {
-                FileStream fs = new FileStream($"{Directory.GetCurrentDirectory()}\\{MainForm.EEOTitle.Replace(" ", "_")}_-_{MainForm.EEONickname}.eelvl", FileMode.OpenOrCreate);
-                editArea.CurFrame.SaveLVL(fs);
-                fs.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An error has occured: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (editArea.Frames.Count > 0)
+                {
+                    WOMade = wd.madeby;
+                    WOTitle = wd.title;
+                    WONickname = wd.owner;
+                    WODescription = wd.description;
+                    WOMinimap = wd.minimp;
+                    userdata.useColor = wd.usecolor;
+                    this.Text = $"({WOTitle}) [{WONickname}] ({editArea.Frames[0].Width}x{editArea.Frames[0].Height}) - EEOditor {this.ProductVersion}";
+                    if (wd.usecolor) userdata.thisColor = wd.bgcolor;
+                    else userdata.thisColor = Color.Transparent;
+                    Graphics g = Graphics.FromImage(editArea.Back);
+                    for (int y = 0; y < editArea.Frames[0].Height; y++)
+                    {
+                        for (int x = 0; x < editArea.Frames[0].Width; x++)
+                        {
+                            if (x == 0 || y == 0 || x == editArea.Frames[0].Width - 1 || y == editArea.Frames[0].Height - 1)
+                            {
+                                editArea.Draw(x, y, g, Color.Transparent);
+                            }
+                            else
+                            {
+                                editArea.Draw(x, y, g, userdata.thisColor);
+                            }
+                        }
+                    }
+                    editArea.Invalidate();
+                }
             }
         }
     }
@@ -4855,6 +4878,7 @@ namespace EEditor
         public bool replaceit { get; set; }
         public bool oldmark { get; set; }
         public bool checkUpdate { get; set; }
+        public DateTime lastcheck { get; set; }
         public bool darkTheme { get; set; }
         public int SaveXBlocks { get; set; }
         public bool HotkeyBar { get; set; }
@@ -4873,6 +4897,8 @@ namespace EEditor
         public Color visitedlink { get; set; }
 
         public Color activelink { get; set; }
+
+        public Color groupbox { get; set; }
     }
     public class removeBadRenderer : ToolStripSystemRenderer
     {

@@ -38,7 +38,7 @@ namespace EEditor
             int calc = Convert.ToInt32(nUWidth.Value) * 16 + Convert.ToInt32(nUHeight.Value) * 16;
             if (calc > Math.Round(Math.Sqrt(2147483648 / 16)))
             {
-                MessageBox.Show("Can't load this world. It's too big.","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show("Can't load this world. It's too big.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
             else
@@ -55,15 +55,15 @@ namespace EEditor
                 var title = tbtitle.Text;
                 var name = tbowner.Text;
                 if (string.IsNullOrEmpty(title)) title = "Untitled World";
-                if (string.IsNullOrEmpty(name)) name = "Player";
+                if (string.IsNullOrEmpty(name)) name = "player";
 
-                MainForm.Text = $"({title}) [{name}] ({nUWidth.Value}x{nUHeight.Value}) EEOditor { MainForm.ProductVersion}";
+                MainForm.Text = $"({title}) [{name}] ({nUWidth.Value}x{nUHeight.Value}) EEOditor {MainForm.ProductVersion}";
                 #region Listbox selection
                 SizeWidth = Convert.ToInt32(nUWidth.Value);
                 SizeHeight = Convert.ToInt32(nUHeight.Value);
-                MainForm.EEONickname = name;
-                MainForm.EEOTitle = title;
-                MainForm.EEOMade = rbEEOffline.Checked ? "made offline" : "Created by EEOditor";
+                MainForm.WONickname = name.ToLower();
+                MainForm.WOTitle = title;
+                MainForm.WOMade = rbEEOffline.Checked ? "made offline" : "Created by EEOditor";
                 #endregion
                 DialogResult = DialogResult.OK;
                 Close();
@@ -100,8 +100,6 @@ namespace EEditor
         {
             this.ForeColor = MainForm.themecolors.foreground;
             this.BackColor = MainForm.themecolors.background;
-            MainForm.userdata.thisColor = Color.Transparent;
-            MainForm.userdata.useColor = false;
             foreach (Control cntr in this.Controls)
             {
                 if (cntr.GetType() == typeof(Button))
@@ -112,14 +110,13 @@ namespace EEditor
                 }
                 if (cntr.GetType() == typeof(GroupBox))
                 {
-                    cntr.ForeColor = MainForm.themecolors.foreground;
-                    cntr.BackColor = MainForm.themecolors.background;
+                    ((GroupBox)cntr).ForeColor = MainForm.themecolors.groupbox;
                     foreach (Control cntrl in cntr.Controls)
                     {
                         if (cntrl.GetType() == typeof(Button))
                         {
-                            ((Button)cntrl).ForeColor = MainForm.themecolors.foreground;
-                            ((Button)cntrl).BackColor = MainForm.themecolors.accent;
+                            cntrl.ForeColor = MainForm.themecolors.foreground;
+                            cntrl.BackColor = MainForm.themecolors.accent;
                             ((Button)cntrl).FlatStyle = FlatStyle.Flat;
                         }
                         if (cntrl.GetType() == typeof(TextBox))
@@ -127,14 +124,27 @@ namespace EEditor
                             cntrl.ForeColor = MainForm.themecolors.foreground;
                             cntrl.BackColor = MainForm.themecolors.accent;
                         }
+                        if (cntrl.GetType() == typeof(System.Windows.Forms.Label))
+                        {
+                            cntrl.ForeColor = MainForm.themecolors.foreground;
+                            cntrl.BackColor = MainForm.themecolors.background;
+                        }
                         if (cntrl.GetType() == typeof(NumericUpDown))
                         {
                             cntrl.ForeColor = MainForm.themecolors.foreground;
                             cntrl.BackColor = MainForm.themecolors.accent;
                         }
+                        if (cntrl.GetType() == typeof(RadioButton))
+                        {
+                            cntrl.ForeColor = MainForm.themecolors.foreground;
+                            cntrl.BackColor = MainForm.themecolors.background;
+                        }
                     }
                 }
+
             }
+
+
         }
 
         private void btnSizeList_Click(object sender, EventArgs e)
@@ -157,31 +167,7 @@ namespace EEditor
             }
         }
 
-        private void btnBgColor_Click(object sender, EventArgs e)
-        {
-            BgColor col = new BgColor();
-            if (col.ShowDialog() == DialogResult.OK)
-            {
-                if (MainForm.userdata.useColor) MainForm.userdata.thisColor = col.setCol;
-                else MainForm.userdata.thisColor = Color.Transparent;
-                Graphics g = Graphics.FromImage(MainForm.editArea.Back);
-                for (int y = 0; y < MainForm.editArea.Frames[0].Height; y++)
-                {
-                    for (int x = 0; x < MainForm.editArea.Frames[0].Width; x++)
-                    {
-                        if (x == 0 || y == 0 || x == MainForm.editArea.Frames[0].Width - 1 || y == MainForm.editArea.Frames[0].Height - 1)
-                        {
-                            MainForm.editArea.Draw(x, y, g, Color.Transparent);
-                        }
-                        else
-                        {
-                            MainForm.editArea.Draw(x, y, g, MainForm.userdata.thisColor);
-                        }
-                    }
-                }
-                MainForm.editArea.Invalidate();
-            }
-        }
+
 
     }
 }
