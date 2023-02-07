@@ -7,6 +7,8 @@ using System.Threading;
 using SharpCompress.Archives;
 using SharpCompress.Readers;
 using System.Diagnostics;
+using EEditor.Properties;
+
 namespace EEditor
 {
     public partial class About : Form
@@ -23,40 +25,36 @@ namespace EEditor
         {
             this.ForeColor = MainForm.themecolors.foreground;
             this.BackColor = MainForm.themecolors.background;
-            for (int i = 0;i < this.Controls.Count;i++)
+            foreach (Control cntrls in this.Controls)
             {
-                if (this.Controls[i].GetType() == typeof(GroupBox))
+                if (cntrls.GetType() == typeof(GroupBox))
                 {
-                    this.Controls[i].ForeColor = MainForm.themecolors.foreground;
-                    for (int a = 0;a < this.Controls[i].Controls.Count;a++)
+                    cntrls.ForeColor = MainForm.themecolors.groupbox;
+                    foreach (var cntr in cntrls.Controls)
                     {
-                        if (this.Controls[i].Controls[a].GetType() == typeof(Label))
+                        if (cntr.GetType() == typeof(System.Windows.Forms.Label))
                         {
-                            this.Controls[i].Controls[a].ForeColor = MainForm.themecolors.foreground;
-                            this.Controls[i].Controls[a].BackColor = MainForm.themecolors.background;
+                            ((System.Windows.Forms.Label)cntr).ForeColor = MainForm.themecolors.foreground;
+                            ((System.Windows.Forms.Label)cntr).BackColor = MainForm.themecolors.background;
                         }
-                        if (this.Controls[i].Controls[a].GetType() == typeof(LinkLabel))
+                        if (cntr.GetType() == typeof(LinkLabel))
                         {
-                            ((LinkLabel)this.Controls[i].Controls[a]).ForeColor = MainForm.themecolors.foreground;
-                            ((LinkLabel)this.Controls[i].Controls[a]).BackColor = MainForm.themecolors.background;
-                            ((LinkLabel)this.Controls[i].Controls[a]).LinkColor = MainForm.themecolors.link;
-                            ((LinkLabel)this.Controls[i].Controls[a]).VisitedLinkColor = MainForm.themecolors.visitedlink;
-                            ((LinkLabel)this.Controls[i].Controls[a]).ActiveLinkColor = MainForm.themecolors.activelink;
-                            
-
-
+                            ((LinkLabel)cntr).ForeColor = MainForm.themecolors.foreground;
+                            ((LinkLabel)cntr).BackColor = MainForm.themecolors.background;
+                            ((LinkLabel)cntr).LinkColor = MainForm.themecolors.link;
+                            ((LinkLabel)cntr).VisitedLinkColor = MainForm.themecolors.visitedlink;
+                            ((LinkLabel)cntr).ActiveLinkColor = MainForm.themecolors.activelink;
                         }
-                        if (this.Controls[i].Controls[a].GetType() == typeof(Button))
+                        if (cntr.GetType() == typeof(Button))
                         {
-                            ((Button)this.Controls[i].Controls[a]).ForeColor = MainForm.themecolors.foreground;
-                            ((Button)this.Controls[i].Controls[a]).BackColor = MainForm.themecolors.accent;
-                            ((Button)this.Controls[i].Controls[a]).FlatStyle = FlatStyle.Flat;
+                            ((Button)cntr).ForeColor = MainForm.themecolors.foreground;
+                            ((Button)cntr).BackColor = MainForm.themecolors.accent;
+                            ((Button)cntr).FlatStyle = FlatStyle.Flat;
                         }
                     }
                 }
-                //if (this.Controls[i].name)
             }
-    }
+        }
 
         #region Main links
         private void Button_Click(object sender, EventArgs e)
@@ -65,19 +63,19 @@ namespace EEditor
             switch (((Button)sender).Name.ToString())
             {
                 case "ForumButton":
-                        link1 = "https://forums.everybodyedits.com/viewtopic.php?id=47253";
+                    link1 = "https://forums.everybodyedits.com/viewtopic.php?id=47253";
                     break;
                 case "BugsOrFeatureButton":
-                        link1 = "https://github.com/capasha/EEOEditor/issues";
+                    link1 = "https://github.com/capasha/EEOEditor/issues";
                     break;
                 case "CreditButton":
-                        link1 = "https://github.com/capasha/EEOEditor/wiki/Credits";
+                    link1 = "https://github.com/capasha/EEOEditor/wiki/Credits";
                     break;
                 case "WikiButton":
-                        link1 = "https://github.com/capasha/EEOEditor/wiki";
+                    link1 = "https://github.com/capasha/EEOEditor/wiki";
                     break;
                 case "HomepageButton":
-                        link1 = "https://github.com/capasha/EEOEditor";
+                    link1 = "https://github.com/capasha/EEOEditor";
                     break;
             }
             DialogResult dgresult = MessageBox.Show($"Do you want to open {link1}\nin your webbrowser?", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
@@ -134,11 +132,8 @@ namespace EEditor
 
         private void DownloadButton_Click(object sender, EventArgs e)
         {
-            var file = $"{Directory.GetCurrentDirectory()}\\SoftwareUpdater.exe";
-            if (File.Exists(file))
-            {
-                Process.Start(file);
-            }
+            /*Updater updater = new Updater();
+            updater.ShowDialog();*/
         }
 
         private void linkLabel_MouseHover(object sender, EventArgs e)
