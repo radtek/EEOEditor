@@ -378,6 +378,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Updater.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Properties\Updater.Designer.cs">
+      <DependentUpon>Updater.cs</DependentUpon>
+    </Compile>
     <Compile Include="random.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -468,6 +474,12 @@
     <Compile Include="WorldArchiveMenu.Designer.cs">
       <DependentUpon>WorldArchiveMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="WorldSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WorldSettings.Designer.cs">
+      <DependentUpon>WorldSettings.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="About.resx">
       <DependentUpon>About.cs</DependentUpon>
     </EmbeddedResource>
@@ -519,6 +531,9 @@
     <EmbeddedResource Include="Piano.resx">
       <DependentUpon>Piano.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Updater.resx">
+      <DependentUpon>Updater.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="random.resx">
       <DependentUpon>random.cs</DependentUpon>
     </EmbeddedResource>
@@ -559,6 +574,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WorldArchiveMenu.resx">
       <DependentUpon>WorldArchiveMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WorldSettings.resx">
+      <DependentUpon>WorldSettings.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="bin\Debug\blocktext.ttf" />
@@ -606,6 +624,8 @@
     <None Include="Resources\ee_icon.png" />
     <None Include="Resources\fb_icon.png" />
     <None Include="Resources\ee_transfer.png" />
+    <None Include="Resources\globecog.png" />
+    <None Include="Resources\globecog_1.png" />
     <Content Include="Resources\history.png" />
     <Content Include="Resources\id.png" />
     <Content Include="Resources\insert.png" />
@@ -617,6 +637,7 @@
     <None Include="Resources\maze.png" />
     <None Include="Resources\logo.png" />
     <None Include="Resources\misc.png" />
+    <None Include="Resources\minimap.png" />
     <Content Include="Resources\redo.png" />
     <None Include="Resources\rotate.png" />
     <None Include="Resources\settings.ico" />
@@ -653,7 +674,6 @@
     <None Include="Resources\cross.png" />
     <None Include="Resources\download.png" />
     <None Include="Resources\image.png" />
-    <None Include="Resources\minimap.png" />
     <None Include="Resources\tool_pen.png" />
     <Content Include="Resources\blockbar.png" />
     <Content Include="Resources\newline.png" />
