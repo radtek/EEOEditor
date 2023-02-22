@@ -178,7 +178,6 @@ namespace EEditor
             if (editArea.ChangeBlock)
             {
                 editArea.ChangeBlock = false;
-                Console.WriteLine(editArea.CurFrame.Foreground[y, x]);
                 int fid = editArea.CurFrame.Foreground[y, x];
                 if (fid != 0)
                 {
