@@ -35,13 +35,9 @@ namespace EEditor
 
         private void button1_Click(object sender, EventArgs e)
         {
-            int calc = Convert.ToInt32(nUWidth.Value) * 16 + Convert.ToInt32(nUHeight.Value) * 16;
-            if (calc > Math.Round(Math.Sqrt(2147483648 / 16)))
-            {
-                MessageBox.Show("Can't load this world. It's too big.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-            }
-            else
+            int w = Convert.ToInt32(nUWidth.Value);
+            int h = Convert.ToInt32(nUHeight.Value);
+            if (w <= 636 && h <= 460 || w <= 460 && h <= 636)
             {
                 MainForm.SetPenTool();
                 if (Clipboard.ContainsData("EEBrush")) Clipboard.Clear();
@@ -67,6 +63,10 @@ namespace EEditor
                 #endregion
                 DialogResult = DialogResult.OK;
                 Close();
+            }
+            else {
+                MessageBox.Show("Can't load this world. It's too big.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             }
         }
 
