@@ -34,13 +34,28 @@ namespace EEditor
 
         public void Init(int width, int height)
         {
-            BlockWidth = width;
-            BlockHeight = height;
-            Size = new Size(width, height);
-            Bitmap = new Bitmap(width, height);
-            for (int x = 0; x < width; ++x) for (int y = 0; y < height; ++y) Bitmap.SetPixel(x, y, Color.Black);
-            Point relativePos = new Point(-25, -25);
-            Location = new Point(Parent.ClientSize.Width - Width + relativePos.X, Parent.ClientSize.Height - Height + relativePos.Y);
+            if (this.InvokeRequired)
+            {
+                this.Invoke((MethodInvoker)delegate
+                {
+                    BlockWidth = width;
+                    BlockHeight = height;
+                    Size = new Size(width, height);
+                    Bitmap = new Bitmap(width, height);
+                    for (int x = 0; x < width; ++x) for (int y = 0; y < height; ++y) Bitmap.SetPixel(x, y, Color.Black);
+                    Point relativePos = new Point(-25, -25);
+                    Location = new Point(Parent.ClientSize.Width - Width + relativePos.X, Parent.ClientSize.Height - Height + relativePos.Y);
+                });
+            } else
+            {
+                BlockWidth = width;
+                BlockHeight = height;
+                Size = new Size(width, height);
+                Bitmap = new Bitmap(width, height);
+                for (int x = 0; x < width; ++x) for (int y = 0; y < height; ++y) Bitmap.SetPixel(x, y, Color.Black);
+                Point relativePos = new Point(-25, -25);
+                Location = new Point(Parent.ClientSize.Width - Width + relativePos.X, Parent.ClientSize.Height - Height + relativePos.Y);
+            }
 
         }
 
