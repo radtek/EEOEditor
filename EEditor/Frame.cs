@@ -9,6 +9,10 @@ using System.IO;
 using Newtonsoft.Json.Linq;
 using EELVL;
 using System.Threading;
+using static System.Net.Mime.MediaTypeNames;
+using System.Runtime.ConstrainedExecution;
+using System.Windows;
+
 namespace EEditor
 {
     public class Frame
@@ -27,6 +31,8 @@ namespace EEditor
         public string nickname { get; set; }
         public string owner { get; set; }
         public string levelname { get; set; }
+        public int totalblocks { get; set; }
+        public bool toobig { get; set; }
         public uint backgroundColor { get; set; }
         public static byte[] xx;
         public static byte[] yy;
@@ -506,6 +512,7 @@ namespace EEditor
             using (FileStream fs = new FileStream(file, FileMode.Open))
             {
                 Level lvl = Level.Open(fs);
+                int totalblock = 0;
                 Frame f = new Frame(lvl.Width, lvl.Height);
                 f.levelname = lvl.WorldName;
                 f.nickname = lvl.OwnerName;
@@ -533,11 +540,14 @@ namespace EEditor
                         if (Blocks.IsType(lvl[0, x, y].BlockID, Blocks.BlockType.Normal))
                         {
                             f.Foreground[y, x] = lvl[0, x, y].BlockID;
+                            totalblock += 1;
+
                         }
                         if (Blocks.IsType(lvl[0, x, y].BlockID, Blocks.BlockType.Rotatable) || Blocks.IsType(lvl[0, x, y].BlockID, Blocks.BlockType.RotatableButNotReally))
                         {
                             f.Foreground[y, x] = lvl[0, x, y].BlockID;
                             f.BlockData[y, x] = ((Blocks.RotatableBlock)lvl[0, x, y]).Rotation;
+                            totalblock += 1;
                         }
                         if (Blocks.IsType(lvl[0, x, y].BlockID, Blocks.BlockType.NPC))
                         {
@@ -547,12 +557,14 @@ namespace EEditor
                             f.BlockData4[y, x] = ((Blocks.NPCBlock)lvl[0, x, y]).Message1;
                             f.BlockData5[y, x] = ((Blocks.NPCBlock)lvl[0, x, y]).Message2;
                             f.BlockData6[y, x] = ((Blocks.NPCBlock)lvl[0, x, y]).Message3;
+                            totalblock += 1;
                         }
                         if (Blocks.IsType(lvl[0, x, y].BlockID, Blocks.BlockType.Sign))
                         {
                             f.Foreground[y, x] = lvl[0, x, y].BlockID;
                             f.BlockData3[y, x] = ((Blocks.SignBlock)lvl[0, x, y]).Text;
                             f.BlockData[y, x] = ((Blocks.SignBlock)lvl[0, x, y]).Morph;
+                            totalblock += 1;
                         }
                         if (Blocks.IsType(lvl[0, x, y].BlockID, Blocks.BlockType.Portal))
                         {
@@ -561,37 +573,45 @@ namespace EEditor
                             f.BlockData[y, x] = ((Blocks.PortalBlock)lvl[0, x, y]).Rotation;
                             f.BlockData1[y, x] = ((Blocks.PortalBlock)lvl[0, x, y]).ID;
                             f.BlockData2[y, x] = ((Blocks.PortalBlock)lvl[0, x, y]).Target;
+                            totalblock += 1;
                         }
                         if (Blocks.IsType(lvl[0, x, y].BlockID, Blocks.BlockType.Morphable))
                         {
                             f.Foreground[y, x] = lvl[0, x, y].BlockID;
                             f.BlockData[y, x] = ((Blocks.MorphableBlock)lvl[0, x, y]).Morph;
+                            totalblock += 1;
                         }
                         if (Blocks.IsType(lvl[0, x, y].BlockID, Blocks.BlockType.Number))
                         {
                             f.Foreground[y, x] = lvl[0, x, y].BlockID;
                             f.BlockData[y, x] = ((Blocks.NumberBlock)lvl[0, x, y]).Number;
+                            totalblock += 1;
                         }
                         if (Blocks.IsType(lvl[0, x, y].BlockID, Blocks.BlockType.Enumerable))
                         {
                             f.Foreground[y, x] = lvl[0, x, y].BlockID;
                             f.BlockData[y, x] = ((Blocks.EnumerableBlock)lvl[0, x, y]).Variant;
+                            totalblock += 1;
                         }
                         if (Blocks.IsType(lvl[0, x, y].BlockID, Blocks.BlockType.WorldPortal))
                         {
                             f.Foreground[y, x] = lvl[0, x, y].BlockID;
                             f.BlockData[y, x] = ((Blocks.WorldPortalBlock)lvl[0, x, y]).Spawn;
                             f.BlockData3[y, x] = ((Blocks.WorldPortalBlock)lvl[0, x, y]).Target;
+                            totalblock += 1;
                         }
                         if (Blocks.IsType(lvl[0, x, y].BlockID, Blocks.BlockType.Music))
                         {
                             f.Foreground[y, x] = lvl[0, x, y].BlockID;
                             int temp = ((Blocks.MusicBlock)lvl[0, x, y]).Note;
                             f.BlockData[y, x] = temp;
+                            totalblock += 1;
                         }
                         if (Blocks.IsType(lvl[1, x, y].BlockID, Blocks.BlockType.Normal))
                         {
                             f.Background[y, x] = lvl[1, x, y].BlockID;
+                            if (lvl[1, x, y].BlockID != 0) totalblock += 1;
+
                         }
                         if (Blocks.IsType(lvl[0, x, y].BlockID, Blocks.BlockType.Label))
                         {
@@ -599,9 +619,21 @@ namespace EEditor
                             f.BlockData[y, x] = ((Blocks.LabelBlock)lvl[0, x, y]).Wrap;
                             f.BlockData3[y, x] = ((Blocks.LabelBlock)lvl[0, x, y]).Text;
                             f.BlockData4[y, x] = ((Blocks.LabelBlock)lvl[0, x, y]).Color;
+                            totalblock += 1;
                         }
-
                     }
+
+                }
+                if (totalblock > 393042)
+                {
+
+                    f.totalblocks = totalblock;
+                    f.toobig = true;
+
+                }
+                else
+                {
+                    f.toobig = false;
                 }
                 return f;
             }
