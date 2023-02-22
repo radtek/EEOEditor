@@ -222,7 +222,7 @@ namespace EEditor
             minimap.BringToFront();
 
             userdata.lastSelectedBlockbar = 0;
-
+            updateTheme();
             //this.worldArchiveMenu = new WorldArchiveMenu(this);
 
             //Should be set to current acc index actually
@@ -447,7 +447,7 @@ namespace EEditor
 
             // Extract topbar images to tile
             topbar2tile(false);
-            //updateTheme();
+            
             Tool.PenSize = 1;
 
             filterTextBox.KeyDown += filterTextBox_KeyDown;
@@ -462,7 +462,7 @@ namespace EEditor
             SetPenTool();
             //checkUpdate();
             loadBlockPicker();
-            updateTheme();
+            //updateTheme();
             MainForm.editArea.Focus();
         }
 
@@ -1789,7 +1789,6 @@ namespace EEditor
             {
                 MainForm = mainForm;
                 this.BackColor = themecolors.accent;
-
                 this.ID = id;
                 this.blockInfo = blockdata;
                 this.AutoSize = false;
@@ -4573,13 +4572,23 @@ namespace EEditor
                 {
                     string filename = ofd.FileName;
                     Frame frame = Frame.LoadFromEELVL(filename);
-                    if (frame != null)
+                    if (frame.toobig) 
                     {
-                        this.Text = $".eelvl - ({frame.levelname}) [{frame.nickname}] ({frame.Width}x{frame.Height}) - EEOditor {this.ProductVersion}";
-                        editArea.Init(frame, false);
+                        MessageBox.Show($"Can't load this world. It's too big.\nTotal Blocks: {frame.totalblocks} Max Blocks: 393042", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        ofd.Dispose();
                     }
-                    else MessageBox.Show("The selected EELVL is either invalid or corrupt.", "Invalid EELVL", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    ofd.Dispose();
+                    else
+                    {
+                        if (frame != null)
+                        {
+                            this.Text = $".eelvl - ({frame.levelname}) [{frame.nickname}] ({frame.Width}x{frame.Height}) - EEOditor {this.ProductVersion}";
+                            //Thread thread = new Thread(delegate () { editArea.Init(frame, false); });
+                            //thread.Start();
+                            editArea.Init(frame, false);
+                        }
+                        else MessageBox.Show("The selected EELVL is either invalid or corrupt.", "Invalid EELVL", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        ofd.Dispose();
+                    }
                 }
                 else
                 {
@@ -4710,7 +4719,6 @@ namespace EEditor
         {
             ToolStripButton button = e.Data.GetData(typeof(ToolStripButton))
                            as ToolStripButton;
-            Console.WriteLine(button.Name);
         }
 
         private void BlockPickerToolStrip_DragEnter(object sender, DragEventArgs e)
@@ -4753,18 +4761,20 @@ namespace EEditor
                 {
                     if (userdata.useColor) userdata.thisColor = col.setCol;
                     else userdata.thisColor = Color.Transparent;
-                    Graphics g = Graphics.FromImage(MainForm.editArea.Back);
-                    for (int y = 0; y < MainForm.editArea.Frames[0].Height; y++)
+                    using (Graphics g = Graphics.FromImage(MainForm.editArea.Back))
                     {
-                        for (int x = 0; x < MainForm.editArea.Frames[0].Width; x++)
+                        for (int y = 0; y < MainForm.editArea.Frames[0].Height; y++)
                         {
-                            if (x == 0 || y == 0 || x == MainForm.editArea.Frames[0].Width - 1 || y == MainForm.editArea.Frames[0].Height - 1)
+                            for (int x = 0; x < MainForm.editArea.Frames[0].Width; x++)
                             {
-                                MainForm.editArea.Draw(x, y, g, Color.Transparent);
-                            }
-                            else
-                            {
-                                MainForm.editArea.Draw(x, y, g, MainForm.userdata.thisColor);
+                                if (x == 0 || y == 0 || x == MainForm.editArea.Frames[0].Width - 1 || y == MainForm.editArea.Frames[0].Height - 1)
+                                {
+                                    MainForm.editArea.Draw(x, y, g, Color.Transparent);
+                                }
+                                else
+                                {
+                                    MainForm.editArea.Draw(x, y, g, MainForm.userdata.thisColor);
+                                }
                             }
                         }
                     }
@@ -4790,18 +4800,20 @@ namespace EEditor
                     this.Text = $"({WOTitle}) [{WONickname}] ({editArea.Frames[0].Width}x{editArea.Frames[0].Height}) - EEOditor {this.ProductVersion}";
                     if (wd.usecolor) userdata.thisColor = wd.bgcolor;
                     else userdata.thisColor = Color.Transparent;
-                    Graphics g = Graphics.FromImage(editArea.Back);
-                    for (int y = 0; y < editArea.Frames[0].Height; y++)
+                    using (Graphics g = Graphics.FromImage(editArea.Back))
                     {
-                        for (int x = 0; x < editArea.Frames[0].Width; x++)
+                        for (int y = 0; y < editArea.Frames[0].Height; y++)
                         {
-                            if (x == 0 || y == 0 || x == editArea.Frames[0].Width - 1 || y == editArea.Frames[0].Height - 1)
+                            for (int x = 0; x < editArea.Frames[0].Width; x++)
                             {
-                                editArea.Draw(x, y, g, Color.Transparent);
-                            }
-                            else
-                            {
-                                editArea.Draw(x, y, g, userdata.thisColor);
+                                if (x == 0 || y == 0 || x == editArea.Frames[0].Width - 1 || y == editArea.Frames[0].Height - 1)
+                                {
+                                    editArea.Draw(x, y, g, Color.Transparent);
+                                }
+                                else
+                                {
+                                    editArea.Draw(x, y, g, userdata.thisColor);
+                                }
                             }
                         }
                     }
