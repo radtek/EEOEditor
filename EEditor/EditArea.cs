@@ -8,6 +8,7 @@ using System.Drawing.Text;
 using System.Text.RegularExpressions;
 using System.IO;
 using System.Drawing.Imaging;
+using System.Threading;
 
 namespace EEditor
 {
@@ -25,7 +26,7 @@ namespace EEditor
         public Tool Tool { get; set; }
         public Bitmap Back { get; set; }
         public Bitmap Back1 { get; set; }
-
+        public int TotalBlocks { get; set; }
         public Bitmap Label { get; set; }
         public Bitmap adminText { get; set; }
         public Bitmap[] Bricks { get; set; }
@@ -36,6 +37,8 @@ namespace EEditor
         public MainForm MainForm { get; set; }
         public int mX { get; set; }
         public int mY { get; set; }
+
+        public int totalblocks { get; set; }
         public Rectangle reco { get; set; }
         public bool mouseDown { set { IsMouseDown = value; } }
         public string incfg = null;
@@ -70,7 +73,7 @@ IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
 
             VerticalScroll.SmallChange = 8;
             HorizontalScroll.SmallChange = 8;
-            Timer scrollTimer = new Timer() { Interval = 15 };
+            System.Windows.Forms.Timer scrollTimer = new System.Windows.Forms.Timer() { Interval = 15 };
             scrollTimer.Tick += scrollTimer_Tick;
             scrollTimer.Start();
             this.AllowDrop = true;
@@ -98,16 +101,23 @@ IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
                     InsertImageForm open = new InsertImageForm();
                     open.ShowDialog();
                 }
-                else if (Regex.IsMatch(Path.GetExtension(files[0]).ToLower(),"^.eelvl$"))
+                else if (Regex.IsMatch(Path.GetExtension(files[0]).ToLower(), "^.eelvl$"))
                 {
                     string filename = files[0];
                     Frame frame = Frame.LoadFromEELVL(filename);
-                    if (frame != null)
+                    if (frame.toobig)
                     {
-                        this.Text = $".eelvl - ({frame.levelname}) [{frame.nickname}] ({frame.Width}x{frame.Height}) - EEOditor {this.ProductVersion}";
-                        Init(frame, false);
+                        MessageBox.Show($"Can't load this world. It's too big.\nTotal Blocks: {frame.totalblocks} Max Blocks: 263170", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-                    else MessageBox.Show("The dropped EELVL is either invalid or corrupt.", "Invalid EELVL", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    else
+                    {
+                        if (frame != null)
+                        {
+                            this.Text = $".eelvl - ({frame.levelname}) [{frame.nickname}] ({frame.Width}x{frame.Height}) - EEOditor {this.ProductVersion}";
+                            Init(frame, false);
+                        }
+                        else MessageBox.Show("The dropped EELVL is either invalid or corrupt.", "Invalid EELVL", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
         }
@@ -298,15 +308,18 @@ IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
         {
             BlockHeight = height;
             BlockWidth = width;
-            Size size = new Size(BlockWidth * MainForm.Zoom, BlockHeight * MainForm.Zoom);
             Frame frame = new Frame(BlockWidth, BlockHeight);
             frame.Reset(false);
+            //Thread thread = new Thread(delegate() { Init(frame, false); });
             Init(frame, false);
-
         }
+
+
+
 
         public void Init(Frame frame, bool frme)
         {
+
             BlockHeight = frame.Height;
             BlockWidth = frame.Width;
             Frames.Clear();
@@ -329,7 +342,8 @@ IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
             Size size = new Size(BlockWidth * MainForm.Zoom, BlockHeight * MainForm.Zoom);
             Back = new Bitmap(BlockWidth * MainForm.Zoom, BlockHeight * MainForm.Zoom);
             Minimap.Init(BlockWidth, BlockHeight);
-            PaintCurFrame();
+            Thread td = new Thread(PaintCurFrame);
+            td.Start();
             this.AutoScrollMinSize = size;
             this.Invalidate();
             started = true;
@@ -337,11 +351,18 @@ IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
 
         protected void PaintCurFrame()
         {
-            Graphics g = Graphics.FromImage(Back);
-            for (int x = 0; x < BlockWidth; ++x)
-                for (int y = 0; y < BlockHeight; ++y)
-                    Draw(x, y, g, Color.Transparent);
-            g.Save();
+
+            using (Graphics g = Graphics.FromImage(Back))
+            {
+                for (int x = 0; x < BlockWidth; ++x)
+                {
+                    for (int y = 0; y < BlockHeight; ++y)
+                    {
+                        Draw(x, y, g, Color.Transparent);
+                    }
+                }
+            }
+
         }
 
         /*public void Draw(int x, int y, Graphics g)
@@ -361,6 +382,7 @@ IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
         public void Draw(int x, int y, Graphics g, int bid, int fid, int coins, int id, int target, string text, string text1, string text2, string text3, Color color)
         {
             //Graphics g = Graphics.FromImage(Back);
+
             if (Bricks[bid] == null || bid == -1)
             {
                 if (bid >= 500 && bid <= 999 || bid >= 2507 && bid <= 2513)
@@ -425,6 +447,7 @@ IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
             }*/
             if (fid > 0 && Bricks[fid] != null && fid != -1 && !bdata.ignore.Contains(fid) && !bdata.morphable.Contains(fid))
             {
+
                 Bitmap bmp1 = new Bitmap(Bricks[fid], MainForm.Zoom, MainForm.Zoom);
                 if (!MainForm.userdata.useColor)
                 {
@@ -543,7 +566,7 @@ IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
                 if (fid == 1000)
                 {
                     string texta = text;
-                    g.DrawRectangle(new Pen(ColorTranslator.FromHtml(text1)), new Rectangle(x * 16,y * 16,15,15));
+                    g.DrawRectangle(new Pen(ColorTranslator.FromHtml(text1)), new Rectangle(x * 16, y * 16, 15, 15));
                     //DrawText(text, Back1, Brushes.White, null, 8, null,null, x * 16, y * 16, true);
                 }
                 /*if (fid == 1000)
@@ -572,7 +595,8 @@ IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
                     Bitmap bmp2 = bdata.getRotation(fid, coins);
                     if (bmp2 != null) g.DrawImage(bmp2, x * 16, y * 16);
                 }
-            } //yes
+            }
+            //yes
             if (MainForm.userdata.useColor)
             {
                 if (bid == 0 || fid == 0)
@@ -639,7 +663,7 @@ IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
             }
             else if (Label != null)
             {
-                e.Graphics.DrawImage(Label, e.ClipRectangle, new Rectangle(xStart,yStart,100,100),GraphicsUnit.Pixel);
+                e.Graphics.DrawImage(Label, e.ClipRectangle, new Rectangle(xStart, yStart, 100, 100), GraphicsUnit.Pixel);
             }
 
         }
@@ -681,17 +705,17 @@ IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
                 else if (CurFrame.Foreground[p.Y, p.X] == 385)
                 {
 
-                        string text = null;
-                        if (CurFrame.BlockData3[p.Y, p.X].Length >= 10)
-                        {
-                            text = CurFrame.BlockData3[p.Y, p.X].Substring(0, 10) + "....";
-                        }
-                        else
-                        {
-                            text = CurFrame.BlockData3[p.Y, p.X];
-                        }
-                        MainForm.rot.Text = CurFrame.BlockData[p.Y, p.X].ToString();
-                        MainForm.txt.Text = text;
+                    string text = null;
+                    if (CurFrame.BlockData3[p.Y, p.X].Length >= 10)
+                    {
+                        text = CurFrame.BlockData3[p.Y, p.X].Substring(0, 10) + "....";
+                    }
+                    else
+                    {
+                        text = CurFrame.BlockData3[p.Y, p.X];
+                    }
+                    MainForm.rot.Text = CurFrame.BlockData[p.Y, p.X].ToString();
+                    MainForm.txt.Text = text;
                 }
                 else if (CurFrame.Foreground[p.Y, p.X] == 1000)
                 {
@@ -957,34 +981,34 @@ IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
         {
             using (Graphics gge = Graphics.FromImage(bmp))
             {
-                    gge.TextRenderingHint = TextRenderingHint.SingleBitPerPixel;
-                    if (fonte != null) fontz = new Font(fonte, size, FontStyle.Regular, GraphicsUnit.Pixel);
-                    if (fonte == null) fontz = new Font("System", size, FontStyle.Regular, GraphicsUnit.Pixel);
-                    if (line.Length <= 2) rect = new Rectangle(x - 2, y, 19, 16);
-                    else { rect = new Rectangle(x - 1, y, 19, 16); }
+                gge.TextRenderingHint = TextRenderingHint.SingleBitPerPixel;
+                if (fonte != null) fontz = new Font(fonte, size, FontStyle.Regular, GraphicsUnit.Pixel);
+                if (fonte == null) fontz = new Font("System", size, FontStyle.Regular, GraphicsUnit.Pixel);
+                if (line.Length <= 2) rect = new Rectangle(x - 2, y, 19, 16);
+                else { rect = new Rectangle(x - 1, y, 19, 16); }
 
-                    if (aligment0 != null && aligment1 != null)
+                if (aligment0 != null && aligment1 != null)
+                {
+                    using (StringFormat sf = new StringFormat())
                     {
-                        using (StringFormat sf = new StringFormat())
-                        {
-                            if (aligment0 == "top") { sf.LineAlignment = StringAlignment.Near; }
-                            if (aligment0 == "middle") { sf.LineAlignment = StringAlignment.Center; }
-                            if (aligment0 == "bottom") { sf.LineAlignment = StringAlignment.Far; }
-                            if (aligment1 == "left") { sf.Alignment = StringAlignment.Near; }
-                            if (aligment1 == "right") { sf.Alignment = StringAlignment.Far; }
-                            if (aligment1 == "center") { sf.Alignment = StringAlignment.Center; }
-                            gge.DrawString(line, fontz, brush1, rect, sf);
-                            gge.Save();
-                        }
+                        if (aligment0 == "top") { sf.LineAlignment = StringAlignment.Near; }
+                        if (aligment0 == "middle") { sf.LineAlignment = StringAlignment.Center; }
+                        if (aligment0 == "bottom") { sf.LineAlignment = StringAlignment.Far; }
+                        if (aligment1 == "left") { sf.Alignment = StringAlignment.Near; }
+                        if (aligment1 == "right") { sf.Alignment = StringAlignment.Far; }
+                        if (aligment1 == "center") { sf.Alignment = StringAlignment.Center; }
+                        gge.DrawString(line, fontz, brush1, rect, sf);
+                        gge.Save();
                     }
-                    else
-                    {
-                        //gge.DrawString(line, fontz, brush1, rect);
-                        //Console.WriteLine(line);
-                        //gge.DrawRectangle(new Pen(Color.Red), new Rectangle(x, y, 180, 39));
-                        //gge.DrawString(line, fontz, brush1, new Point(x,y));
-                    }
-                
+                }
+                else
+                {
+                    //gge.DrawString(line, fontz, brush1, rect);
+                    //Console.WriteLine(line);
+                    //gge.DrawRectangle(new Pen(Color.Red), new Rectangle(x, y, 180, 39));
+                    //gge.DrawString(line, fontz, brush1, new Point(x,y));
+                }
+
             }
             //Draw(x, y, gge, Color.Transparent);
             //Invalidate();
