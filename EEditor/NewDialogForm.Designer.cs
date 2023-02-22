@@ -78,7 +78,7 @@
             // 
             this.nUHeight.Location = new System.Drawing.Point(56, 49);
             this.nUHeight.Maximum = new decimal(new int[] {
-            400,
+            636,
             0,
             0,
             0});
