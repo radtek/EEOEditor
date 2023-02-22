@@ -34,8 +34,21 @@ namespace EEditor
                 }
             }
             sortby(1);
+            counter();
         }
-
+        private void counter()
+        {
+            int count = 0;
+            for (int x = 0; x < MainForm.editArea.CurFrame.Width; x++)
+            {
+                for (int y = 0; y < MainForm.editArea.CurFrame.Height; y++)
+                {
+                    if (MainForm.editArea.CurFrame.Foreground[y, x] < 500 || MainForm.editArea.CurFrame.Foreground[y, x] >= 1000) count++;
+                    if (MainForm.editArea.CurFrame.Background[y, x] >= 500 && MainForm.editArea.CurFrame.Background[y, x] <= 999) count++;
+                }
+            }
+            lblTotalBlocks.Text = $"Total blocks: {count}";
+        }
         private void sortby(int id)
         {
             panel1.Controls.Clear();
@@ -46,30 +59,30 @@ namespace EEditor
                 {
                     if (bdata.ContainsKey(MainForm.editArea.CurFrame.Foreground[y, x]) && id >= 0 && id <= 3)
                     {
-
-
+                        
                         bdata[MainForm.editArea.CurFrame.Foreground[y, x]] += 1;
                     }
                     if (!bdata.ContainsKey(MainForm.editArea.CurFrame.Foreground[y, x]) && id >= 0 && id <= 3)
                     {
-
+                       
                         bdata.Add(MainForm.editArea.CurFrame.Foreground[y, x], 1);
                     }
-                    if (bdata.ContainsKey(MainForm.editArea.CurFrame.Background[y, x]) && MainForm.editArea.CurFrame.Background[y, x]  != 0 && (id == 0 || id == 4))
+                    if (bdata.ContainsKey(MainForm.editArea.CurFrame.Background[y, x]) && MainForm.editArea.CurFrame.Background[y, x] != 0 && (id == 0 || id == 4))
                     {
-
-
+                        
                         bdata[MainForm.editArea.CurFrame.Background[y, x]] += 1;
                     }
                     if (!bdata.ContainsKey(MainForm.editArea.CurFrame.Background[y, x]) && MainForm.editArea.CurFrame.Background[y, x] != 0 && (id == 0 || id == 4))
                     {
-
+                        
                         bdata.Add(MainForm.editArea.CurFrame.Background[y, x], 1);
                     }
                 }
             }
-                int position = 0, wposition = 4;
-            foreach (var val in bdata)
+            int position = 0, wposition = 4;
+            var sortedDict = from entry in bdata orderby entry.Value descending select entry;
+            
+            foreach (var val in sortedDict)
             {
                 PictureBox table = new PictureBox();
                 ToolTip tp = new ToolTip();
@@ -101,10 +114,10 @@ namespace EEditor
                         }
                         panel1.Controls.Add(table);
                     }
-                    
+
                     if (MainForm.ActionBlocks.ContainsKey(val.Key) && (id == 0 || id == 2))
                     {
-                        
+
                         block = MainForm.ActionBlocks[val.Key];
                         using (Graphics gr = Graphics.FromImage(bmp))
                         {
@@ -128,9 +141,9 @@ namespace EEditor
                         block = MainForm.DecorationBlocks[val.Key];
                         using (Graphics gr = Graphics.FromImage(bmp))
                         {
-                            
+
                             gr.FillRectangle(new SolidBrush(Color.Gray), new Rectangle(5, 5, 100, 50));
-                            gr.DrawRectangle(new Pen(MainForm.userdata.darkTheme ? Color.White:Color.Black), new Rectangle(5, 5, 54, 24));
+                            gr.DrawRectangle(new Pen(MainForm.userdata.darkTheme ? Color.White : Color.Black), new Rectangle(5, 5, 54, 24));
                             gr.DrawImage(block, new Point(8, 8));
                             //gr.DrawString($"{val.Value}", new Font("Arial", 8, FontStyle.Regular), new SolidBrush(Color.Black), new Point(25, 9));
                             gr.DrawString($"{val.Value}", new Font("Arial", 8, FontStyle.Regular), new SolidBrush(Color.White), new Point(24, 8));

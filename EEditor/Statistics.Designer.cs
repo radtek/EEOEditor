@@ -34,6 +34,7 @@
             this.actradioButton = new System.Windows.Forms.RadioButton();
             this.bgradioButton = new System.Windows.Forms.RadioButton();
             this.decorradioButton = new System.Windows.Forms.RadioButton();
+            this.lblTotalBlocks = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // panel1
@@ -52,7 +53,6 @@
             this.fgradioButton.Name = "fgradioButton";
             this.fgradioButton.Size = new System.Drawing.Size(22, 22);
             this.fgradioButton.TabIndex = 3;
-            this.fgradioButton.TabStop = true;
             this.fgradioButton.UseVisualStyleBackColor = true;
             this.fgradioButton.CheckedChanged += new System.EventHandler(this.fgradioButton_CheckedChanged);
             // 
@@ -65,7 +65,6 @@
             this.actradioButton.Name = "actradioButton";
             this.actradioButton.Size = new System.Drawing.Size(22, 22);
             this.actradioButton.TabIndex = 4;
-            this.actradioButton.TabStop = true;
             this.actradioButton.UseVisualStyleBackColor = true;
             this.actradioButton.CheckedChanged += new System.EventHandler(this.actradioButton_CheckedChanged);
             // 
@@ -78,7 +77,6 @@
             this.bgradioButton.Name = "bgradioButton";
             this.bgradioButton.Size = new System.Drawing.Size(22, 22);
             this.bgradioButton.TabIndex = 5;
-            this.bgradioButton.TabStop = true;
             this.bgradioButton.UseVisualStyleBackColor = true;
             this.bgradioButton.CheckedChanged += new System.EventHandler(this.bgradioButton_CheckedChanged);
             // 
@@ -91,15 +89,24 @@
             this.decorradioButton.Name = "decorradioButton";
             this.decorradioButton.Size = new System.Drawing.Size(22, 22);
             this.decorradioButton.TabIndex = 6;
-            this.decorradioButton.TabStop = true;
             this.decorradioButton.UseVisualStyleBackColor = true;
             this.decorradioButton.CheckedChanged += new System.EventHandler(this.decorradioButton_CheckedChanged);
+            // 
+            // lblTotalBlocks
+            // 
+            this.lblTotalBlocks.AutoSize = true;
+            this.lblTotalBlocks.Location = new System.Drawing.Point(157, 306);
+            this.lblTotalBlocks.Name = "lblTotalBlocks";
+            this.lblTotalBlocks.Size = new System.Drawing.Size(78, 13);
+            this.lblTotalBlocks.TabIndex = 7;
+            this.lblTotalBlocks.Text = "Total Blocks: 0";
             // 
             // Statistics
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(313, 331);
+            this.ClientSize = new System.Drawing.Size(313, 353);
+            this.Controls.Add(this.lblTotalBlocks);
             this.Controls.Add(this.decorradioButton);
             this.Controls.Add(this.bgradioButton);
             this.Controls.Add(this.actradioButton);
@@ -121,5 +128,6 @@
         private System.Windows.Forms.RadioButton actradioButton;
         private System.Windows.Forms.RadioButton bgradioButton;
         private System.Windows.Forms.RadioButton decorradioButton;
+        private System.Windows.Forms.Label lblTotalBlocks;
     }
 }
