@@ -1,7 +1,4 @@
-### Message to everyone
-EEOditor is going to be updated soon. I can't say an ETA.
-
-## EEOditor - Everybody Edits Offline Editor  
+## EEOditor - Everybody Edits Offline Editor
    
 Welcome to the EEOditor GitHub page! Here we host sourcecode and latest version of EEOditor.
   
