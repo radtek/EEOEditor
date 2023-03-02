@@ -25,7 +25,15 @@ namespace EEditor
             listView1.View = View.Tile;
             listView1.TileSize = new Size(200, 24);
             listView1.Items.Clear();
-            var width = MainForm.decosBMD.Width / 16 + MainForm.miscBMD.Width / 16 + MainForm.foregroundBMD.Width / 16 + MainForm.backgroundBMD.Width / 16;
+            listView2.View = View.Tile;
+            listView2.TileSize = new Size(200, 24);
+            listView2.Items.Clear();
+            ImageList imglist2 = new ImageList();
+            imglist2.ColorDepth = ColorDepth.Depth32Bit;
+            imglist2.ImageSize = new Size(16, 16);
+            imglist.ColorDepth = ColorDepth.Depth32Bit;
+            imglist.ImageSize = new Size(16, 16);
+            var width = MainForm.decosBMD.Width / 16 + MainForm.miscBMD.Width / 16 + MainForm.foregroundBMD.Width / 16;
             if (imglist.Images.Count == 0)
             {
                 Bitmap img1 = new Bitmap(width, 16);
@@ -45,17 +53,21 @@ namespace EEditor
                         {
                             img1 = MainForm.foregroundBMD.Clone(new Rectangle(MainForm.foregroundBMI[i] * 16, 0, 16, 16), MainForm.foregroundBMD.PixelFormat);
                         }
-                    }
-                    else if (i >= 500 && i <= 999)
-                    {
-                        if (MainForm.backgroundBMI[i] != 0)
+                        else
                         {
-                            img1 = MainForm.backgroundBMD.Clone(new Rectangle(MainForm.backgroundBMI[i] * 16, 0, 16, 16), MainForm.backgroundBMD.PixelFormat);
+                            Bitmap temp = new Bitmap(16, 16);
+                            Graphics gr = Graphics.FromImage(temp);
+                            gr.Clear(Color.Transparent);
+                            gr.DrawImage(Properties.Resources.unknown.Clone(new Rectangle(1 * 16, 0, 16, 16), Properties.Resources.unknown.PixelFormat), 0, 0);
+                            img1 = temp;
                         }
+                        imglist2.Images.Add(img1);
+                        imglist.Images.Add(img1);
                     }
-                    imglist.Images.Add(img1);
+                    
                 }
                 listView1.LargeImageList = imglist;
+                listView2.LargeImageList = imglist2;
             }
 
             if (MainForm.userdata.IgnoreBlocks.Count > 0)
@@ -70,6 +82,24 @@ namespace EEditor
 
                     listView1.Items.Add(lvi);
                 }
+            }
+            foreach (var item in MainForm.blocksdata)
+            {
+                
+                if (item < 500 || item >= 1001)
+                {
+                    if (!MainForm.userdata.IgnoreBlocks.Contains(item))
+                    {
+                        ListViewItem lvi = new ListViewItem()
+                        {
+                            Text = "BlockID: " + item,
+                            Name = item.ToString(),
+                            ImageIndex = item
+                        };
+                        if (!listView2.Items.Contains(lvi)) listView2.Items.Add(lvi);
+                    }
+                }
+                
             }
         }
 
@@ -91,6 +121,15 @@ namespace EEditor
         {
             MainForm.userdata.IgnoreBlocks.Clear();
             loaddata();
+        }
+
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            if (listView2.SelectedItems.Count == 1)
+            {
+                Console.WriteLine(listView2.SelectedItems[0].Text);
+            }
         }
     }
 }

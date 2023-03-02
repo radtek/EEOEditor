@@ -93,6 +93,7 @@
             this.label15 = new System.Windows.Forms.Label();
             this.WorldPortalRadioButton = new System.Windows.Forms.RadioButton();
             this.SignRadioButton = new System.Windows.Forms.RadioButton();
+            this.rbSpikes = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rotateIcon2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rotateIcon1)).BeginInit();
@@ -419,15 +420,15 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(6, 17);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(185, 20);
+            this.textBox1.Size = new System.Drawing.Size(168, 20);
             this.textBox1.TabIndex = 10;
             this.textBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyUp);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(197, 16);
+            this.button2.Location = new System.Drawing.Point(180, 15);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(49, 22);
+            this.button2.Size = new System.Drawing.Size(56, 22);
             this.button2.TabIndex = 9;
             this.button2.Text = "Search";
             this.button2.UseVisualStyleBackColor = true;
@@ -494,6 +495,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.rbSpikes);
             this.tabPage1.Controls.Add(this.NormalRadioButton);
             this.tabPage1.Controls.Add(this.RotationPictureBox2);
             this.tabPage1.Controls.Add(this.RotationPictureBox1);
@@ -852,6 +854,19 @@
             this.SignRadioButton.UseVisualStyleBackColor = true;
             this.SignRadioButton.Click += new System.EventHandler(this.SignRadioButton_Click);
             // 
+            // rbSpikes
+            // 
+            this.rbSpikes.AutoSize = true;
+            this.rbSpikes.Location = new System.Drawing.Point(75, 98);
+            this.rbSpikes.Name = "rbSpikes";
+            this.rbSpikes.Size = new System.Drawing.Size(90, 17);
+            this.rbSpikes.TabIndex = 27;
+            this.rbSpikes.TabStop = true;
+            this.rbSpikes.Text = "Spike Special";
+            this.rbSpikes.UseVisualStyleBackColor = true;
+            this.rbSpikes.CheckedChanged += new System.EventHandler(this.rbSpikes_CheckedChanged);
+            this.rbSpikes.Click += new System.EventHandler(this.rbSpikes_Click);
+            // 
             // Replacer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -971,5 +986,6 @@
         private System.Windows.Forms.RadioButton NormalRadioButton;
         private System.Windows.Forms.Button ClearBgsBlacklistButton;
         private System.Windows.Forms.CheckBox ReplaceUnknownCheckBox;
+        private System.Windows.Forms.RadioButton rbSpikes;
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace EEditor
@@ -34,6 +35,7 @@ namespace EEditor
 
         public void Init(int width, int height)
         {
+
             if (this.InvokeRequired)
             {
                 this.Invoke((MethodInvoker)delegate
@@ -46,7 +48,8 @@ namespace EEditor
                     Point relativePos = new Point(-25, -25);
                     Location = new Point(Parent.ClientSize.Width - Width + relativePos.X, Parent.ClientSize.Height - Height + relativePos.Y);
                 });
-            } else
+            }
+            else
             {
                 BlockWidth = width;
                 BlockHeight = height;

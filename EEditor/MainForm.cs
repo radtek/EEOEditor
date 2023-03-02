@@ -15,6 +15,7 @@ using System.Xml.Linq;
 using EEditor.Properties;
 using SharpCompress.Common;
 using SharpCompress.Archives;
+using System.Threading.Tasks;
 
 namespace EEditor
 {
@@ -30,6 +31,7 @@ namespace EEditor
         public static Dictionary<int, Bitmap> DecorationBlocks = new Dictionary<int, Bitmap>();
         public static Dictionary<int, Bitmap> BackgroundBlocks = new Dictionary<int, Bitmap>();
         public static List<listofBlocks> blocksdb = new List<listofBlocks>();
+        public static List<int> blocksdata = new List<int>();
         public static string pathSettings = $"{Directory.GetCurrentDirectory()}\\settings.json";
         private Dictionary<int, Bitmap> sblocks = new Dictionary<int, Bitmap>();
         private Dictionary<int, Bitmap> sblocks1 = new Dictionary<int, Bitmap>();
@@ -194,7 +196,7 @@ namespace EEditor
 
             userdata.useColor = false;
             userdata.thisColor = Color.Transparent;
-            
+
             //starting = true;
             //starting1 = true;
             subButton.Enabled = false;
@@ -437,7 +439,7 @@ namespace EEditor
             DetectBlocks();
 
             delay = new List<int>();
-            editArea.Init(25, 25);
+            executeInitArea(); 
             frameSelector.SelectedIndex = 0;
 
             this.Text = "EEOditor " + this.ProductVersion;
@@ -467,7 +469,10 @@ namespace EEditor
         }
 
         #region Generate topbar images to tile
-
+        private void executeInitArea()
+        {
+            editArea.Init(25, 25);
+        }
         private void topbar2tile(bool convert)
         {
             if (convert)
@@ -1536,7 +1541,7 @@ namespace EEditor
                 if (starting)
                 {
                     starting = false;
-                    this.Invoke((MethodInvoker)delegate { editArea.Init(25, 25); });
+                    this.Invoke((MethodInvoker)delegate { executeInitArea(); });
                 }
             }
             else
@@ -1581,25 +1586,27 @@ namespace EEditor
                         if (mode == 0)
                         {
                             values[i] += blocks[ids[i]];
-
+                            blocksdata.Add(ids[i]);
                         }
                         else if (mode == 1)
                         {
                             values[i] += misc[ids[i]];
-
+                            blocksdata.Add(ids[i]);
                         }
                         else if (mode == 2)
                         {
                             values[i] += decos[ids[i]];
+                            blocksdata.Add(ids[i]);
                         }
                         else if (mode == 3)
                         {
                             values[i] += bgs[ids[i]];
+                            blocksdata.Add(ids[i]);
                         }
 
                     }
                     blocksdb.Add(new listofBlocks() { mode = mode, blocks = values, name = desc });
-
+                    
                 }
 
                 int length = ids.Length;
@@ -2964,12 +2971,12 @@ namespace EEditor
                 if (form.MapFrame != null)
                 {
 
-                    editArea.Init(form.MapFrame, false);
+                    ExecuteInitFrame(form.MapFrame,false);
 
                 }
                 else
                 {
-                    editArea.Init(form.SizeWidth, form.SizeHeight);
+                    ExecuteInitWH(form.SizeWidth, form.SizeHeight);
 
                 }
             }
@@ -2979,7 +2986,14 @@ namespace EEditor
                 form.notsaved = false;
             }
         }
-
+        private void ExecuteInitFrame(Frame mapframe,bool frame)
+        {
+            editArea.Init(mapframe, frame);
+        }
+        private void ExecuteInitWH(int width,int height)
+        {
+            editArea.Init(width,height);
+        }
         //Load
         private void new33ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -3009,7 +3023,7 @@ namespace EEditor
                     if (frame != null)
                     {
                         this.Text = $"({Path.GetFileName(ofd.FileName)}) [Unknown] ({frame.Width}x{frame.Height}) - EEOditor {this.ProductVersion}";
-                        editArea.Init(frame, false);
+                        ExecuteInitFrame(frame, false);
                     }
                     else MessageBox.Show("The selected EELevel is either invalid or corrupt.", "Invalid EELevel", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -3046,7 +3060,7 @@ namespace EEditor
                     if (frame != null)
                     {
                         this.Text = $".spt - ({frame.levelname}) [{frame.nickname}] ({frame.Width}x{frame.Height}) - EEOditor {this.ProductVersion}";
-                        editArea.Init(frame, false);
+                        ExecuteInitFrame(frame, false);
                     }
                     else MessageBox.Show("The selected EELVL is either invalid or corrupt.", "Invalid EELVL", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     ofd.Dispose();
@@ -3087,7 +3101,7 @@ namespace EEditor
                 if (frame != null)
                 {
                     this.Text = $"({Path.GetFileName(ofd.FileName)}) [Unknown] ({frame.Width}x{frame.Height}) - EEOditor {this.ProductVersion}";
-                    editArea.Init(frame, false);
+                    ExecuteInitFrame(frame, false);
                 }
                 else MessageBox.Show("The selected EELevel is either invalid or corrupt.", "Invalid EELevel", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -3121,7 +3135,7 @@ namespace EEditor
                 if (frame != null)
                 {
                     this.Text = $"({Path.GetFileName(ofd.FileName)}) [Unknown] ({frame.Width}x{frame.Height}) - EEOditor {this.ProductVersion}";
-                    editArea.Init(frame, false);
+                    ExecuteInitFrame(frame, false);
                 }
                 else MessageBox.Show("The selected EELevel is either invalid or corrupt.", "Invalid EELevel", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -3156,7 +3170,7 @@ namespace EEditor
                 if (frame != null)
                 {
                     this.Text = $"({Path.GetFileName(ofd.FileName)}) [Unknown] ({frame.Width}x{frame.Height}) - EEOditor {this.ProductVersion}";
-                    editArea.Init(frame, false);
+                    ExecuteInitFrame(frame, false);
                 }
                 else MessageBox.Show("The selected EELevel is either invalid or corrupt.", "Invalid EELevel", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -3203,7 +3217,7 @@ namespace EEditor
                         if (frame != null)
                         {
                             this.Text = $"({Path.GetFileName(ofd.FileName)}) [Unknown] ({frame.Width}x{frame.Height}) - EEOditor {this.ProductVersion}";
-                            editArea.Init(frame, false);
+                            ExecuteInitFrame(frame, false);
                         }
                         else
                         {
@@ -3218,7 +3232,7 @@ namespace EEditor
                         if (frame != null)
                         {
                             this.Text = $"({Path.GetFileName(ofd.FileName)}) [Unknown] ({frame.Width}x{frame.Height}) - EEOditor {this.ProductVersion}";
-                            editArea.Init(frame, false);
+                            ExecuteInitFrame(frame, false);
                         }
                         else
                         {
@@ -4361,7 +4375,7 @@ namespace EEditor
                         if (frame != null)
                         {
                             this.Text = $"({Path.GetFileName(ofd.FileName)}) [Unknown] ({frame.Width}x{frame.Height}) - EEOditor {this.ProductVersion}";
-                            editArea.Init(frame, false);
+                            ExecuteInitFrame(frame, false);
                         }
                         else MessageBox.Show("The selected JSON Database World is either corrupt or invalid.", "Invalid JSON Database World", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
@@ -4433,7 +4447,7 @@ namespace EEditor
                     if (frame != null)
                     {
                         this.Text = $"({Path.GetFileName(ofd.FileName)}) [Unknown] ({frame.Width}x{frame.Height}) - EEOditor {this.ProductVersion}";
-                        editArea.Init(frame, false);
+                        ExecuteInitFrame(frame, false);
                     }
                     else MessageBox.Show("The selected EELevel is either invalid or corrupt.", "Invalid EELevel", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     ofd.Dispose();
@@ -4480,7 +4494,7 @@ namespace EEditor
                 {
 
                     this.Text = $"({Path.GetFileName(ofd.FileName)}) [Unknown] ({frame.Width}x{frame.Height}) - EEOditor {this.ProductVersion}";
-                    editArea.Init(frame, false);
+                    ExecuteInitFrame(frame, false);
                 }
                 else MessageBox.Show("The selected EELevel is either invalid or corrupt.", "Invalid EELevel", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 ofd.Dispose();
@@ -4518,7 +4532,7 @@ namespace EEditor
                 {
 
                     this.Text = $"({Path.GetFileName(ofd.FileName)}) [Unknown] ({frame.Width}x{frame.Height}) - EEOditor {this.ProductVersion}";
-                    editArea.Init(frame, false);
+                    ExecuteInitFrame(frame, false);
                 }
                 else MessageBox.Show("The selected EELevel is either invalid or corrupt.", "Invalid EELevel", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 ofd.Dispose();
@@ -4584,7 +4598,7 @@ namespace EEditor
                             this.Text = $".eelvl - ({frame.levelname}) [{frame.nickname}] ({frame.Width}x{frame.Height}) - EEOditor {this.ProductVersion}";
                             //Thread thread = new Thread(delegate () { editArea.Init(frame, false); });
                             //thread.Start();
-                            editArea.Init(frame, false);
+                            ExecuteInitFrame(frame, false);
                         }
                         else MessageBox.Show("The selected EELVL is either invalid or corrupt.", "Invalid EELVL", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         ofd.Dispose();
@@ -4684,7 +4698,7 @@ namespace EEditor
                         if (frame != null)
                         {
                             this.Text = $"({Path.GetFileName(ofd.FileName)}) - [Unknown] ({frame.Width}x{frame.Height}) - EEOditor {this.ProductVersion}";
-                            editArea.Init(frame, false);
+                            ExecuteInitFrame(frame, false);
                         }
                         else MessageBox.Show("The selected JSON Database World is either corrupt or invalid.", "Invalid JSON Database World", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }

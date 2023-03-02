@@ -37,7 +37,7 @@ namespace EEditor
         {
             int w = Convert.ToInt32(nUWidth.Value);
             int h = Convert.ToInt32(nUHeight.Value);
-            if (w <= 636 && h <= 460 || w <= 460 && h <= 636)
+            if (w <= 637 && h <= 460 || w <= 460 && h <= 637)
             {
                 MainForm.SetPenTool();
                 if (Clipboard.ContainsData("EEBrush")) Clipboard.Clear();

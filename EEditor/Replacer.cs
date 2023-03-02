@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace EEditor
 {
@@ -20,6 +21,7 @@ namespace EEditor
         private int[,] lastBlock;
         private int portalRotationFind = 0;
         private int portalRotationRepl = 0;
+        private bool spikeSpecial = false;
         Bitmap bmp = new Bitmap(1, 1);
         Bitmap img1;
         public Replacer(MainForm mainForm)
@@ -244,14 +246,14 @@ namespace EEditor
                 {
                     //if (MainForm.userdata.replaceit)
                     //{
-                        Bitmap img1 = MainForm.decosBMD.Clone(new Rectangle(MainForm.decosBMI[Convert.ToInt32(numericUpDown2.Value)] * 16, 0, 16, 16), MainForm.decosBMD.PixelFormat);
-                        ReplacePictureBox.Image = img1;
-                        numericUpDown2.ForeColor = MainForm.themecolors.foreground;
-                        label4.Text = null;
-                        button5.Enabled = true;
-                        button1.Enabled = true;
-                        replaceRotate.Value = 1;
-                        replaceRotating();
+                    Bitmap img1 = MainForm.decosBMD.Clone(new Rectangle(MainForm.decosBMI[Convert.ToInt32(numericUpDown2.Value)] * 16, 0, 16, 16), MainForm.decosBMD.PixelFormat);
+                    ReplacePictureBox.Image = img1;
+                    numericUpDown2.ForeColor = MainForm.themecolors.foreground;
+                    label4.Text = null;
+                    button5.Enabled = true;
+                    button1.Enabled = true;
+                    replaceRotate.Value = 1;
+                    replaceRotating();
                     //}
                 }
 
@@ -260,13 +262,13 @@ namespace EEditor
                     //if (MainForm.userdata.replaceit)
                     //{
                     Bitmap img1 = MainForm.miscBMD.Clone(new Rectangle(MainForm.miscBMI[Convert.ToInt32(numericUpDown2.Value)] * 16, 0, 16, 16), MainForm.miscBMD.PixelFormat);
-                        ReplacePictureBox.Image = img1;
-                        numericUpDown2.ForeColor = MainForm.themecolors.foreground;
-                        label4.Text = null;
-                        button5.Enabled = true;
-                        button1.Enabled = true;
-                        replaceRotate.Value = 1;
-                        replaceRotating();
+                    ReplacePictureBox.Image = img1;
+                    numericUpDown2.ForeColor = MainForm.themecolors.foreground;
+                    label4.Text = null;
+                    button5.Enabled = true;
+                    button1.Enabled = true;
+                    replaceRotate.Value = 1;
+                    replaceRotating();
                     // }
                 }
                 else
@@ -274,12 +276,12 @@ namespace EEditor
                     // if (MainForm.userdata.replaceit)
                     //  {
                     Bitmap img1 = MainForm.foregroundBMD.Clone(new Rectangle(MainForm.foregroundBMI[Convert.ToInt32(numericUpDown2.Value)] * 16, 0, 16, 16), MainForm.foregroundBMD.PixelFormat);
-                        ReplacePictureBox.Image = img1;
-                        numericUpDown2.ForeColor = MainForm.themecolors.foreground;
-                        label4.Text = null;
-                        button5.Enabled = true;
-                        button1.Enabled = true;
-                        replaceRotate.Value = 1;
+                    ReplacePictureBox.Image = img1;
+                    numericUpDown2.ForeColor = MainForm.themecolors.foreground;
+                    label4.Text = null;
+                    button5.Enabled = true;
+                    button1.Enabled = true;
+                    replaceRotate.Value = 1;
                     //  }
 
                 }
@@ -290,11 +292,11 @@ namespace EEditor
                 //if (MainForm.userdata.replaceit)
                 //{
                 Bitmap img6 = MainForm.backgroundBMD.Clone(new Rectangle(MainForm.backgroundBMI[Convert.ToInt32(numericUpDown2.Value)] * 16, 0, 16, 16), MainForm.backgroundBMD.PixelFormat);
-                    ReplacePictureBox.Image = img6;
-                    numericUpDown2.ForeColor = MainForm.themecolors.foreground;
-                    label4.Text = null;
-                    button5.Enabled = true;
-                    button1.Enabled = true;
+                ReplacePictureBox.Image = img6;
+                numericUpDown2.ForeColor = MainForm.themecolors.foreground;
+                label4.Text = null;
+                button5.Enabled = true;
+                button1.Enabled = true;
                 //}
             }
         }
@@ -358,7 +360,40 @@ namespace EEditor
                 }
             }
         }
-
+        private async void GrabTotalBlocks(int layer)
+        {
+            await Task.Run(() =>
+            {
+                int total = 0;
+                for (int x = 0; x < MainForm.editArea.CurFrame.Width; x++)
+                {
+                    for (int y = 0; y < MainForm.editArea.CurFrame.Height; y++)
+                    {
+                        if (layer == 0)
+                        {
+                            if (MainForm.editArea.CurFrame.Foreground[y, x] == numericUpDown1.Value)
+                            {
+                                total += 1;
+                            }
+                        }
+                        else
+                        {
+                            if (MainForm.editArea.CurFrame.Background[x, y] == numericUpDown1.Value)
+                            {
+                                total += 1;
+                            }
+                        }
+                    }
+                }
+                if (label4.InvokeRequired)
+                {
+                    MainForm.editArea.Invoke((MethodInvoker)delegate
+                    {
+                        label4.Text = "The world has " + total + " blocks of ID " + numericUpDown1.Value + ".";
+                    });
+                }
+            });
+        }
         private void numericUpDown1_KeyUp(object sender, KeyEventArgs e)
         {
             ToolTip tp = new ToolTip();
@@ -388,22 +423,11 @@ namespace EEditor
                 {
                     Bitmap temp = new Bitmap(16, 16);
                     Graphics gr = Graphics.FromImage(temp);
-                    gr.Clear(Color.Black);
+                    gr.Clear(Color.Transparent);
                     gr.DrawImage(Properties.Resources.unknown.Clone(new Rectangle(1 * 16, 0, 16, 16), Properties.Resources.unknown.PixelFormat), 0, 0);
                     FindPictureBox.Image = temp;
                 }
-                int total = 0;
-                for (int x = 0; x < MainForm.editArea.CurFrame.Width; x++)
-                {
-                    for (int y = 0; y < MainForm.editArea.CurFrame.Height; y++)
-                    {
-                        if (MainForm.editArea.CurFrame.Foreground[y, x] == numericUpDown1.Value)
-                        {
-                            total += 1;
-                        }
-                    }
-                }
-                label4.Text = "The world has " + total + " blocks of ID " + numericUpDown1.Value + ".";
+                GrabTotalBlocks(0);
             }
             else if (numericUpDown1.Value >= 500 && numericUpDown1.Value <= 999)
             {
@@ -411,18 +435,7 @@ namespace EEditor
                 {
                     Bitmap img4 = MainForm.backgroundBMD.Clone(new Rectangle(MainForm.backgroundBMI[Convert.ToInt32(numericUpDown1.Value)] * 16, 0, 16, 16), MainForm.backgroundBMD.PixelFormat);
                     FindPictureBox.Image = img4;
-                    int total = 0;
-                    for (int x = 0; x < MainForm.editArea.CurFrame.Width; x++)
-                    {
-                        for (int y = 0; y < MainForm.editArea.CurFrame.Height; y++)
-                        {
-                            if (MainForm.editArea.CurFrame.Background[x, y] == numericUpDown1.Value)
-                            {
-                                total += 1;
-                            }
-                        }
-                    }
-                    label4.Text = "The world has " + total + " backgrounds of ID " + numericUpDown1.Value + ".";
+                    GrabTotalBlocks(1);
                 }
                 else
                 {
@@ -431,18 +444,7 @@ namespace EEditor
                     gr.Clear(Color.Black);
                     gr.DrawImage(Properties.Resources.unknown.Clone(new Rectangle(2 * 16, 0, 16, 16), Properties.Resources.unknown.PixelFormat), 0, 0);
                     FindPictureBox.Image = temp;
-                    int total = 0;
-                    for (int x = 0; x < MainForm.editArea.CurFrame.Width; x++)
-                    {
-                        for (int y = 0; y < MainForm.editArea.CurFrame.Height; y++)
-                        {
-                            if (MainForm.editArea.CurFrame.Background[x, y] == numericUpDown1.Value)
-                            {
-                                total += 1;
-                            }
-                        }
-                    }
-                    label4.Text = "The world has " + total + " backgrounds of ID " + numericUpDown1.Value + ".";
+                    GrabTotalBlocks(1);
 
                 }
             }
@@ -559,67 +561,19 @@ namespace EEditor
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //ThreadPool.QueueUserWorkItem(delegate (object param0)
-            //{
+            Replacing();
+        }
+        private void Replacing()
+        {
+
             int incr = 0;
             int total = MainForm.editArea.CurFrame.Height - 1;
 
-            if (numericUpDown1.Value >= 500 && numericUpDown1.Value <= 999 || numericUpDown1.Value == 0 && numericUpDown2.Value >= 500 && numericUpDown2.Value <= 999 || numericUpDown2.Value == 0)
+            for (int yy = 0; yy < MainForm.editArea.Frames[0].Height; yy++)
             {
-
-                for (int yy = 0; yy < MainForm.editArea.Frames[0].Height; yy++)
+                for (int xx = 0; xx < MainForm.editArea.Frames[0].Width; xx++)
                 {
-                    for (int xx = 0; xx < MainForm.editArea.Frames[0].Width; xx++)
-                    {
-                        if (MainForm.editArea.Frames[0].Background[yy, xx] == numericUpDown1.Value)
-                        {
-
-                            MainForm.editArea.Frames[0].Background[yy, xx] = (int)numericUpDown2.Value;
-                            //incfg += (int)rp.NU2.Value + ":" + editArea.CurFrame.Background[yy, xx] + ":" + xx + ":" + yy + ":";
-                            Point p = new Point(xx * 16 - Math.Abs(MainForm.editArea.AutoScrollPosition.X), yy * 16 - Math.Abs(MainForm.editArea.AutoScrollPosition.Y));
-                            if (MainForm.editArea.InvokeRequired)
-                            {
-                                MainForm.editArea.Invoke((MethodInvoker)delegate
-                                {
-                                    MainForm.editArea.Draw(xx, yy, Graphics.FromImage(MainForm.editArea.Back), MainForm.userdata.thisColor);
-                                });
-                            }
-                            else
-                            {
-                                MainForm.editArea.Draw(xx, yy, Graphics.FromImage(MainForm.editArea.Back), MainForm.userdata.thisColor);
-
-                            }
-                            MainForm.editArea.Invalidate(new Rectangle(p, new Size(16, 16)));
-
-
-
-                        }
-                        if (progressBar1.InvokeRequired)
-                        {
-                            progressBar1.Invoke((MethodInvoker)delegate
-                            {
-                                double db = ((double)incr / total) * 100;
-                                int value = Convert.ToInt32(db) > 100 ? 100 : Convert.ToInt32(db);
-                                progressBar1.Value = value;
-                            });
-                        }
-                        if (!progressBar1.InvokeRequired)
-                        {
-                            double db = ((double)incr / total) * 100;
-                            int value = Convert.ToInt32(db) > 100 ? 100 : Convert.ToInt32(db);
-                            progressBar1.Value = value;
-                        }
-                        incr += 1;
-                    }
-
-                }
-            }
-
-            if ((numericUpDown1.Value < 500 || numericUpDown1.Value >= 1001) && (numericUpDown2.Value < 500 || numericUpDown2.Value >= 1001))
-            {
-                for (int yy = 0; yy < MainForm.editArea.Frames[0].Height; yy++)
-                {
-                    for (int xx = 0; xx < MainForm.editArea.Frames[0].Width; xx++)
+                    if ((numericUpDown1.Value < 500 || numericUpDown1.Value >= 1001) && (numericUpDown2.Value < 500 || numericUpDown2.Value >= 1001))
                     {
                         if (MainForm.editArea.Frames[0].Foreground[yy, xx] == numericUpDown1.Value)
                         {
@@ -641,21 +595,19 @@ namespace EEditor
                                         }
                                     }
                                 }
-                                Console.WriteLine(NormalRadioButton.Checked);
-                                if (NormalRadioButton.Checked)
+                                else if (NormalRadioButton.Checked)
                                 {
-                                    if (MainForm.editArea.Frames[0].BlockData[yy, xx] == findRotate.Value)
-                                    {
-                                        Console.WriteLine(replaceRotate.Value);
-                                        MainForm.editArea.Frames[0].BlockData[yy, xx] = Convert.ToInt32(replaceRotate.Value);
-                                        MainForm.editArea.Frames[0].Foreground[yy, xx] = (int)numericUpDown2.Value;
-                                        //ToolPen.rotation[(int)numericUpDown2.Value] = Convert.ToInt32(replaceRotate.Value);
-                                    }
-                                    
+
+                                    Console.WriteLine(replaceRotate.Value);
+                                    MainForm.editArea.Frames[0].BlockData[yy, xx] = Convert.ToInt32(replaceRotate.Value);
+                                    MainForm.editArea.Frames[0].Foreground[yy, xx] = (int)numericUpDown2.Value;
+                                    //ToolPen.rotation[(int)numericUpDown2.Value] = Convert.ToInt32(replaceRotate.Value);
+
+
                                 }
-                                if (PortalRadioButton.Checked || PortalINVRadioButton.Checked)
+                                else if (PortalRadioButton.Checked || PortalINVRadioButton.Checked)
                                 {
-                                    if (MainForm.editArea.Frames[0].BlockData[yy, xx] == portalRotationFind &&  MainForm.editArea.Frames[0].BlockData1[yy,xx] == Convert.ToInt32(PortalFindFrom.Value) && MainForm.editArea.Frames[0].BlockData2[yy, xx] == Convert.ToInt32(PortalFindTo.Value))
+                                    if (MainForm.editArea.Frames[0].BlockData[yy, xx] == portalRotationFind && MainForm.editArea.Frames[0].BlockData1[yy, xx] == Convert.ToInt32(PortalFindFrom.Value) && MainForm.editArea.Frames[0].BlockData2[yy, xx] == Convert.ToInt32(PortalFindTo.Value))
                                     {
                                         MainForm.editArea.Frames[0].BlockData[yy, xx] = portalRotationRepl;
                                         MainForm.editArea.Frames[0].BlockData1[yy, xx] = Convert.ToInt32(PortalReplaceFrom.Value);
@@ -670,33 +622,36 @@ namespace EEditor
                             else
                             {
 
-
-                                    if (SignRadioButton.Checked || WorldPortalRadioButton.Checked)
-                                    {
-                                        if (MainForm.editArea.Frames[0].Foreground[yy, xx] == 385 || MainForm.editArea.Frames[0].Foreground[yy, xx] == 374)
-                                        {
-                                            MainForm.editArea.Frames[0].Foreground[yy, xx] = (int)numericUpDown2.Value;
-                                            MainForm.editArea.Frames[0].BlockData3[yy, xx] = ReplaceTextBox.Text;
-                                            MainForm.editArea.Frames[0].BlockData[yy, xx] = Convert.ToInt32(replaceRotate.Value);
-                                        }
-                                    }
-                                    if (NormalRadioButton.Checked)
+                                if (rbSpikes.Checked)
+                                {
+                                    MainForm.editArea.Frames[0].Foreground[yy, xx] = (int)numericUpDown2.Value;
+                                }
+                                if (SignRadioButton.Checked || WorldPortalRadioButton.Checked)
+                                {
+                                    if (MainForm.editArea.Frames[0].Foreground[yy, xx] == 385 || MainForm.editArea.Frames[0].Foreground[yy, xx] == 374)
                                     {
                                         MainForm.editArea.Frames[0].Foreground[yy, xx] = (int)numericUpDown2.Value;
+                                        MainForm.editArea.Frames[0].BlockData3[yy, xx] = ReplaceTextBox.Text;
                                         MainForm.editArea.Frames[0].BlockData[yy, xx] = Convert.ToInt32(replaceRotate.Value);
-                                        //ToolPen.rotation[(int)numericUpDown2.Value] = Convert.ToInt32(replaceRotate.Value);
                                     }
-                                    if (PortalRadioButton.Checked || PortalINVRadioButton.Checked)
+                                }
+                                else if (NormalRadioButton.Checked)
+                                {
+                                    MainForm.editArea.Frames[0].Foreground[yy, xx] = (int)numericUpDown2.Value;
+                                    MainForm.editArea.Frames[0].BlockData[yy, xx] = Convert.ToInt32(replaceRotate.Value);
+                                    //ToolPen.rotation[(int)numericUpDown2.Value] = Convert.ToInt32(replaceRotate.Value);
+                                }
+                                else if (PortalRadioButton.Checked || PortalINVRadioButton.Checked)
+                                {
+                                    if (MainForm.editArea.Frames[0].BlockData[yy, xx] == portalRotationFind && MainForm.editArea.Frames[0].BlockData1[yy, xx] == Convert.ToInt32(PortalFindFrom.Value) && MainForm.editArea.Frames[0].BlockData2[yy, xx] == Convert.ToInt32(PortalFindTo.Value))
                                     {
-                                        if (MainForm.editArea.Frames[0].BlockData[yy, xx] == portalRotationFind && MainForm.editArea.Frames[0].BlockData1[yy, xx] == Convert.ToInt32(PortalFindFrom.Value) && MainForm.editArea.Frames[0].BlockData2[yy, xx] == Convert.ToInt32(PortalFindTo.Value))
-                                        {
-                                            MainForm.editArea.Frames[0].BlockData[yy, xx] = portalRotationRepl;
-                                            MainForm.editArea.Frames[0].BlockData1[yy, xx] = Convert.ToInt32(PortalReplaceFrom.Value);
-                                            MainForm.editArea.Frames[0].BlockData2[yy, xx] = Convert.ToInt32(PortalReplaceTo.Value);
+                                        MainForm.editArea.Frames[0].BlockData[yy, xx] = portalRotationRepl;
+                                        MainForm.editArea.Frames[0].BlockData1[yy, xx] = Convert.ToInt32(PortalReplaceFrom.Value);
+                                        MainForm.editArea.Frames[0].BlockData2[yy, xx] = Convert.ToInt32(PortalReplaceTo.Value);
                                         MainForm.editArea.Frames[0].Foreground[yy, xx] = Convert.ToInt32(numericUpDown2.Value);
-                                        }
                                     }
-                                
+                                }
+
 
                             }
                             //incfg += (int)rp.NU2.Value + ":" + editArea.CurFrame.Foreground[yy, xx] + ":" + xx + ":" + yy + ":";
@@ -707,7 +662,7 @@ namespace EEditor
                                     MainForm.editArea.Frames[0].Foreground[yy, xx] = (int)numericUpDown2.Value;
                                 }
                             }
-                            Point p = new Point(xx * 16 - Math.Abs(MainForm.editArea.AutoScrollPosition.X), yy * 16 - Math.Abs(MainForm.editArea.AutoScrollPosition.Y));
+                           
                             if (MainForm.editArea.InvokeRequired)
                             {
                                 MainForm.editArea.Invoke((MethodInvoker)delegate
@@ -724,10 +679,32 @@ namespace EEditor
 
 
                         }
-
-
-
                     }
+                    if ((numericUpDown1.Value >= 500 && numericUpDown1.Value < 1000) && (numericUpDown2.Value >= 500 && numericUpDown2.Value < 1000) ||numericUpDown1.Value == 0)
+                    {
+                        if (MainForm.editArea.Frames[0].Background[yy, xx] == numericUpDown1.Value || numericUpDown1.Value == 0)
+                        {
+
+                            if (numericUpDown1.Value != numericUpDown2.Value)
+                            {
+                                MainForm.editArea.Frames[0].Background[yy, xx] = (int)numericUpDown2.Value;
+                                if (MainForm.editArea.InvokeRequired)
+                                {
+                                    MainForm.editArea.Invoke((MethodInvoker)delegate
+                                    {
+                                        MainForm.editArea.Draw(xx, yy, Graphics.FromImage(MainForm.editArea.Back), MainForm.userdata.thisColor);
+                                    });
+                                }
+                                else
+                                {
+                                    MainForm.editArea.Draw(xx, yy, Graphics.FromImage(MainForm.editArea.Back), MainForm.userdata.thisColor);
+
+                                }
+                            }
+                        }
+                    }
+
+                    Point p = new Point(xx * 16 - Math.Abs(MainForm.editArea.AutoScrollPosition.X), yy * 16 - Math.Abs(MainForm.editArea.AutoScrollPosition.Y));
                     if (progressBar1.InvokeRequired)
                     {
                         progressBar1.Invoke((MethodInvoker)delegate
@@ -737,7 +714,7 @@ namespace EEditor
                             progressBar1.Value = value;
                         });
                     }
-                    if (!progressBar1.InvokeRequired)
+                    else
                     {
                         double db = ((double)incr / total) * 100;
                         int value = Convert.ToInt32(db) > 100 ? 100 : Convert.ToInt32(db);
@@ -745,10 +722,11 @@ namespace EEditor
                     }
                     incr += 1;
 
+
+
                 }
             }
             MainForm.editArea.Invalidate();
-            //});
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -801,9 +779,10 @@ namespace EEditor
                     replaced[y, x] = 0;
                     replaced1[y, x] = 0;
                     MainForm.editArea.Draw(x, y, Graphics.FromImage(MainForm.editArea.Back), MainForm.userdata.thisColor);
-                    MainForm.editArea.Invalidate();
+                    
                 }
             }
+            MainForm.editArea.Invalidate();
             MainForm.editArea.Back1 = MainForm.editArea.Back;
         }
 
@@ -839,18 +818,25 @@ namespace EEditor
         private void Replacer_FormClosed(object sender, FormClosedEventArgs e)
         {
             MainForm.editArea.Back1 = null;
-            for (int y = 0; y < MainForm.editArea.Frames[0].Height; y++)
-            {
-                for (int x = 0; x < MainForm.editArea.Frames[0].Width; x++)
-                {
-                    replaced[y, x] = 0;
-                    replaced1[y, x] = 0;
-                    MainForm.editArea.Draw(x, y, Graphics.FromImage(MainForm.editArea.Back), MainForm.userdata.thisColor);
-                    MainForm.editArea.Invalidate();
-
-                }
-            }
+            RemoveSearchBlocks();
             MainForm.editArea.Back1 = MainForm.editArea.Back;
+        }
+        private async void RemoveSearchBlocks()
+        {
+            await Task.Run(() =>
+            {
+                for (int y = 0; y < MainForm.editArea.Frames[0].Height; y++)
+                {
+                    for (int x = 0; x < MainForm.editArea.Frames[0].Width; x++)
+                    {
+                        replaced[y, x] = 0;
+                        replaced1[y, x] = 0;
+                        MainForm.editArea.Draw(x, y, Graphics.FromImage(MainForm.editArea.Back), MainForm.userdata.thisColor);
+                        MainForm.editArea.Invalidate();
+
+                    }
+                }
+            });
         }
 
         private void findRotate_ValueChanged(object sender, EventArgs e)
@@ -881,22 +867,32 @@ namespace EEditor
             removeBgBehindBlocks();
         }
 
-        private void removeBgBehindBlocks()
+        private async void removeBgBehindBlocks()
         {
-            int total1 = MainForm.editArea.Frames[0].Height - 1;
-            int incr = 0;
-            int totalReplaced = 0;
-            for (int y = 0; y < MainForm.editArea.Frames[0].Height; y++)
+            await Task.Run(() =>
             {
-                for (int x = 0; x < MainForm.editArea.Frames[0].Width; x++)
+                int total1 = MainForm.editArea.Frames[0].Height - 1;
+                int incr = 0;
+                int totalReplaced = 0;
+                for (int y = 0; y < MainForm.editArea.Frames[0].Height; y++)
                 {
-                    int bid = MainForm.editArea.Frames[0].Background[y, x];
-                    int fid = MainForm.editArea.Frames[0].Foreground[y, x];
-                    if (bid != 0 && fid != 0)
+                    for (int x = 0; x < MainForm.editArea.Frames[0].Width; x++)
                     {
-                        if (MainForm.userdata.IgnoreBlocks != null)
+                        int bid = MainForm.editArea.Frames[0].Background[y, x];
+                        int fid = MainForm.editArea.Frames[0].Foreground[y, x];
+                        if (bid != 0 && fid != 0)
                         {
-                            if (!MainForm.userdata.IgnoreBlocks.Contains(fid) && MainForm.decosBMI[fid] == 0 && MainForm.miscBMI[fid] == 0)
+                            if (MainForm.userdata.IgnoreBlocks != null)
+                            {
+                                if (!MainForm.userdata.IgnoreBlocks.Contains(fid) && MainForm.decosBMI[fid] == 0 && MainForm.miscBMI[fid] == 0)
+                                {
+                                    MainForm.editArea.Frames[0].Background[y, x] = 0;
+                                    MainForm.editArea.Draw(x, y, Graphics.FromImage(MainForm.editArea.Back), MainForm.userdata.thisColor);
+                                    MainForm.editArea.Invalidate();
+                                    totalReplaced += 1;
+                                }
+                            }
+                            else
                             {
                                 MainForm.editArea.Frames[0].Background[y, x] = 0;
                                 MainForm.editArea.Draw(x, y, Graphics.FromImage(MainForm.editArea.Back), MainForm.userdata.thisColor);
@@ -904,42 +900,35 @@ namespace EEditor
                                 totalReplaced += 1;
                             }
                         }
-                        else
-                        {
-                            MainForm.editArea.Frames[0].Background[y, x] = 0;
-                            MainForm.editArea.Draw(x, y, Graphics.FromImage(MainForm.editArea.Back), MainForm.userdata.thisColor);
-                            MainForm.editArea.Invalidate();
-                            totalReplaced += 1;
-                        }
                     }
-                }
-                if (progressBar1.InvokeRequired)
-                {
-                    progressBar1.Invoke((MethodInvoker)delegate
+                    if (progressBar1.InvokeRequired)
+                    {
+                        progressBar1.Invoke((MethodInvoker)delegate
+                        {
+                            double db = ((double)incr / total1) * 100;
+                            progressBar1.Value = Convert.ToInt32(db);
+                        });
+                    }
+                    if (!progressBar1.InvokeRequired)
                     {
                         double db = ((double)incr / total1) * 100;
                         progressBar1.Value = Convert.ToInt32(db);
+                    }
+                    incr += 1;
+
+                }
+                if (label4.InvokeRequired)
+                {
+                    label4.Invoke((MethodInvoker)delegate
+                    {
+                        label4.Text = "Replaced " + totalReplaced + " backgrounds behind blocks.";
                     });
                 }
-                if (!progressBar1.InvokeRequired)
+                else
                 {
-                    double db = ((double)incr / total1) * 100;
-                    progressBar1.Value = Convert.ToInt32(db);
+                    label4.Text = "Replaced " + totalReplaced + " backgrounds behind blocks.";
                 }
-                incr += 1;
-
-            }
-            if (label4.InvokeRequired)
-            {
-                label4.Invoke((MethodInvoker)delegate
-                {
-                    label4.Text = "Replaced " + totalReplaced + " blocks you don't own.";
-                });
-            }
-            else
-            {
-                label4.Text = "Replaced " + totalReplaced + " backgrounds behind blocks.";
-            }
+            });
         }
         private void replaceRotate_ValueChanged(object sender, EventArgs e)
         {
@@ -973,17 +962,23 @@ namespace EEditor
             SignRadioButton.Checked = false;
             WorldPortalRadioButton.Checked = false;
             NormalRadioButton.Checked = false;
+            rbSpikes.Checked = false;
+            findRotate.Enabled = true;
+            replaceRotate.Enabled = true;
         }
 
         private void PortalINVRadioButton_Click(object sender, EventArgs e)
         {
             PortalRadioButton.Checked = false;
             PortalRotFind.Image = MainForm.miscBMD.Clone(new Rectangle(112 * 16, 0, 16, 16), MainForm.miscBMD.PixelFormat);
-            PortalRotRepl.Image = MainForm.miscBMD.Clone(new Rectangle(112* 16, 0, 16, 16), MainForm.miscBMD.PixelFormat);
+            PortalRotRepl.Image = MainForm.miscBMD.Clone(new Rectangle(112 * 16, 0, 16, 16), MainForm.miscBMD.PixelFormat);
             PortalINVRadioButton.Checked = true;
             SignRadioButton.Checked = false;
             WorldPortalRadioButton.Checked = false;
             NormalRadioButton.Checked = false;
+            rbSpikes.Checked = false;
+            findRotate.Enabled = true;
+            replaceRotate.Enabled = true;
         }
 
         private void NormalRadioButton_Click(object sender, EventArgs e)
@@ -992,7 +987,10 @@ namespace EEditor
             PortalINVRadioButton.Checked = false;
             SignRadioButton.Checked = false;
             WorldPortalRadioButton.Checked = false;
+            rbSpikes.Checked = false;
             NormalRadioButton.Checked = true;
+            findRotate.Enabled = true;
+            replaceRotate.Enabled = true;
         }
 
         private void SignRadioButton_Click(object sender, EventArgs e)
@@ -1002,6 +1000,9 @@ namespace EEditor
             SignRadioButton.Checked = true;
             WorldPortalRadioButton.Checked = false;
             NormalRadioButton.Checked = false;
+            rbSpikes.Checked = false;
+            findRotate.Enabled = true;
+            replaceRotate.Enabled = true;
         }
 
         private void WorldPortalRadioButton_Click(object sender, EventArgs e)
@@ -1011,6 +1012,9 @@ namespace EEditor
             SignRadioButton.Checked = false;
             WorldPortalRadioButton.Checked = true;
             NormalRadioButton.Checked = false;
+            rbSpikes.Checked = false;
+            findRotate.Enabled = true;
+            replaceRotate.Enabled = true;
         }
 
         private void ClearBgsBlacklistButton_Click(object sender, EventArgs e)
@@ -1038,19 +1042,19 @@ namespace EEditor
 
         private void PortalRotFind_Click(object sender, EventArgs e)
         {
-            
+
             if (PortalRadioButton.Checked)
             {
                 portalRotationFind += 1;
                 PortalRotFind.Image = bdata.getRotation(242, portalRotationFind);
                 if (portalRotationFind == 3) portalRotationFind = 0;
-                
+
             }
             if (PortalINVRadioButton.Checked)
             {
                 portalRotationFind += 1;
                 PortalRotFind.Image = bdata.getRotation(381, portalRotationFind);
-               
+
                 if (portalRotationFind == 3) portalRotationFind = 0;
             }
         }
@@ -1061,7 +1065,7 @@ namespace EEditor
             {
                 portalRotationRepl += 1;
                 PortalRotRepl.Image = bdata.getRotation(242, portalRotationRepl);
-                
+
                 if (portalRotationRepl == 3) portalRotationRepl = 0;
 
             }
@@ -1069,9 +1073,28 @@ namespace EEditor
             {
                 portalRotationRepl += 1;
                 PortalRotRepl.Image = bdata.getRotation(381, portalRotationRepl);
-                
+
                 if (portalRotationRepl == 3) portalRotationRepl = 0;
             }
+        }
+
+        private void rbSpikes_Click(object sender, EventArgs e)
+        {
+            PortalRadioButton.Checked = false;
+            PortalINVRadioButton.Checked = false;
+            SignRadioButton.Checked = false;
+            WorldPortalRadioButton.Checked = false;
+            NormalRadioButton.Checked = false;
+            rbSpikes.Checked = true;
+            findRotate.Enabled = false;
+            replaceRotate.Enabled = false;
+            RotationPictureBox1.Image = Properties.Resources.cross;
+            RotationPictureBox2.Image = Properties.Resources.cross;
+        }
+
+        private void rbSpikes_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

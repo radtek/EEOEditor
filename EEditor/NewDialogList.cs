@@ -34,6 +34,7 @@ namespace EEditor
             Gen("400x50", "Wide");
             Gen("400x200", "Great");
             Gen("636x50", "Ultra Wide");
+            Gen("637x460", "Lictor special");
             this.BackColor = MainForm.themecolors.background;
             this.ForeColor= MainForm.themecolors.foreground;
             Listviewlos.BackColor = MainForm.themecolors.background;

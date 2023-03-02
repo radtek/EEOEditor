@@ -35,6 +35,8 @@ namespace EEditor
             tp.SetToolTip(UpdateCheckCheckBox, "Check for new updates.");
             tp.SetToolTip(DarkThemeCheckBox, "Choose between light and dark theme.");
             tp.SetToolTip(cBHotkeyBar, "Show or hide HotkeyBar.");
+            tp.SetToolTip(rbBackground, "Ingnore empty blocks on backgrounds.");
+            tp.SetToolTip(rbEmpty, "Replace background blocks with empty blocks");
             usePenToolCheckBox.Checked = MainForm.userdata.usePenTool;
             selectAllBorderCheckBox.Checked = MainForm.userdata.selectAllBorder;
             confirmCloseCheckBox.Checked = MainForm.userdata.confirmClose;
@@ -61,7 +63,14 @@ namespace EEditor
             clearButton.ForeColor = MainForm.themecolors.foreground;
             clearButton.BackColor = MainForm.themecolors.accent;
             clearButton.FlatStyle = FlatStyle.Flat;
-            gbSelectionTool.ForeColor = MainForm.themecolors.foreground;
+            gbSelectionTool.ForeColor = MainForm.themecolors.groupbox;
+            foreach (Control control in gbSelectionTool.Controls)
+            {
+                if (control is RadioButton)
+                {
+                    ((RadioButton)control).ForeColor = MainForm.themecolors.foreground;
+                }
+            }
 
             var items = ((StatusStrip)statusStrip1).Items;
             for (int o = 0; o < items.Count; o++)

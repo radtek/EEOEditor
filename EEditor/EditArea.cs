@@ -9,6 +9,8 @@ using System.Text.RegularExpressions;
 using System.IO;
 using System.Drawing.Imaging;
 using System.Threading;
+using System.Threading.Tasks;
+using static System.Windows.Forms.MonthCalendar;
 
 namespace EEditor
 {
@@ -114,12 +116,16 @@ IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
                         if (frame != null)
                         {
                             this.Text = $".eelvl - ({frame.levelname}) [{frame.nickname}] ({frame.Width}x{frame.Height}) - EEOditor {this.ProductVersion}";
-                            Init(frame, false);
+                            ExecuteInitFrame(frame, false);
                         }
                         else MessageBox.Show("The dropped EELVL is either invalid or corrupt.", "Invalid EELVL", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
+        }
+        private void ExecuteInitFrame(Frame frame, bool wat)
+        {
+            Init(frame, wat);
         }
 
         [DllImport("user32.dll")]
@@ -319,6 +325,7 @@ IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
 
         public void Init(Frame frame, bool frme)
         {
+            started = true;
 
             BlockHeight = frame.Height;
             BlockWidth = frame.Width;
@@ -331,17 +338,16 @@ IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
             Back = new Bitmap(BlockWidth * MainForm.Zoom, BlockHeight * MainForm.Zoom);
             Minimap.Init(BlockWidth, BlockHeight);
             PaintCurFrame();
-            this.AutoScrollMinSize = size;
-            this.Invalidate();
-            started = true;
+            started = false;
 
+            this.AutoScrollMinSize = size;
         }
         public void zoomRefresh()
         {
             curFrame = 0;
             Size size = new Size(BlockWidth * MainForm.Zoom, BlockHeight * MainForm.Zoom);
             Back = new Bitmap(BlockWidth * MainForm.Zoom, BlockHeight * MainForm.Zoom);
-            Minimap.Init(BlockWidth, BlockHeight);
+            //Minimap.Init(BlockWidth, BlockHeight);
             Thread td = new Thread(PaintCurFrame);
             td.Start();
             this.AutoScrollMinSize = size;
@@ -359,6 +365,7 @@ IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
                     for (int y = 0; y < BlockHeight; ++y)
                     {
                         Draw(x, y, g, Color.Transparent);
+                        this.Invalidate();
                     }
                 }
             }
@@ -628,10 +635,12 @@ IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
                 Minimap.SetPixel(x, y, bid);
                 if (fid != -1 && Minimap.ImageColor[fid]) Minimap.SetPixel(x, y, fid);
             }
+
         }
 
         public void Draw(int x, int y, Graphics g, Color color)
         {
+
             int bid = CurFrame.Background[y, x];
             int coins = CurFrame.BlockData[y, x];
             int fid = CurFrame.Foreground[y, x];
@@ -642,6 +651,7 @@ IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
             string text2 = CurFrame.BlockData5[y, x];
             string text3 = CurFrame.BlockData6[y, x];
             Draw(x, y, g, bid, fid, coins, id, target, text, text1, text2, text3, color);
+
         }
         #endregion
 
@@ -661,10 +671,6 @@ IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
                 //e.Graphics.DrawImage(Back, e.ClipRectangle, new Rectangle(new Point(xStart, yStart), e.ClipRectangle.Size), GraphicsUnit.Pixel);
                 //e.Graphics.DrawImage(Back, e.ClipRectangle, e.ClipRectangle, GraphicsUnit.Pixel);
             }
-            else if (Label != null)
-            {
-                e.Graphics.DrawImage(Label, e.ClipRectangle, new Rectangle(xStart, yStart, 100, 100), GraphicsUnit.Pixel);
-            }
 
         }
 
@@ -679,7 +685,7 @@ IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
         {
             Tool.MouseMove(e);
             IsMouseUp = false;
-            if (started)
+            if (!started)
             {
                 Point p = Tool.GetLocation(e);
                 if (e.X / MainForm.Zoom <= CurFrame.Width) MainForm.pos.Text = "X: " + p.X + " Y: " + p.Y;

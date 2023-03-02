@@ -44,7 +44,7 @@
             this.Listviewlos.Location = new System.Drawing.Point(12, 12);
             this.Listviewlos.MultiSelect = false;
             this.Listviewlos.Name = "Listviewlos";
-            this.Listviewlos.Size = new System.Drawing.Size(273, 264);
+            this.Listviewlos.Size = new System.Drawing.Size(273, 328);
             this.Listviewlos.TabIndex = 0;
             this.Listviewlos.UseCompatibleStateImageBehavior = false;
             this.Listviewlos.View = System.Windows.Forms.View.Details;
@@ -64,7 +64,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(302, 294);
+            this.ClientSize = new System.Drawing.Size(302, 358);
             this.Controls.Add(this.Listviewlos);
             this.Name = "NewDialogList";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
